@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demos - Find Nuclei Viewer</title>
+    <meta name="description" content="See Find Nuclei Viewer in action — open microscopy data, browse HCS plates, and share images with a URL.">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            padding: 2rem;
+        }
+        .demos-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .demos-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2.5rem 2rem;
+            color: white;
+            text-align: center;
+        }
+        .demos-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .demos-header p { opacity: 0.9; font-size: 0.9375rem; max-width: 500px; margin: 0 auto; }
+        .demos-body { padding: 2rem 2.5rem 3rem; }
+
+        /* Video cards */
+        .demo-card {
+            margin-bottom: 2.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .demo-card:last-of-type { margin-bottom: 0; }
+        .demo-video-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 */
+            background: #1a1a1a;
+        }
+        .demo-video-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .demo-info {
+            padding: 1.25rem 1.5rem;
+        }
+        .demo-label {
+            display: inline-block;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #667eea;
+            background: #f0f4ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        .demo-info h2 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .demo-info p {
+            color: #4b5563;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        .demo-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .demo-feature {
+            font-size: 0.75rem;
+            color: #6b7280;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+        }
+
+        /* CTA section */
+        .demos-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        .demos-cta p {
+            color: #4b5563;
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .cta-button:hover { opacity: 0.9; transform: translateY(-1px); }
+        .demos-back {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+        .demo-try-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .demo-try-link:hover { text-decoration: underline; }
+        .demos-back:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .demos-body { padding: 1.25rem 1.25rem 2rem; }
+            .demo-info { padding: 1rem; }
+            .demos-header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demos-container">
+        <div class="demos-header">
+            <h1>See It in Action</h1>
+        </div>
+        <div class="demos-body">
+
+            <!-- Demo 1: Local Multi-Channel -->
+            <!-- Replace VIDEO_ID_1 with your YouTube video ID -->
+            <div class="demo-card">
+                <div class="demo-video-wrap">
+                    <iframe src="https://www.youtube.com/embed/p9veMmibuWA?rel=0&modestbranding=1&loop=1&playlist=p9veMmibuWA&vq=hd720&mute=1" title="Open Your Microscopy Data in 10 Seconds" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="demo-info">
+                    <span class="demo-label">Local Data</span>
+                    <h2>Open Your Microscopy Data in 10 Seconds</h2>
+                    <p>
+                        Drag a local OME-ZARR folder into the browser. Multi-resolution tiles load
+                        instantly — your data never leaves your machine.
+                    </p>
+                    <div class="demo-features">
+                        <span class="demo-feature">Drag &amp; drop</span>
+                        <span class="demo-feature">Multi-resolution</span>
+                        <span class="demo-feature">Channel blending</span>
+                        <span class="demo-feature">Auto-contrast</span>
+                        <span class="demo-feature">Z-stack</span>
+                        <span class="demo-feature">Segmentation overlays</span>
+                    </div>
+                    <a class="demo-try-link" href="/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0079A%2Fidr0079_images.zarr" target="_blank" rel="noopener noreferrer">Try this dataset &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Demo 2: HCS Plate -->
+            <div class="demo-card">
+                <div class="demo-video-wrap">
+                    <iframe src="https://www.youtube.com/embed/tTUhXRHREnU?rel=0&modestbranding=1&loop=1&playlist=tTUhXRHREnU&vq=hd720&mute=1" title="96-Well Plate in Your Browser" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="demo-info">
+                    <span class="demo-label">High-Content Screening</span>
+                    <h2>96-Well Plate in Your Browser</h2>
+                    <p>
+                        Drag and drop an HCS plate and navigate from plate overview down to individual
+                        cells in one seamless zoom — your data never leaves your machine.
+                    </p>
+                    <div class="demo-features">
+                        <span class="demo-feature">Plate overview</span>
+                        <span class="demo-feature">Well navigation</span>
+                        <span class="demo-feature">Field grid</span>
+                        <span class="demo-feature">Plate-to-cell zoom</span>
+                        <span class="demo-feature">Per-channel control</span>
+                    </div>
+                    <a class="demo-try-link" href="/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0001A%2F2551.zarr" target="_blank" rel="noopener noreferrer">Try this dataset &rarr;</a>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="demos-cta">
+                <p>No install. No upload. No account.</p>
+                <a href="/" class="cta-button">Try It Yourself &rarr;</a>
+            </div>
+
+            <a href="/" class="demos-back">&larr; Back to Find Nuclei Viewer</a>
+        </div>
+    </div>
+</body>
+</html>

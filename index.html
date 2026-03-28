@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Nuclei Viewer — Free Online OME-ZARR Bio-Image Viewer</title>
+    <meta name="description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plate viewer, segmentation overlays, z-projection. No install, no upload, no account. Open source.">
+    <meta name="keywords" content="OME-ZARR viewer, OME-NGFF viewer, bio-image viewer, microscopy viewer, ZARR image viewer, fluorescence microscopy, HCS plate viewer, high content screening, segmentation overlay, z-projection, browser image viewer, OME-ZARR online, NGFF viewer, microscopy data visualization">
+    <meta name="author" content="Find Nuclei">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://find-nuclei.github.io/">
+    <meta name="theme-color" content="#6d28d9">
+
+    <!-- Open Graph / Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://find-nuclei.github.io/">
+    <meta property="og:title" content="Find Nuclei Viewer — Free Online OME-ZARR Bio-Image Viewer">
+    <meta property="og:description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plates, segmentation overlays, z-projection. No install, no upload, no account.">
+    <meta property="og:image" content="https://find-nuclei.github.io/screenshots/og-preview.jpg">
+    <meta property="og:site_name" content="Find Nuclei Viewer">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Find Nuclei Viewer — Free Online OME-ZARR Bio-Image Viewer">
+    <meta name="twitter:description" content="View OME-ZARR microscopy images in your browser. Multi-channel, HCS plates, segmentation overlays. No install required.">
+    <meta name="twitter:image" content="https://find-nuclei.github.io/screenshots/og-preview.jpg">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Find Nuclei Viewer",
+      "url": "https://find-nuclei.github.io/",
+      "description": "Browser-based OME-ZARR viewer for microscopy and bio-image data. Supports multi-channel fluorescence, HCS plate navigation, segmentation overlays, z-projection, and shareable deep links.",
+      "applicationCategory": "ScienceApplication",
+      "operatingSystem": "Any (browser-based)",
+      "browserRequirements": "Chrome, Edge, Firefox, Safari (WebGL2 required)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "OME-ZARR / OME-NGFF file viewing",
+        "Multi-channel fluorescence microscopy",
+        "HCS plate viewer (96, 384, 1536-well)",
+        "Segmentation label overlays",
+        "Z-projection (max, mean, min)",
+        "Shape annotations (polygon, line, point)",
+        "Shareable deep links",
+        "Local file support (no upload)",
+        "Auto-contrast with histograms"
+      ],
+      "screenshot": "https://find-nuclei.github.io/screenshots/og-preview.jpg",
+      "softwareHelp": {
+        "@type": "CreativeWork",
+        "url": "https://find-nuclei.github.io/docs/"
+      }
+    }
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="./logo192.png">
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa--dMjge3ye1p_6cqmyzAu1.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        #root {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        /* Upgrade Modal Styles */
+        .fn-upgrade-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .fn-upgrade-modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .fn-upgrade-modal h2 {
+            margin: 0 0 1rem 0;
+            color: #333;
+        }
+
+        .fn-upgrade-modal p {
+            margin: 0 0 1rem 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .fn-upgrade-modal ul {
+            margin: 0 0 1.5rem 1.5rem;
+            color: #666;
+        }
+
+        .fn-upgrade-modal li {
+            margin: 0.5rem 0;
+        }
+
+        .fn-upgrade-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Reason: Upgrade modal buttons inherit from FindNucleiViewer.css
+           design tokens. Only layout-specific overrides here. */
+        .fn-upgrade-actions .fn-btn-primary,
+        .fn-upgrade-actions .fn-btn-secondary {
+            padding: var(--fn-space-sm, 8px) var(--fn-space-lg, 24px);
+            font-size: var(--fn-font-size-sm, 0.875rem);
+        }
+    </style>
+  <script type="module" crossorigin src="./assets/index-BYWh387O.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CuIaIVX-.css">
+</head>
+<body>
+    <div id="root"></div>
+
+</body>
+</html>

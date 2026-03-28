@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: Find Nuclei Viewer
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: Find Nuclei
+    email: info@find-nuclei.com
+url: "https://find-nuclei.github.io"
+repository-code: "https://github.com/Find-Nuclei/find-nuclei.github.io"
+license: Proprietary
+keywords:
+  - ome-zarr
+  - ome-ngff
+  - microscopy
+  - bio-image
+  - viewer
+  - zarr
+  - high-content-screening
+  - fluorescence
+  - digital-pathology
+  - spatial-biology
+abstract: >-
+  Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data
+  with GPU-accelerated rendering, shape annotations, segmentation
+  label overlays, and local file access. All processing runs
+  client-side with no data uploaded to any server.

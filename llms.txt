@@ -1,0 +1,43 @@
+# Find Nuclei Viewer
+
+> Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data with GPU-accelerated rendering.
+
+## What it does
+
+Find Nuclei Viewer is a zero-install web application for viewing and annotating bio-image data in OME-ZARR format. It runs entirely in the browser — no data is uploaded to any server.
+
+## Key capabilities
+
+- Opens local ZARR files directly from disk (no upload, no server required)
+- Shape annotations (polygons, lines, points, distance measurements) with browser-local persistence
+- Export annotations as CSV spreadsheet or GeoJSON
+- Segmentation label overlays from ZARR or local/network drive
+- Multi-channel fluorescence visualization with custom colors and intensity ranges
+- Per-channel histograms and auto-contrast (2%–98% percentile)
+- Z-projection (max, mean, min intensity) with configurable Z-range
+- High-Content Screening (HCS) plate navigation with well picker and field grid
+- GPU-accelerated multi-resolution tiled rendering via deck.gl WebGL
+- Shareable deep links — URL tracks zoom, position, channels, Z-slice in real-time
+- Supports OME-ZARR v0.4 and v0.5, including sharded stores
+- Handles images exceeding 100,000 pixels in either dimension
+
+## Who it's for
+
+Researchers and scientists working with microscopy data: digital pathology, spatial biology, high-content screening, confocal microscopy, light-sheet imaging, electron microscopy, super-resolution microscopy, spatial transcriptomics, live-cell imaging.
+
+## Technical details
+
+- Format: OME-ZARR (OME-NGFF) v0.4 and v0.5
+- Browsers: Chrome, Edge (full support including local files), Firefox (remote URLs only)
+- Rendering: deck.gl with WebGL, multi-resolution tiled loading
+- Privacy: all processing is client-side, no server backend required
+- No account or installation required
+
+## Links
+
+- Launch: https://find-nuclei.github.io
+- Source: https://github.com/Find-Nuclei/find-nuclei.github.io
+- Issues: https://github.com/Find-Nuclei/find-nuclei.github.io/issues
+- Terms of Service: https://find-nuclei.github.io/terms.html
+- Privacy Policy: https://find-nuclei.github.io/privacy.html
+- Contact: info@find-nuclei.com

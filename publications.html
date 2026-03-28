@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications — Embedded OME-ZARR Viewer Demo | Find Nuclei</title>
+    <meta name="description" content="See how journals can embed interactive OME-ZARR microscopy viewers directly in publication pages. Two lines of HTML — no install, no iframe.">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Reason: Hide browser scrollbar while keeping scroll functional.
+           The page still scrolls normally — only the visual bar is hidden. */
+        html { scrollbar-width: none; }
+        html::-webkit-scrollbar { display: none; }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            padding: 2rem;
+        }
+
+        .page-container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* ── Header ── */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2.5rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+            font-size: 0.9375rem;
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .page-body {
+            padding: 0 2.5rem 3rem;
+        }
+
+        /* ── Tabs ── */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 2rem;
+            gap: 0;
+            overflow: hidden;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-family: inherit;
+        }
+
+        .tab:hover {
+            color: #374151;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        /* ── Study panels ── */
+        .study-panel {
+            display: none;
+        }
+
+        .study-panel.active {
+            display: block;
+        }
+
+        .study-meta {
+            margin-bottom: 1.5rem;
+        }
+
+        .study-meta h2 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .study-meta .study-id {
+            display: inline-block;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #667eea;
+            background: #f0f4ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .study-meta p {
+            color: #4b5563;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        .study-meta a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .study-meta a:hover {
+            text-decoration: underline;
+        }
+
+        .study-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .study-tag {
+            font-size: 0.75rem;
+            color: #6b7280;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+        }
+
+        /* ── Viewer container ── */
+        .viewer-section {
+            margin-bottom: 2rem;
+        }
+
+        .viewer-section h3 {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .viewer-wrap {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* ── Code snippet ── */
+        .code-section {
+            margin-top: 2rem;
+        }
+
+        .code-section h3 {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 0.8125rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block .tag { color: #89b4fa; }
+        .code-block .attr { color: #a6e3a1; }
+        .code-block .val { color: #f9e2af; }
+        .code-block .comment { color: #6c7086; }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #cdd6f4;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.15s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ── CTA ── */
+        .page-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .page-cta p {
+            color: #4b5563;
+            font-size: 0.9375rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .page-cta .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .page-cta .cta-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .page-cta .cta-button-secondary {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            margin-left: 0.75rem;
+        }
+
+        .page-cta .cta-button-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .page-cta .cta-sub {
+            margin-top: 0.75rem;
+            font-size: 0.8125rem;
+            color: #9ca3af;
+        }
+
+        .page-back {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        .page-back:hover { text-decoration: underline; }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .page-body { padding: 0 1.25rem 2rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .tab { padding: 0.75rem 1rem; font-size: 0.8125rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Embedded Viewer for Publications</h1>
+            <p>
+                Two lines of HTML. No iframe. No install.
+                See how journals can embed interactive OME-ZARR microscopy data directly in their pages.
+            </p>
+        </div>
+
+        <div class="page-body">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-panel="idr0062">IDR-0062</button>
+                <button class="tab" data-panel="idr0066">IDR-0066</button>
+                <button class="tab" data-panel="idr0073">IDR-0073</button>
+                <button class="tab" data-panel="idr0079">IDR-0079</button>
+                <button class="tab" data-panel="howto">How It Works</button>
+            </div>
+
+            <!-- ─── IDR-0062 ─── -->
+            <div class="study-panel active" id="panel-idr0062">
+                <div class="study-meta">
+                    <span class="study-id">IDR-0062</span>
+                    <h2>NesSys: Accurate Nuclear Segmentation in 3D</h2>
+                    <p>
+                        Blin G et al. (2019) <em>PLoS Biology</em>.
+                        Automated detection and segmentation of nuclei within intact mouse tissues
+                        and dense 3D cultures using confocal microscopy.
+                        <a href="https://idr.openmicroscopy.org/study/idr0062/" target="_blank" rel="noopener">View on IDR &rarr;</a>
+                        &middot;
+                        <a href="/?url=https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0062A/6001240.zarr" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                    </p>
+                    <div class="study-tags">
+                        <span class="study-tag">Mus musculus</span>
+                        <span class="study-tag">Confocal 3D</span>
+                        <span class="study-tag">Nuclear segmentation</span>
+                        <span class="study-tag">Multi-channel</span>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Interactive Viewer</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0062A/6001240.zarr"
+                            labels="on"
+                            width="100%"
+                            height="500"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Embed Code</h3>
+                    <div class="code-block" id="code-idr0062">
+                        <button class="copy-btn" onclick="copyCode('code-idr0062')">Copy</button>
+<span class="comment">&lt;!-- Load once in &lt;head&gt; --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://find-nuclei.github.io/embed/v1/viewer.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Place anywhere in your article --&gt;</span>
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0062A/6001240.zarr"</span>
+  <span class="attr">labels</span>=<span class="val">"on"</span>
+  <span class="attr">width</span>=<span class="val">"100%"</span>
+  <span class="attr">height</span>=<span class="val">"500"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── IDR-0066 ─── -->
+            <div class="study-panel" id="panel-idr0066">
+                <div class="study-meta">
+                    <span class="study-id">IDR-0066</span>
+                    <h2>mesoSPIM: Open-Source Light-Sheet Microscopy for Cleared Tissue</h2>
+                    <p>
+                        Voigt FF et al. (2019) <em>Nature Methods</em>.
+                        Mesoscale light-sheet imaging of large cleared tissue specimens including
+                        chicken embryo vasculature.
+                        <a href="https://idr.openmicroscopy.org/study/idr0066/" target="_blank" rel="noopener">View on IDR &rarr;</a>
+                        &middot;
+                        <a href="/?url=https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.5/idr0066/ExpD_chicken_embryo_MIP.ome.zarr" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                    </p>
+                    <div class="study-tags">
+                        <span class="study-tag">Chicken embryo</span>
+                        <span class="study-tag">Light-sheet (mesoSPIM)</span>
+                        <span class="study-tag">Cleared tissue</span>
+                        <span class="study-tag">MIP</span>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Interactive Viewer</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.5/idr0066/ExpD_chicken_embryo_MIP.ome.zarr"
+                            width="100%"
+                            height="500"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Embed Code</h3>
+                    <div class="code-block" id="code-idr0066">
+                        <button class="copy-btn" onclick="copyCode('code-idr0066')">Copy</button>
+<span class="comment">&lt;!-- Load once in &lt;head&gt; --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://find-nuclei.github.io/embed/v1/viewer.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Place anywhere in your article --&gt;</span>
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.5/idr0066/ExpD_chicken_embryo_MIP.ome.zarr"</span>
+  <span class="attr">width</span>=<span class="val">"100%"</span>
+  <span class="attr">height</span>=<span class="val">"500"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── IDR-0073 ─── -->
+            <div class="study-panel" id="panel-idr0073">
+                <div class="study-meta">
+                    <span class="study-id">IDR-0073</span>
+                    <h2>Graph-Based Description of Tertiary Lymphoid Organs</h2>
+                    <p>
+                        Schaadt NS et al. (2020) <em>PLoS Computational Biology</em>.
+                        Neighborhood graph analysis of immune infiltrates in human tissue sections
+                        (breast cancer, kidney, lung) using bright-field immunohistochemistry.
+                        <a href="https://idr.openmicroscopy.org/study/idr0073/" target="_blank" rel="noopener">View on IDR &rarr;</a>
+                        &middot;
+                        <a href="/?url=https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0073A/9798462.zarr" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                    </p>
+                    <div class="study-tags">
+                        <span class="study-tag">Homo sapiens</span>
+                        <span class="study-tag">Bright-field histology</span>
+                        <span class="study-tag">Immunohistochemistry</span>
+                        <span class="study-tag">Tertiary lymphoid organs</span>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Interactive Viewer</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0073A/9798462.zarr"
+                            width="100%"
+                            height="500"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Embed Code</h3>
+                    <div class="code-block" id="code-idr0073">
+                        <button class="copy-btn" onclick="copyCode('code-idr0073')">Copy</button>
+<span class="comment">&lt;!-- Load once in &lt;head&gt; --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://find-nuclei.github.io/embed/v1/viewer.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- RGB images auto-detect white background, or set explicitly --&gt;</span>
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0073A/9798462.zarr"</span>
+  <span class="attr">background</span>=<span class="val">"white"</span>
+  <span class="attr">width</span>=<span class="val">"100%"</span>
+  <span class="attr">height</span>=<span class="val">"500"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── IDR-0079 ─── -->
+            <div class="study-panel" id="panel-idr0079">
+                <div class="study-meta">
+                    <span class="study-id">IDR-0079</span>
+                    <h2>Cellular Architecture in the Developing Lateral Line Primordium</h2>
+                    <p>
+                        Hartmann J et al. (2020) <em>eLife</em>.
+                        3D cell shape and organization analysis in the zebrafish posterior lateral line
+                        primordium using AiryScan confocal microscopy and automated segmentation.
+                        <a href="https://idr.openmicroscopy.org/study/idr0079/" target="_blank" rel="noopener">View on IDR &rarr;</a>
+                        &middot;
+                        <a href="/?url=https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0079A/idr0079_images.zarr" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                    </p>
+                    <div class="study-tags">
+                        <span class="study-tag">Danio rerio</span>
+                        <span class="study-tag">AiryScan confocal</span>
+                        <span class="study-tag">3D segmentation</span>
+                        <span class="study-tag">Z-stack</span>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Series 0</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0079A/idr0079_images.zarr"
+                            image="0"
+                            labels="on"
+                            x="500" y="350" zoom="-0.5"
+                            width="100%"
+                            height="400"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Series 1</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0079A/idr0079_images.zarr"
+                            image="1"
+                            width="100%"
+                            height="400"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Series 2</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0079A/idr0079_images.zarr"
+                            image="2"
+                            labels="on"
+                            width="100%"
+                            height="400"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Embed Code</h3>
+                    <div class="code-block" id="code-idr0079">
+                        <button class="copy-btn" onclick="copyCode('code-idr0079')">Copy</button>
+<span class="comment">&lt;!-- Load once in &lt;head&gt; --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://find-nuclei.github.io/embed/v1/viewer.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Use the image attribute to select a series --&gt;</span>
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0079A/idr0079_images.zarr"</span>
+  <span class="attr">image</span>=<span class="val">"0"</span>
+  <span class="attr">width</span>=<span class="val">"100%"</span>
+  <span class="attr">height</span>=<span class="val">"400"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── How It Works ─── -->
+            <div class="study-panel" id="panel-howto">
+                <div class="study-meta">
+                    <h2>Embed in Two Steps</h2>
+                    <p>
+                        Any journal, data portal, or institutional repository can add interactive
+                        OME-ZARR viewers to their pages. No backend, no API key, no build step.
+                    </p>
+                </div>
+
+                <div class="code-section" style="margin-top: 0;">
+                    <h3>Step 1 — Load the script (once per page)</h3>
+                    <div class="code-block">
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://find-nuclei.github.io/embed/v1/viewer.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Step 2 — Place the viewer</h3>
+                    <div class="code-block">
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://your-s3-bucket.com/dataset.ome.zarr"</span>
+  <span class="attr">width</span>=<span class="val">"100%"</span>
+  <span class="attr">height</span>=<span class="val">"500"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Optional — Customize channels and Z-slice</h3>
+                    <div class="code-block">
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://..."</span>
+  <span class="attr">z</span>=<span class="val">"15"</span>
+  <span class="attr">channels</span>=<span class="val">"0:on:00FF00:100:4000,1:on:FF0000:50:2000"</span>
+  <span class="attr">theme</span>=<span class="val">"light"</span>
+  <span class="attr">controls</span>=<span class="val">"minimal"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Attributes Reference</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 0.5rem;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid #e5e7eb; text-align: left;">
+                                    <th style="padding: 0.5rem 1rem; color: #374151;">Attribute</th>
+                                    <th style="padding: 0.5rem 1rem; color: #374151;">Required</th>
+                                    <th style="padding: 0.5rem 1rem; color: #374151;">Default</th>
+                                    <th style="padding: 0.5rem 1rem; color: #374151;">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">url</code></td>
+                                    <td style="padding: 0.5rem 1rem;">Yes</td>
+                                    <td style="padding: 0.5rem 1rem;">&mdash;</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;">ZARR store URL (HTTP or S3)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">z</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">middle</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;">Initial Z-slice index</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">channels</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">auto</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;">Channel config: <code style="font-size:0.75rem">idx:on/off:hex:min:max,...</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">width</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">100%</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;">CSS width (pixels or %)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">height</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">16:9 auto</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;">CSS height (pixels or %)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">controls</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">minimal</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;"><code>minimal</code> or <code>none</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">theme</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">dark</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;"><code>dark</code> or <code>light</code></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.5rem 1rem;"><code style="background:#f0f4ff;color:#667eea;padding:0.1em 0.3em;border-radius:3px;">token</code></td>
+                                    <td style="padding: 0.5rem 1rem;">No</td>
+                                    <td style="padding: 0.5rem 1rem;">&mdash;</td>
+                                    <td style="padding: 0.5rem 1rem; color: #4b5563;">Bearer token for auth sources</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="page-cta">
+                <p>Want to embed interactive microscopy in your journal or data portal?</p>
+                <a href="/" class="cta-button">Try the Full Viewer &rarr;</a>
+                <a href="/docs/guides/embedding.html" target="_blank" rel="noopener noreferrer" class="cta-button cta-button-secondary">Read the Embedding Guide &rarr;</a>
+                <p class="cta-sub">Free to use &middot; No account required &middot; No install</p>
+            </div>
+
+            <a href="/" class="page-back">&larr; Back to Find Nuclei Viewer</a>
+        </div>
+    </div>
+
+    <!-- Load the embed bundle -->
+    <script src="./embed/v1/viewer.js"></script>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.study-panel').forEach(p => p.classList.remove('active'));
+
+                tab.classList.add('active');
+                const panelId = 'panel-' + tab.dataset.panel;
+                document.getElementById(panelId)?.classList.add('active');
+            });
+        });
+
+        // Copy code snippet
+        function copyCode(elementId) {
+            const block = document.getElementById(elementId);
+            if (!block) return;
+
+            // Extract plain text, stripping HTML tags
+            const temp = document.createElement('div');
+            temp.innerHTML = block.innerHTML;
+            // Remove the copy button text
+            temp.querySelectorAll('.copy-btn').forEach(b => b.remove());
+            const text = temp.textContent?.trim() || '';
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = block.querySelector('.copy-btn');
+                if (btn) {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

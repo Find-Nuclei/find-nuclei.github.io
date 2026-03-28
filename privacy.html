@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Find Nuclei Viewer</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            padding: 2rem;
+        }
+        .legal-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .legal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+        .legal-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .legal-header p { opacity: 0.9; font-size: 0.9375rem; }
+        .legal-body { padding: 2rem 2.5rem 3rem; line-height: 1.7; }
+        .legal-body h2 {
+            font-size: 1.25rem;
+            color: #667eea;
+            margin: 2rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .legal-body h2:first-child { margin-top: 0; }
+        .legal-body p { margin-bottom: 1rem; color: #4b5563; font-size: 0.9375rem; }
+        .legal-body ul { margin: 0 0 1rem 1.5rem; color: #4b5563; font-size: 0.9375rem; }
+        .legal-body li { margin-bottom: 0.5rem; }
+        .legal-body a { color: #667eea; }
+        .legal-body a:hover { text-decoration: underline; }
+        .legal-back {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+        .legal-back:hover { text-decoration: underline; }
+        .highlight-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            color: #4b5563;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <div class="legal-container">
+        <div class="legal-header">
+            <h1>Privacy Policy</h1>
+            <p>Effective: March 1, 2026</p>
+        </div>
+        <div class="legal-body">
+            <h2>1. Overview</h2>
+            <div class="highlight-box">
+                Find Nuclei Viewer is designed with privacy first. No account is required, no
+                personal information is collected, and your image data never leaves your browser.
+            </div>
+
+            <h2>2. Analytics We Collect</h2>
+            <p>
+                We use <a href="https://plausible.io" target="_blank" rel="noopener noreferrer">Plausible Analytics</a>,
+                a privacy-friendly analytics service hosted in the EU. Plausible does not use cookies
+                and does not collect personal data.
+            </p>
+            <p>Plausible collects:</p>
+            <ul>
+                <li>Page views (which pages are visited)</li>
+                <li>Referrer (how you found us)</li>
+                <li>Browser and operating system type</li>
+                <li>Country (derived from anonymized IP; IP is not stored)</li>
+                <li>Screen size category (mobile/tablet/desktop)</li>
+            </ul>
+            <p>Plausible does <strong>not</strong> collect:</p>
+            <ul>
+                <li>IP addresses</li>
+                <li>Personal identifiers</li>
+                <li>Cross-site tracking data</li>
+                <li>Any information about the images you view</li>
+            </ul>
+
+            <h2>3. Data Stored in Your Browser</h2>
+            <p>
+                The viewer stores data <strong>locally in your browser</strong> to provide a smooth
+                experience. This data never leaves your device.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Storage</th>
+                        <th>What</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IndexedDB</td>
+                        <td>Image metadata, thumbnails, viewer settings, annotations</td>
+                        <td>Remember recently opened images and restore your last view</td>
+                    </tr>
+                    <tr>
+                        <td>localStorage</td>
+                        <td>UI preferences (e.g., welcome modal dismissed, storage notice)</td>
+                        <td>Remember small UI choices across sessions</td>
+                    </tr>
+                    <tr>
+                        <td>File System Access API</td>
+                        <td>Directory handle references (Chrome/Edge only)</td>
+                        <td>Re-open local ZARR folders without re-selecting them</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4. Your Image Data</h2>
+            <div class="highlight-box">
+                Your microscopy data is processed entirely in your browser using WebGPU/WebGL.
+                Image files are never uploaded to any server. When loading from a URL, your
+                browser fetches data directly from that URL — Find Nuclei does not proxy or
+                store any of it.
+            </div>
+
+            <h2>5. Cookies</h2>
+            <p>
+                <strong>We do not use cookies.</strong> Plausible Analytics is cookieless by design.
+                No third-party cookies are set by this site.
+            </p>
+
+            <h2>6. Third-Party Services</h2>
+            <p>The only third-party service we use is:</p>
+            <ul>
+                <li>
+                    <strong>Plausible Analytics</strong> — privacy-friendly, GDPR-compliant web
+                    analytics hosted in the EU. No personal data is collected or shared.
+                    <a href="https://plausible.io/privacy-focused-web-analytics" target="_blank" rel="noopener noreferrer">
+                        Learn more about Plausible's privacy practices.
+                    </a>
+                </li>
+            </ul>
+
+            <h2>7. Your Rights</h2>
+            <p>
+                Since all viewer data is stored locally in your browser, you have full control:
+            </p>
+            <ul>
+                <li>
+                    <strong>Delete all data</strong>: Use the "Clear All Data" button on the
+                    landing page, or clear your browser's site data for this domain
+                </li>
+                <li>
+                    <strong>Opt out of analytics</strong>: Use a browser extension like
+                    uBlock Origin or Plausible's
+                    <a href="https://plausible.io/docs/excluding" target="_blank" rel="noopener noreferrer">exclusion guide</a>
+                </li>
+                <li>
+                    <strong>Export your data</strong>: Annotations and settings can be exported
+                    from the viewer interface
+                </li>
+            </ul>
+
+            <h2>8. Children</h2>
+            <p>
+                Find Nuclei Viewer is a scientific tool not directed at children under 13. We do
+                not knowingly collect information from children.
+            </p>
+
+            <h2>9. Changes to This Policy</h2>
+            <p>
+                We may update this Privacy Policy from time to time. Changes will be posted on this
+                page with an updated effective date.
+            </p>
+
+            <h2>10. Contact</h2>
+            <p>
+                For privacy-related questions, contact us at
+                <a href="mailto:info@find-nuclei.com">info@find-nuclei.com</a>.
+            </p>
+
+            <a href="/" class="legal-back">&larr; Back to Find Nuclei Viewer</a>
+        </div>
+    </div>
+</body>
+</html>
