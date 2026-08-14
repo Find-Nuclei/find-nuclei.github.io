@@ -70,12 +70,30 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png">
     <link rel="apple-touch-icon" sizes="192x192" href="./logo192.png">
+    <!--
+      Two analytics systems run here on purpose, for a few weeks.
+
+      Plausible has counted this page since launch. Ours is being added
+      alongside so the two can be compared on the same traffic, which is the
+      only way to know our numbers are right before Plausible is retired.
+      Both are cookieless and both are described in privacy.html section 2.
+
+      Expect a difference in page views. Our tracker records one view per app
+      load: opening an image only changes the query string, and the path guard
+      ignores a history change that lands on the same path. Plausible may count
+      those history changes as further views. Check that before assuming a bug.
+
+      When Plausible goes, delete the two tags below and section 2's Plausible
+      subsection in privacy.html together.
+    -->
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://plausible.io/js/pa--dMjge3ye1p_6cqmyzAu1.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
     </script>
+    <!-- Ours. First-party, no cookies, no browser storage. -->
+    <script async src="https://fn-stats.gymsync.workers.dev/fn.js"></script>
     <style>
         * {
             margin: 0;
