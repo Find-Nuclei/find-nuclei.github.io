@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Nuclei Viewer | Free Online OME-ZARR Bio-Image Viewer</title>
-    <meta name="description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plate viewer, segmentation overlays, z-projection. No install, no upload, no account. Open source.">
+    <meta name="description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plate viewer, segmentation overlays, z-projection. Install it and it works offline. No upload, no account.">
     <meta name="keywords" content="OME-ZARR viewer, OME-NGFF viewer, bio-image viewer, microscopy viewer, ZARR image viewer, fluorescence microscopy, HCS plate viewer, high content screening, segmentation overlay, z-projection, browser image viewer, OME-ZARR online, NGFF viewer, microscopy data visualization">
     <meta name="author" content="Find Nuclei">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://find-nuclei.github.io/">
     <meta name="theme-color" content="#6d28d9">
+    <!-- Reason: relative href, matching the build's base: './'. An absolute
+         "/manifest.webmanifest" would break the app when served from a
+         subdirectory, which is the whole reason the base is relative. -->
+    <link rel="manifest" href="./manifest.webmanifest">
 
     <!-- Open Graph / Social sharing -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://find-nuclei.github.io/">
     <meta property="og:title" content="Find Nuclei Viewer | Free Online OME-ZARR Bio-Image Viewer">
-    <meta property="og:description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plates, segmentation overlays, z-projection. No install, no upload, no account.">
+    <meta property="og:description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plates, segmentation overlays, z-projection. No upload, no account.">
     <meta property="og:image" content="https://find-nuclei.github.io/screenshots/og-preview.jpg">
     <meta property="og:site_name" content="Find Nuclei Viewer">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Find Nuclei Viewer | Free Online OME-ZARR Bio-Image Viewer">
-    <meta name="twitter:description" content="View OME-ZARR microscopy images in your browser. Multi-channel, HCS plates, segmentation overlays. No install required.">
+    <meta name="twitter:description" content="View OME-ZARR microscopy images in your browser. Multi-channel, HCS plates, segmentation overlays. No upload, no account.">
     <meta name="twitter:image" content="https://find-nuclei.github.io/screenshots/og-preview.jpg">
 
     <!-- Structured Data: WebApplication -->
@@ -35,7 +39,7 @@
       "description": "Browser-based OME-ZARR viewer for microscopy and bio-image data. Supports multi-channel fluorescence, HCS plate navigation, segmentation overlays, z-projection, and shareable deep links.",
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "Any (browser-based)",
-      "browserRequirements": "Chrome, Edge, Firefox, Safari (WebGL2 required)",
+      "browserRequirements": "WebGL2. Chrome or Edge for local file access; Firefox and Safari can load remote URLs.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -50,7 +54,9 @@
         "Shape annotations (polygon, line, point)",
         "Shareable deep links",
         "Local file support (no upload)",
-        "Auto-contrast with histograms"
+        "Auto-contrast with histograms",
+        "Measurements and phenotyping from analytics tables",
+        "Installable as a desktop app, works offline"
       ],
       "screenshot": "https://find-nuclei.github.io/screenshots/og-preview.jpg",
       "softwareHelp": {
@@ -145,8 +151,8 @@
             font-size: var(--fn-font-size-sm, 0.875rem);
         }
     </style>
-  <script type="module" crossorigin src="./assets/index-BgqGgoWA.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CUReAMAr.css">
+  <script type="module" crossorigin src="./assets/index-Zpj4IOcc.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DPjWNzhh.css">
 </head>
 <body>
     <div id="root"></div>

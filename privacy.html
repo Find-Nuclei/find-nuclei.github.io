@@ -40,6 +40,11 @@
             border-bottom: 1px solid #e5e7eb;
         }
         .legal-body h2:first-child { margin-top: 0; }
+        .legal-body h3 {
+            font-size: 1rem;
+            color: #374151;
+            margin: 1.5rem 0 0.5rem;
+        }
         .legal-body p { margin-bottom: 1rem; color: #4b5563; font-size: 0.9375rem; }
         .legal-body ul { margin: 0 0 1rem 1.5rem; color: #4b5563; font-size: 0.9375rem; }
         .legal-body li { margin-bottom: 0.5rem; }
@@ -86,7 +91,7 @@
     <div class="legal-container">
         <div class="legal-header">
             <h1>Privacy Policy</h1>
-            <p>Effective: March 1, 2026</p>
+            <p>Effective: August 13, 2026</p>
         </div>
         <div class="legal-body">
             <h2>1. Overview</h2>
@@ -97,9 +102,42 @@
 
             <h2>2. Analytics We Collect</h2>
             <p>
-                We use <a href="https://plausible.io" target="_blank" rel="noopener noreferrer">Plausible Analytics</a>,
-                a privacy-friendly analytics service hosted in the EU. Plausible does not use cookies
-                and does not collect personal data.
+                We count page visits so we know which parts of the site and documentation are
+                worth the effort. We are moving from a third-party service to our own, so both
+                are described here. Neither uses cookies, and neither can identify you.
+            </p>
+
+            <h3>Find Nuclei analytics (ours)</h3>
+            <p>
+                Software we wrote, running on our own infrastructure in the European Union.
+                No third-party analytics service and no advertising network is involved.
+            </p>
+            <p>It records:</p>
+            <ul>
+                <li>Which page you opened, and when</li>
+                <li>The site that linked to you, reduced to a bare hostname</li>
+                <li>Rough location: country, region, and city, worked out from your IP address</li>
+                <li>The network operator providing your connection</li>
+                <li>Browser, operating system, device type, and the main language your browser asks for</li>
+            </ul>
+            <p>
+                <strong>Your IP address is never stored.</strong> It is used once, mixed with a
+                secret we throw away and replace every day, to produce a number that tells repeat
+                visits apart within a single day. Because that secret is destroyed, we cannot
+                connect your visits across different days, and we cannot connect a visit here to
+                a visit on our main website.
+            </p>
+            <p>
+                No cookies and no browser storage of any kind are used for this. If your browser
+                sends Do Not Track or Global Privacy Control, we record nothing at all.
+            </p>
+
+            <h3>Plausible Analytics (being retired)</h3>
+            <p>
+                <a href="https://plausible.io" target="_blank" rel="noopener noreferrer">Plausible Analytics</a>
+                is a privacy-friendly analytics service hosted in the EU. It does not use cookies
+                and does not collect personal data. We are replacing it with our own system above,
+                and this section will be removed once that is complete.
             </p>
             <p>Plausible collects:</p>
             <ul>
@@ -116,6 +154,11 @@
                 <li>Cross-site tracking data</li>
                 <li>Any information about the images you view</li>
             </ul>
+
+            <p>
+                <strong>Neither system records anything about your images.</strong> Not filenames,
+                not URLs, not dimensions, not pixel data. See section 4.
+            </p>
 
             <h2>3. Data Stored in Your Browser</h2>
             <p>
@@ -147,6 +190,11 @@
                         <td>Directory handle references (Chrome/Edge only)</td>
                         <td>Re-open local ZARR folders without re-selecting them</td>
                     </tr>
+                    <tr>
+                        <td>Cache Storage</td>
+                        <td>The viewer's own program files. Never image data, which is never cached by design.</td>
+                        <td>Let the viewer start and run with no network connection</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -160,16 +208,22 @@
 
             <h2>5. Cookies</h2>
             <p>
-                <strong>We do not use cookies.</strong> Plausible Analytics is cookieless by design.
+                <strong>We do not use cookies.</strong> Both analytics systems described in
+                section 2 are cookieless by design, and ours uses no browser storage at all.
                 No third-party cookies are set by this site.
             </p>
 
             <h2>6. Third-Party Services</h2>
+            <p>
+                Our own analytics is not a third party. It runs on infrastructure we control,
+                in the European Union, and the data goes nowhere else.
+            </p>
             <p>The only third-party service we use is:</p>
             <ul>
                 <li>
                     <strong>Plausible Analytics</strong>: privacy-friendly, GDPR-compliant web
-                    analytics hosted in the EU. No personal data is collected or shared.
+                    analytics hosted in the EU. No personal data is collected or shared. Being
+                    retired, see section 2.
                     <a href="https://plausible.io/privacy-focused-web-analytics" target="_blank" rel="noopener noreferrer">
                         Learn more about Plausible's privacy practices.
                     </a>
