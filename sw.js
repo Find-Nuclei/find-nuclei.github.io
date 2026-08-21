@@ -80,7 +80,7 @@ function classify(request, ctx) {
     // something this worker should be interpreting.
     if (method !== 'GET') return 'ignore';
 
-    // Reason: the user's image data, the analytics tables and the Plausible tag
+    // Reason: the user's image data, the analytics tables and the analytics tag
     // are all cross-origin. Caching image data would write customer pixels to
     // disk on whatever machine the browser is on, which contradicts the whole
     // pitch, and Cache Storage ignores Range semantics, which would silently
