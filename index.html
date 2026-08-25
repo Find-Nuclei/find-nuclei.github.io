@@ -79,6 +79,31 @@
       path, so browsing images inside one session is a single view. That is
       deliberate; do not read it as undercounting.
     -->
+    <script>
+      /*
+        The tracker below is async, so the app can mount and call fn.track()
+        before it exists. Those calls used to vanish silently, and the loss was
+        biased: on a reload the service worker serves the app from cache while
+        the tracker still goes to the network, so viewer_open disappeared for
+        returning users specifically. Queue here, entry.ts replays after its
+        page view. Capped, because a page where fn.js never arrives must not
+        grow this forever.
+      */
+      window.fn = window.fn || (function () {
+        /*
+          Closed over, not on `this`. A detached reference such as
+          `const t = window.fn.track` would otherwise lose the queue and throw,
+          and telemetry must never throw into the app.
+        */
+        var q = [];
+        return {
+          q: q,
+          track: function (name, props) {
+            if (q.length < 20) q.push([name, props]);
+          },
+        };
+      })();
+    </script>
     <script async src="https://fn-stats.find-nuclei.workers.dev/fn.js"></script>
     <style>
         * {
