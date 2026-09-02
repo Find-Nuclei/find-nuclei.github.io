@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = '7ce350b8e034';
+const BUILD_ID = 'b7400f243985';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/5025552-C-so2le5.jpg",
@@ -180,14 +180,14 @@ const PRECACHE_PATHS = [
     "assets/blosc-CINP29Do.js",
     "assets/browser-CSeI90Bu.js",
     "assets/chunk-INHXZS53-CYqy14ta.js",
-    "assets/fn-plate-tables-BvCzNpu5.js",
+    "assets/fn-plate-tables-Bh-9O8HP.js",
     "assets/gzip-BduOtoNN.js",
-    "assets/index-BElTspqA.js",
     "assets/index-C9jc4ZgV.css",
     "assets/index-CGTCTMpn.js",
     "assets/index-CI0Eyzzp.js",
+    "assets/index-CblR-tzV.js",
     "assets/index-DSGHM4gd.js",
-    "assets/index-DsjIuYo-.js",
+    "assets/index-HLBxBGjQ.js",
     "assets/lz4-CvXMSXgq.js",
     "assets/zlib-BDjr_O7m.js",
     "assets/zstd-Dvw5UDYA.js",
