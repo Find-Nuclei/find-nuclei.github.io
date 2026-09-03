@@ -39,14 +39,14 @@
       "description": "Browser-based OME-ZARR viewer for microscopy and bio-image data. Supports multi-channel fluorescence, HCS plate navigation, segmentation overlays, z-projection, and shareable deep links.",
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "Any (browser-based)",
-      "browserRequirements": "WebGL2. Chrome or Edge for local file access; Firefox and Safari can load remote URLs.",
+      "browserRequirements": "WebGL2. Every browser can open a remote URL or a dataset zipped into one .ozx or .zip file. Reading a dataset FOLDER from disk needs Chrome or Edge.",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
       "featureList": [
-        "OME-ZARR / OME-NGFF file viewing",
+        "OME-ZARR / OME-NGFF v0.3, v0.4 and v0.5 file viewing",
         "Multi-channel fluorescence microscopy",
         "HCS plate viewer (96, 384, 1536-well)",
         "Segmentation label overlays",
@@ -54,6 +54,7 @@
         "Shape annotations (polygon, line, point)",
         "Shareable deep links",
         "Local file support (no upload)",
+        "Zipped datasets (.ozx or .zip) open in Safari and Firefox too",
         "Auto-contrast with histograms",
         "Measurements and phenotyping from analytics tables",
         "Installable as a desktop app, works offline"
@@ -180,7 +181,7 @@
             font-size: var(--fn-font-size-sm, 0.875rem);
         }
     </style>
-  <script type="module" crossorigin src="./assets/index-CHXbtbmV.js"></script>
+  <script type="module" crossorigin src="./assets/index-DnmVmSnd.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-C9jc4ZgV.css">
 </head>
 <body>

@@ -108,9 +108,10 @@ No iframe, no build step, no framework required. Works in any CMS (WordPress, Dr
 
 ## Requirements
 
-- **Format:** OME-ZARR (OME-NGFF) v0.4 and v0.5, including sharded stores, plus `bioformats2raw` layouts.
+- **Format:** OME-ZARR (OME-NGFF) v0.3, v0.4 and v0.5, including sharded stores, plus `bioformats2raw` layouts.
 - **Any modern browser** for remote URLs, including Firefox and Safari.
-- **Chrome or Edge** to open files and folders from disk. That path uses the File System Access API, which the other browsers do not implement yet.
+- **Any modern browser** for a dataset zipped into a single `.ozx` or `.zip` file, opened in place with nothing unpacked. One file is a `Blob`, and every browser can read one.
+- **Chrome or Edge** to open a dataset *folder* from disk. That path uses the File System Access API, which the other browsers do not implement yet.
 
 ---
 
