@@ -5,6 +5,8 @@ type: software
 authors:
   - name: Find Nuclei
     email: info@find-nuclei.com
+version: "2026-09-02"
+date-released: "2026-09-02"
 url: "https://find-nuclei.github.io"
 repository-code: "https://github.com/Find-Nuclei/find-nuclei.github.io"
 license: Proprietary

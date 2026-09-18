@@ -312,15 +312,74 @@
         <div class="page-body">
             <!-- Tabs -->
             <div class="tabs">
-                <button class="tab active" data-panel="idr0062">IDR-0062</button>
+                <button class="tab active" data-panel="barkley">Nuclei Mosaic</button>
+                <button class="tab" data-panel="idr0062">IDR-0062</button>
                 <button class="tab" data-panel="idr0066">IDR-0066</button>
                 <button class="tab" data-panel="idr0073">IDR-0073</button>
                 <button class="tab" data-panel="idr0079">IDR-0079</button>
                 <button class="tab" data-panel="howto">How It Works</button>
             </div>
 
+            <!-- ─── Nuclei mosaic (Barkley) ─── -->
+            <!-- TODO before deploy: confirm the dataset license and the preferred citation line with the author. -->
+            <div class="study-panel active" id="panel-barkley">
+                <div class="study-meta">
+                    <span class="study-id">Nuclei Mosaic</span>
+                    <h2>1,061,277 Cell Nuclei From 100 Experiments</h2>
+                    <p>
+                        Barkley RJR (2026), unpublished dataset, shared by the author.
+                        Every nucleus imaged across 100 experiments, cropped and stitched into one
+                        263,936 &times; 263,680 pixel OME-Zarr with a 10-level pyramid, about 70 GB at
+                        full resolution, hosted on the Open Storage Network.
+                        Related preprint: Barkley RJR, Brodrick AJ, Parker JSL (2026).
+                        Reimag(in)ing representative images. <em>Elemental Microscopy</em>.
+                        <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>
+                        &middot;
+                        <a href="/?url=https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                    </p>
+                    <div class="study-tags">
+                        <span class="study-tag">Fluorescence</span>
+                        <span class="study-tag">Nuclei</span>
+                        <span class="study-tag">Single channel</span>
+                        <span class="study-tag">1M objects</span>
+                        <span class="study-tag">Zarr v2</span>
+                    </div>
+                </div>
+
+                <div class="viewer-section">
+                    <h3>Interactive Viewer</h3>
+                    <div class="viewer-wrap">
+                        <find-nuclei-viewer
+                            url="https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr"
+                            channels="0:on:FFFFFF:4:247"
+                            x="11554" y="26975" zoom="-1"
+                            width="100%"
+                            height="500"
+                        ></find-nuclei-viewer>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Embed Code</h3>
+                    <div class="code-block" id="code-barkley">
+                        <button class="copy-btn" onclick="copyCode('code-barkley')">Copy</button>
+<span class="comment">&lt;!-- Load once in &lt;head&gt; --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://find-nuclei.github.io/embed/v1/viewer.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Place anywhere in your article --&gt;</span>
+<span class="tag">&lt;find-nuclei-viewer</span>
+  <span class="attr">url</span>=<span class="val">"https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr"</span>
+  <span class="attr">channels</span>=<span class="val">"0:on:FFFFFF:4:247"</span>
+  <span class="attr">x</span>=<span class="val">"11554"</span> <span class="attr">y</span>=<span class="val">"26975"</span> <span class="attr">zoom</span>=<span class="val">"-1"</span>
+  <span class="attr">width</span>=<span class="val">"100%"</span>
+  <span class="attr">height</span>=<span class="val">"500"</span>
+<span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- ─── IDR-0062 ─── -->
-            <div class="study-panel active" id="panel-idr0062">
+            <div class="study-panel" id="panel-idr0062">
                 <div class="study-meta">
                     <span class="study-id">IDR-0062</span>
                     <h2>NesSys: Accurate Nuclear Segmentation in 3D</h2>
@@ -653,6 +712,20 @@
                         </table>
                     </div>
                 </div>
+                <div class="code-section">
+                    <h3>Citing the Viewer</h3>
+                    <p style="color: #4b5563; font-size: 0.9375rem; margin: 0 0 0.75rem;">
+                        You are welcome to embed the viewer in a preprint, a journal article, or a data portal.
+                        Load the script from find-nuclei.github.io and cite the viewer as:
+                    </p>
+                    <div class="code-block" id="code-cite">
+                        <button class="copy-btn" onclick="copyCode('code-cite')">Copy</button>
+Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-02. https://find-nuclei.github.io
+                    </div>
+                    <p style="color: #4b5563; font-size: 0.875rem; margin: 0.75rem 0 0;">
+                        Machine-readable form: <a href="/CITATION.cff" target="_blank" rel="noopener">CITATION.cff</a>.
+                    </p>
+                </div>
             </div>
 
             <!-- CTA -->
@@ -671,17 +744,25 @@
     <script src="./embed/v1/viewer.js"></script>
 
     <script>
-        // Tab switching
+        // Tab switching. The panel name doubles as a URL hash, so
+        // publications.html#barkley opens that study directly.
+        function activatePanel(name) {
+            const panel = document.getElementById('panel-' + name);
+            if (!panel) return false;
+            document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.panel === name));
+            document.querySelectorAll('.study-panel').forEach(p => p.classList.remove('active'));
+            panel.classList.add('active');
+            return true;
+        }
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.study-panel').forEach(p => p.classList.remove('active'));
-
-                tab.classList.add('active');
-                const panelId = 'panel-' + tab.dataset.panel;
-                document.getElementById(panelId)?.classList.add('active');
+                if (activatePanel(tab.dataset.panel)) {
+                    history.replaceState(null, '', '#' + tab.dataset.panel);
+                }
             });
         });
+        activatePanel(location.hash.slice(1));
+        window.addEventListener('hashchange', () => activatePanel(location.hash.slice(1)));
 
         // Copy code snippet
         function copyCode(elementId) {
