@@ -121,6 +121,16 @@ All data is processed locally in your browser. No files are uploaded to any serv
 
 ---
 
+## Citation
+
+If you use the viewer in a publication, cite it as:
+
+> Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-02. https://find-nuclei.github.io
+
+The machine-readable form is [CITATION.cff](CITATION.cff); GitHub's "Cite this repository" button reads it.
+
+---
+
 ## License
 
 Copyright (c) 2026 Find Nuclei. All rights reserved.

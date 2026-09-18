@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1,061,277 Cell Nuclei | Find Nuclei Viewer</title>
+    <meta name="description" content="Every nucleus from 100 experiments, stitched into one OME-Zarr and explorable in the browser. Dataset by Russell Barkley, shown in the Find Nuclei Viewer.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <!-- TODO before deploy: confirm the dataset license and the preferred citation line with the author. -->
+    <style>
+        :root { --fn-accent: #4488FF; --fn-bg: #000; --fn-panel: #0d1117; --fn-text: #e6e8ee; --fn-muted: #9aa3b2; --fn-line: #1f2733; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scrollbar-width: none; }
+        html::-webkit-scrollbar { display: none; }
+        body {
+            min-height: 100vh;
+            background: var(--fn-bg);
+            color: var(--fn-text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page-container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.1rem 0;
+            border-bottom: 1px solid var(--fn-line);
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--fn-text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+        }
+        .brand img { width: 26px; height: 26px; }
+        .accent { color: var(--fn-accent); }
+        .header-links a {
+            color: var(--fn-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-left: 1.25rem;
+        }
+        .header-links a:hover { color: var(--fn-accent); }
+        .page-body { padding-top: 2rem; }
+        .study-id {
+            display: inline-block;
+            color: var(--fn-accent);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+        .lede { color: var(--fn-muted); font-size: 0.9375rem; line-height: 1.7; max-width: 880px; }
+        .lede a { color: var(--fn-accent); text-decoration: none; }
+        .lede a:hover { text-decoration: underline; }
+        .viewer-wrap {
+            margin: 1.5rem 0 1rem;
+            border: 1px solid var(--fn-line);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        .views {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--fn-muted);
+            margin-bottom: 2rem;
+        }
+        .views a { color: var(--fn-accent); text-decoration: none; }
+        .views a:hover { text-decoration: underline; }
+        .cite {
+            border-top: 1px solid var(--fn-line);
+            padding-top: 1.25rem;
+            font-size: 0.8125rem;
+            color: var(--fn-muted);
+            line-height: 1.7;
+        }
+        .cite strong { color: var(--fn-text); }
+        .cite a { color: var(--fn-accent); text-decoration: none; }
+        .cite a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .page-container { padding: 0 1rem 2rem; }
+            h1 { font-size: 1.5rem; }
+            .header-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <a class="brand" href="../"><img src="../favicon.svg" alt="">Find Nuclei <span class="accent">Viewer</span></a>
+            <div class="header-links">
+                <a href="../publications.html">Publications</a>
+                <a href="../docs/guides/embedding.html">Embedding guide</a>
+            </div>
+        </div>
+
+        <div class="page-body">
+            <span class="study-id">Nuclei Mosaic</span>
+            <h1>1,061,277 Cell Nuclei From 100 Experiments</h1>
+            <p class="lede">
+                Every nucleus imaged across 100 experiments, cropped and stitched into one
+                263,936 &times; 263,680 pixel OME-Zarr with a 10-level pyramid, about 70 GB at
+                full resolution. Dataset by Russell Barkley, hosted on the Open Storage Network
+                and read directly from there. Zoom out for the whole collection, zoom in for
+                chromatin texture. Related preprint: Barkley RJR, Brodrick AJ, Parker JSL (2026).
+                Reimag(in)ing representative images. <em>Elemental Microscopy</em>.
+                <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>
+            </p>
+
+            <div class="viewer-wrap">
+                <find-nuclei-viewer
+                    url="https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr"
+                    channels="0:on:FFFFFF:0:240"
+                    x="2115" y="1688" zoom="-1.9"
+                    width="100%"
+                    height="640"
+                ></find-nuclei-viewer>
+            </div>
+
+            <div class="views">
+                <a href="../?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.90&amp;xy=2115%2C1688&amp;inv=f&amp;bg=%23000000" target="_blank" rel="noopener">Open in the full viewer &rarr;</a>
+                <span>&middot;</span>
+                <a href="../?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.36&amp;xy=157680%2C116691&amp;inv=f&amp;bg=%23000000" target="_blank" rel="noopener">Original contrast on black &rarr;</a>
+                <span>&middot;</span>
+                <a href="../?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.36&amp;xy=157680%2C116691&amp;inv=t&amp;bg=%23ffffff" target="_blank" rel="noopener">Inverted on white &rarr;</a>
+            </div>
+
+            <div class="cite">
+                <p><strong>Data:</strong> Barkley RJR (2026). Nuclei mosaic, unpublished dataset, shared by the author.
+                <a href="https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr" target="_blank" rel="noopener">OME-Zarr on the Open Storage Network</a>.</p>
+                <p><strong>Viewer:</strong> Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-02.
+                <a href="https://find-nuclei.github.io">https://find-nuclei.github.io</a> &middot;
+                <a href="../CITATION.cff">CITATION.cff</a></p>
+                <p>This page loads the viewer from find-nuclei.github.io and the data from the author's bucket. Nothing is uploaded, and the page sends no analytics.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../embed/v1/viewer.js"></script>
+</body>
+</html>
