@@ -84,9 +84,23 @@ Embed an interactive OME-ZARR viewer in any web page with two lines of HTML:
 ></find-nuclei-viewer>
 ```
 
-No iframe, no build step, no framework required. Works in any CMS (WordPress, Drupal, Ghost, PubPub). Full style isolation via Shadow DOM.
+No iframe, no build step, no framework required. Works in any CMS (WordPress, Drupal, Ghost, PubPub) and inside a shadow root.
 
-- [Live Demo](https://find-nuclei.github.io/publications.html): see it in action with IDR datasets
+In a MyST article (Curvenote journals such as *Elemental Microscopy*), use the widget module. Every key is an attribute of the viewer:
+
+```markdown
+:::{any:bundle} https://find-nuclei.github.io/embed/v1/widget.mjs
+{
+  "url": "https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr",
+  "channels": "0:on:FFFFFF:0:240",
+  "x": 2115, "y": 1688, "zoom": -1.9,
+  "height": "500"
+}
+:::
+```
+
+- [Live Demo](https://find-nuclei.github.io/publications.html): see it in action with IDR datasets and a 1M-nuclei mosaic
+- [MyST and Shadow DOM](https://find-nuclei.github.io/publications/myst-embed.html): the widget, the element in a shadow root, and the iframe fallback, side by side
 - [Embedding Guide](https://find-nuclei.github.io/docs/guides/embedding.html): full attribute reference and examples
 
 ---

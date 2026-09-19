@@ -108,7 +108,7 @@
             margin: 0.75rem 0 1rem;
         }
         .demo-host { margin: 0.75rem 0 0.5rem; border: 1px solid var(--fn-line); border-radius: 10px; overflow: hidden; background: #000; }
-        .demo-frame { display: block; width: 100%; height: 420px; border: 0; }
+        .demo-frame { display: block; width: 100%; height: 900px; border: 0; }
     </style>
 </head>
 <body>
@@ -138,7 +138,7 @@
   "url": "https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr",
   "channels": "0:on:FFFFFF:0:240",
   "x": 2115, "y": 1688, "zoom": -1.9,
-  "height": "420"
+  "height": "560"
 }
 :::</pre>
             <div class="demo-host" id="demo-widget"></div>
@@ -152,7 +152,7 @@
   channels="0:on:FFFFFF:0:240"
   x="2115" y="1688" zoom="-1.9"
   invert background="white"
-  height="420"
+  height="560"
 &gt;&lt;/find-nuclei-viewer&gt;</pre>
             <div class="demo-host" id="demo-shadow"></div>
             <p class="lede">This one also shows the new <code>invert</code> attribute on a white background. <code>grayscale</code> is its sibling.</p>
@@ -182,7 +182,7 @@
         // 1. Drive widget.mjs the way anywidget does: shadow root + render().
         const widgetHost = document.getElementById('demo-widget');
         const widgetRoot = widgetHost.attachShadow({ mode: 'open' });
-        const state = { url: DATA, channels: '0:on:FFFFFF:0:240', x: 2115, y: 1688, zoom: -1.9, height: '420' };
+        const state = { url: DATA, channels: '0:on:FFFFFF:0:240', x: 2115, y: 1688, zoom: -1.9, height: '560' };
         const model = { get: (k) => state[k], on: () => {} };
         const mod = await import('../embed/v1/widget.mjs');
         await mod.default.render({ model, el: widgetRoot });
@@ -191,7 +191,7 @@
         const shadowHost = document.getElementById('demo-shadow');
         const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
         const el = document.createElement('find-nuclei-viewer');
-        for (const [k, v] of Object.entries({ url: DATA, channels: '0:on:FFFFFF:0:240', x: '2115', y: '1688', zoom: '-1.9', invert: '', background: 'white', width: '100%', height: '420' })) {
+        for (const [k, v] of Object.entries({ url: DATA, channels: '0:on:FFFFFF:0:240', x: '2115', y: '1688', zoom: '-1.9', invert: '', background: 'white', width: '100%', height: '560' })) {
             el.setAttribute(k, v);
         }
         shadowRoot.appendChild(el);
