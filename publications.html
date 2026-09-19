@@ -202,6 +202,8 @@
             line-height: 1.7;
             overflow-x: auto;
             position: relative;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
         }
 
         .code-block .tag { color: #89b4fa; }
@@ -321,16 +323,17 @@
             </div>
 
             <!-- ─── Nuclei mosaic (Barkley) ─── -->
-            <!-- TODO before deploy: confirm the dataset license and the preferred citation line with the author. -->
             <div class="study-panel active" id="panel-barkley">
                 <div class="study-meta">
                     <span class="study-id">Nuclei Mosaic</span>
                     <h2>1,061,277 Cell Nuclei From 100 Experiments</h2>
                     <p>
-                        Barkley RJR (2026), unpublished dataset, shared by the author.
+                        Barkley RJR (2026). Nuclei mosaic,
+                        <a href="https://doi.org/10.5281/zenodo.18776682" target="_blank" rel="noopener">doi:10.5281/zenodo.18776682</a>, CC BY 4.0.
                         Every nucleus imaged across 100 experiments, cropped and stitched into one
                         263,936 &times; 263,680 pixel OME-Zarr with a 10-level pyramid, about 70 GB at
-                        full resolution, hosted on the Open Storage Network.
+                        full resolution, streamed from the Open Storage Network
+                        (<a href="https://doi.org/10.6075/J0RR1ZCR" target="_blank" rel="noopener">doi:10.6075/J0RR1ZCR</a>).
                         Related preprint: Barkley RJR, Brodrick AJ, Parker JSL (2026).
                         Reimag(in)ing representative images. <em>Elemental Microscopy</em>.
                         <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>
@@ -350,6 +353,10 @@
                         <span class="study-tag">1M objects</span>
                         <span class="study-tag">Zarr v2</span>
                     </div>
+                    <p style="font-size: 0.8125rem; color: #6b7280; margin-top: 0.75rem;">
+                        This work used the Open Storage Network through allocation BIO250450 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services &amp; Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296.
+                        <a href="https://doi.org/10.1145/3569951.3597559" target="_blank" rel="noopener">doi:10.1145/3569951.3597559</a>
+                    </p>
                 </div>
 
                 <div class="viewer-section">
@@ -366,7 +373,7 @@
                 </div>
 
                 <div class="code-section">
-                    <h3>Embed Code</h3>
+                    <h3>Embed Code: HTML page</h3>
                     <div class="code-block" id="code-barkley">
                         <button class="copy-btn" onclick="copyCode('code-barkley')">Copy</button>
 <span class="comment">&lt;!-- Load once in &lt;head&gt; --&gt;</span>
@@ -381,6 +388,30 @@
   <span class="attr">height</span>=<span class="val">"500"</span>
 <span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
                     </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>Embed Code: MyST article (Curvenote, Elemental Microscopy)</h3>
+                    <p style="color: #4b5563; font-size: 0.9375rem; margin: 0 0 0.75rem;">
+                        MyST sites render widgets inside a shadow root, so use the widget module instead of a
+                        script tag. Every key is an attribute of the viewer, same names as above.
+                        Add <code>"invert": true</code> for a white background with dark nuclei.
+                    </p>
+                    <div class="code-block" id="code-barkley-myst">
+                        <button class="copy-btn" onclick="copyCode('code-barkley-myst')">Copy</button>
+<span class="tag">:::{any:bundle}</span> <span class="val">https://find-nuclei.github.io/embed/v1/widget.mjs</span>
+{
+  <span class="attr">"url"</span>: <span class="val">"https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr"</span>,
+  <span class="attr">"channels"</span>: <span class="val">"0:on:FFFFFF:0:240"</span>,
+  <span class="attr">"x"</span>: 2115, <span class="attr">"y"</span>: 1688, <span class="attr">"zoom"</span>: -1.9,
+  <span class="attr">"height"</span>: <span class="val">"500"</span>
+}
+<span class="tag">:::</span>
+                    </div>
+                    <p style="color: #4b5563; font-size: 0.875rem; margin: 0.75rem 0 0;">
+                        Live demo of this route, plus the iframe fallback:
+                        <a href="/publications/myst-embed.html">MyST and Shadow DOM</a>.
+                    </p>
                 </div>
             </div>
 
@@ -726,7 +757,7 @@
                     </p>
                     <div class="code-block" id="code-cite">
                         <button class="copy-btn" onclick="copyCode('code-cite')">Copy</button>
-Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-02. https://find-nuclei.github.io
+Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-19. https://find-nuclei.github.io
                     </div>
                     <p style="color: #4b5563; font-size: 0.875rem; margin: 0.75rem 0 0;">
                         Machine-readable form: <a href="/CITATION.cff" target="_blank" rel="noopener">CITATION.cff</a>.

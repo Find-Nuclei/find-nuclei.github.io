@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed in MyST and Shadow DOM | Find Nuclei Viewer</title>
+    <meta name="description" content="Three ways to put the Find Nuclei viewer inside a MyST article or any page that isolates widgets in a shadow DOM: the any:bundle widget, the element inside a shadow root, and an iframe.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <style>
+        :root { --fn-accent: #667eea; --fn-bg: #000; --fn-panel: #0d1117; --fn-text: #e6e8ee; --fn-muted: #9aa3b2; --fn-line: #1f2733; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scrollbar-width: none; }
+        html::-webkit-scrollbar { display: none; }
+        body {
+            min-height: 100vh;
+            background: var(--fn-bg);
+            color: var(--fn-text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page-container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.1rem 0;
+            border-bottom: 1px solid var(--fn-line);
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--fn-text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+        }
+        .brand img { width: 26px; height: 26px; }
+        .accent { color: var(--fn-accent); }
+        .header-links a {
+            color: var(--fn-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-left: 1.25rem;
+        }
+        .header-links a:hover { color: var(--fn-accent); }
+        .page-body { padding-top: 2rem; }
+        .study-id {
+            display: inline-block;
+            color: var(--fn-accent);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+        .lede { color: var(--fn-muted); font-size: 0.9375rem; line-height: 1.7; max-width: 880px; }
+        .lede a { color: var(--fn-accent); text-decoration: none; }
+        .lede a:hover { text-decoration: underline; }
+        .viewer-wrap {
+            margin: 1.5rem 0 1rem;
+            border: 1px solid var(--fn-line);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        .views {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--fn-muted);
+            margin-bottom: 2rem;
+        }
+        .views a { color: var(--fn-accent); text-decoration: none; }
+        .views a:hover { text-decoration: underline; }
+        .cite {
+            border-top: 1px solid var(--fn-line);
+            padding-top: 1.25rem;
+            font-size: 0.8125rem;
+            color: var(--fn-muted);
+            line-height: 1.7;
+        }
+        .cite strong { color: var(--fn-text); }
+        .cite a { color: var(--fn-accent); text-decoration: none; }
+        .cite a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .page-container { padding: 0 1rem 2rem; }
+            h1 { font-size: 1.5rem; }
+            .header-links { display: none; }
+        }
+    </style>
+    <style>
+        h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin: 2.25rem 0 0.5rem; }
+        pre {
+            background: var(--fn-panel);
+            border: 1px solid var(--fn-line);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            font-size: 0.8125rem;
+            line-height: 1.55;
+            overflow-x: auto;
+            color: var(--fn-text);
+            margin: 0.75rem 0 1rem;
+        }
+        .demo-host { margin: 0.75rem 0 0.5rem; border: 1px solid var(--fn-line); border-radius: 10px; overflow: hidden; background: #000; }
+        .demo-frame { display: block; width: 100%; height: 420px; border: 0; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <a class="brand" href="../"><img src="../favicon.svg" alt="">Find Nuclei <span class="accent">Viewer</span></a>
+            <div class="header-links">
+                <a href="../publications.html">Publications</a>
+                <a href="../docs/guides/embedding.html">Embedding guide</a>
+            </div>
+        </div>
+
+        <div class="page-body">
+            <span class="study-id">MyST and Shadow DOM</span>
+            <h1>Three ways into an article that isolates its widgets</h1>
+            <p class="lede">
+                Curvenote and MyST sites such as <em>Elemental Microscopy</em> render each widget inside a
+                shadow root. Since release 2026-09-19 the viewer element mounts there directly. This page runs
+                all three routes on the same data so you can pick one and copy it. Data: Barkley RJR (2026),
+                <a href="https://doi.org/10.5281/zenodo.18776682" target="_blank" rel="noopener">doi:10.5281/zenodo.18776682</a>, CC BY 4.0.
+            </p>
+
+            <h2>1. The <code>any:bundle</code> widget</h2>
+            <p class="lede">One directive in your MyST file. Every key becomes an attribute of the viewer element.</p>
+<pre>:::{any:bundle} https://find-nuclei.github.io/embed/v1/widget.mjs
+{
+  "url": "https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr",
+  "channels": "0:on:FFFFFF:0:240",
+  "x": 2115, "y": 1688, "zoom": -1.9,
+  "height": "420"
+}
+:::</pre>
+            <div class="demo-host" id="demo-widget"></div>
+            <p class="lede">Rendered above by calling the widget module the way anywidget does: a shadow root, then <code>render({ model, el })</code>.</p>
+
+            <h2>2. The element inside a shadow root</h2>
+            <p class="lede">What the widget does under the hood. If your platform gives you a shadow root and a script tag, this is all it takes.</p>
+<pre>&lt;script src="https://find-nuclei.github.io/embed/v1/viewer.js"&gt;&lt;/script&gt;
+&lt;find-nuclei-viewer
+  url="https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr"
+  channels="0:on:FFFFFF:0:240"
+  x="2115" y="1688" zoom="-1.9"
+  invert background="white"
+  height="420"
+&gt;&lt;/find-nuclei-viewer&gt;</pre>
+            <div class="demo-host" id="demo-shadow"></div>
+            <p class="lede">This one also shows the new <code>invert</code> attribute on a white background. <code>grayscale</code> is its sibling.</p>
+
+            <h2>3. An iframe</h2>
+            <p class="lede">For a platform that allows neither scripts nor widgets, but does allow iframes. MyST has an <code>iframe</code> directive for exactly this.</p>
+<pre>:::{iframe} https://find-nuclei.github.io/publications/barkley-2026.html
+:width: 100%
+:::</pre>
+            <div class="demo-host">
+                <iframe class="demo-frame" src="barkley-2026.html" title="Find Nuclei viewer, nuclei mosaic" loading="lazy"></iframe>
+            </div>
+
+            <div class="cite" style="margin-top: 2rem;">
+                <p><strong>Viewer:</strong> Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-19.
+                <a href="https://find-nuclei.github.io">https://find-nuclei.github.io</a> &middot;
+                <a href="../CITATION.cff">CITATION.cff</a></p>
+                <p>All three routes load the viewer from find-nuclei.github.io and the data from the author's bucket. Nothing is uploaded, and none of them sends analytics.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../embed/v1/viewer.js"></script>
+    <script type="module">
+        const DATA = 'https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr';
+
+        // 1. Drive widget.mjs the way anywidget does: shadow root + render().
+        const widgetHost = document.getElementById('demo-widget');
+        const widgetRoot = widgetHost.attachShadow({ mode: 'open' });
+        const state = { url: DATA, channels: '0:on:FFFFFF:0:240', x: 2115, y: 1688, zoom: -1.9, height: '420' };
+        const model = { get: (k) => state[k], on: () => {} };
+        const mod = await import('../embed/v1/widget.mjs');
+        await mod.default.render({ model, el: widgetRoot });
+
+        // 2. The bare element inside a shadow root, inverted on white.
+        const shadowHost = document.getElementById('demo-shadow');
+        const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+        const el = document.createElement('find-nuclei-viewer');
+        for (const [k, v] of Object.entries({ url: DATA, channels: '0:on:FFFFFF:0:240', x: '2115', y: '1688', zoom: '-1.9', invert: '', background: 'white', width: '100%', height: '420' })) {
+            el.setAttribute(k, v);
+        }
+        shadowRoot.appendChild(el);
+    </script>
+</body>
+</html>
