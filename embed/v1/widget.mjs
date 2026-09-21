@@ -21,6 +21,7 @@ const ATTRS = [
   'url', 'image', 'z', 't', 'channels', 'labels',
   'x', 'y', 'zoom', 'width', 'height',
   'controls', 'theme', 'background', 'grayscale', 'invert', 'token',
+  'autoplay', 'fps',
 ];
 
 let loading = null;

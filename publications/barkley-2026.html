@@ -9,6 +9,8 @@
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <style>
         :root { --fn-accent: #667eea; --fn-bg: #000; --fn-panel: #0d1117; --fn-text: #e6e8ee; --fn-muted: #9aa3b2; --fn-line: #1f2733; }
+        html[data-theme="light"] { --fn-bg: #ffffff; --fn-panel: #f6f7fb; --fn-text: #111827; --fn-muted: #4b5563; --fn-line: #e5e7eb; }
+        html[data-theme="light"] .viewer-wrap { background: #fff; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scrollbar-width: none; }
         html::-webkit-scrollbar { display: none; }
@@ -100,6 +102,7 @@
         <div class="page-header">
             <a class="brand" href="../"><img src="../favicon.svg" alt="">Find Nuclei <span class="accent">Viewer</span></a>
             <div class="header-links">
+                <a href="#" id="theme-toggle">Light page</a>
                 <a href="../publications.html">Publications</a>
                 <a href="../docs/guides/embedding.html">Embedding guide</a>
             </div>
@@ -136,6 +139,32 @@
                 <a href="../?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.36&amp;xy=157680%2C116691&amp;inv=t&amp;bg=%23ffffff" target="_blank" rel="noopener">Inverted on white &rarr;</a>
             </div>
 
+            <span class="study-id" style="margin-top: 2.5rem;">Live Imaging</span>
+            <h1 style="font-size: 1.5rem;">Reovirus infection, thirty timepoints</h1>
+            <p class="lede">
+                The time-lapse from the same preprint: mNeonGreen and mCherry, two channels over thirty
+                frames. The figure plays on its own once it is on screen and pauses while scrolled away.
+                Every frame is shown complete, so on a slow link the tempo drops rather than the frame
+                tearing. Hover for the play button and the time slider.
+            </p>
+
+            <div class="viewer-wrap">
+                <find-nuclei-viewer
+                    id="video-embed"
+                    url="https://nyu1.osn.mghpcc.org/barkley-replication/video.zarr"
+                    channels="0:on:00FF00:21:130,1:on:FF00FF:24:1313"
+                    t="17"
+                    x="2971" y="4370" zoom="-3.11"
+                    autoplay fps="4"
+                    width="100%"
+                    height="640"
+                ></find-nuclei-viewer>
+            </div>
+
+            <div class="views">
+                <a id="video-full-link" href="../?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fvideo.zarr&amp;z=0&amp;t=17&amp;c=0%3Aon%3A00FF00%3A21%3A130%3A1.00%2C1%3Aon%3AFF00FF%3A24%3A1313%3A1.00&amp;zm=-3.11&amp;xy=2971%2C4370&amp;cm=C&amp;inv=f&amp;bg=%23000000&amp;pj=none%3A0%3A0&amp;l=" target="_blank" rel="noopener">Open this view in the full viewer &rarr;</a>
+            </div>
+
             <div class="cite">
                 <p><strong>Data:</strong> Barkley RJR (2026). Nuclei mosaic.
                 <a href="https://doi.org/10.5281/zenodo.18776682" target="_blank" rel="noopener">doi:10.5281/zenodo.18776682</a>,
@@ -144,6 +173,10 @@
                 (Kirkpatrick et al., 2021, <a href="https://doi.org/10.6075/J0RR1ZCR" target="_blank" rel="noopener">doi:10.6075/J0RR1ZCR</a>).</p>
                 <p><strong>Acknowledgement:</strong> This work used the Open Storage Network through allocation BIO250450 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services &amp; Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296.
                 Boerner et al. (2023), <a href="https://doi.org/10.1145/3569951.3597559" target="_blank" rel="noopener">doi:10.1145/3569951.3597559</a>.</p>
+                <p><strong>Video:</strong> Barkley RJR, Brodrick AJ, Parker JSL (2026). Live imaging from
+                Reimag(in)ing representative images, <em>Elemental Microscopy</em>,
+                <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>, CC BY 4.0.
+                Streamed as <a href="https://nyu1.osn.mghpcc.org/barkley-replication/video.zarr" target="_blank" rel="noopener">OME-Zarr from the Open Storage Network</a>.</p>
                 <p><strong>Viewer:</strong> Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-19.
                 <a href="https://find-nuclei.github.io">https://find-nuclei.github.io</a> &middot;
                 <a href="../CITATION.cff">CITATION.cff</a></p>
@@ -152,6 +185,35 @@
         </div>
     </div>
 
+    <script>
+        // Reason: one page, two looks. ?theme=light lightens the chrome and shows every
+        // viewer inverted on white, the way figures read on paper.
+        (function () {
+            var params = new URLSearchParams(location.search);
+            var light = params.get('theme') === 'light';
+            if (light) {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.querySelectorAll('find-nuclei-viewer').forEach(function (el) {
+                    el.setAttribute('invert', ''); el.setAttribute('background', 'white'); el.setAttribute('theme', 'light');
+                });
+                // The video gets its own paper palette: teal and pink with tight windows,
+                // tuned for the inverted look, centred on the field at frame 6.
+                var video = document.getElementById('video-embed');
+                if (video) {
+                    video.setAttribute('channels', '0:on:008080:29:63,1:on:FF0080:82:580');
+                    video.setAttribute('t', '6');
+                    video.setAttribute('x', '3431'); video.setAttribute('y', '3431'); video.setAttribute('zoom', '-3');
+                }
+                var fullLink = document.getElementById('video-full-link');
+                if (fullLink) fullLink.href = '../?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fvideo.zarr&z=0&t=6&c=0%3Aon%3A008080%3A29%3A63%3A1.00%2C1%3Aon%3AFF0080%3A82%3A580%3A1.00&zm=-3.00&xy=3431%2C3431&cm=C&inv=t&bg=%23ffffff&pj=none%3A0%3A0&l=';
+            }
+            var toggle = document.getElementById('theme-toggle');
+            if (toggle) {
+                toggle.textContent = light ? 'Dark page' : 'Light page';
+                toggle.href = light ? location.pathname : location.pathname + '?theme=light';
+            }
+        })();
+    </script>
     <script src="../embed/v1/viewer.js"></script>
 </body>
 </html>
