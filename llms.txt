@@ -18,7 +18,7 @@ Find Nuclei Viewer is a zero-install web application for viewing and annotating 
 - High-Content Screening (HCS) plate navigation with well picker and field grid
 - GPU-accelerated multi-resolution tiled rendering via deck.gl WebGL
 - Shareable deep links — URL tracks zoom, position, channels, Z-slice in real-time
-- Supports OME-ZARR v0.4 and v0.5, including sharded stores
+- Reads OME-NGFF 0.6, the current spec, plus 0.3, 0.4 and 0.5, including sharded stores
 - Handles images exceeding 100,000 pixels in either dimension
 
 ## Who it's for
@@ -27,7 +27,7 @@ Researchers and scientists working with microscopy data: digital pathology, spat
 
 ## Technical details
 
-- Format: OME-ZARR (OME-NGFF) v0.4 and v0.5
+- Format: OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6. In 0.6: coordinate systems with scale and translation, labels, plates and time-lapses. Scenes and affine transforms are not rendered yet
 - Browsers: Chrome, Edge (full support including local files), Firefox (remote URLs only)
 - Rendering: deck.gl with WebGL, multi-resolution tiled loading
 - Privacy: all processing is client-side, no server backend required

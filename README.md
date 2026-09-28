@@ -122,7 +122,7 @@ In a MyST article (Curvenote journals such as *Elemental Microscopy*), use the w
 
 ## Requirements
 
-- **Format:** OME-ZARR (OME-NGFF) v0.3, v0.4 and v0.5, including sharded stores, plus `bioformats2raw` layouts.
+- **Format:** OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6 (the current spec), including sharded stores, plus `bioformats2raw` layouts.
 - **Any modern browser** for remote URLs, including Firefox and Safari.
 - **Any modern browser** for a dataset zipped into a single `.ozx` or `.zip` file, opened in place with nothing unpacked.
 - **Chrome or Edge** to open a dataset *folder* from disk.
