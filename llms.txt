@@ -28,7 +28,7 @@ Researchers and scientists working with microscopy data: digital pathology, spat
 ## Technical details
 
 - Format: OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6. In 0.6: coordinate systems with scale and translation, labels, plates and time-lapses. Scenes and affine transforms are not rendered yet
-- Browsers: Chrome, Edge (full support including local files), Firefox (remote URLs only)
+- Browsers: Chrome and Edge open everything, including dataset folders from disk. Firefox and Safari open web links and zipped datasets (.ozx or .zip) from disk
 - Rendering: deck.gl with WebGL, multi-resolution tiled loading
 - Privacy: all processing is client-side, no server backend required
 - No account or installation required
