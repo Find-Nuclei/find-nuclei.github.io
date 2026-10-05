@@ -7,6 +7,11 @@
     <meta name="description" content="See how journals can embed interactive OME-ZARR microscopy viewers directly in publication pages. Two lines of HTML. No install, no iframe.">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <!--
+      Page views only, the same tracker as the docs. The embedded viewers on
+      this page send nothing; that is the embed's promise, not this page's.
+    -->
+    <script async src="https://fn-stats.find-nuclei.workers.dev/fn.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -156,6 +161,38 @@
             border: 1px solid #e5e7eb;
             padding: 0.2rem 0.6rem;
             border-radius: 100px;
+        }
+
+        .study-refs {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 0.4rem 1rem;
+            margin: 0;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+
+        .study-refs dt {
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .study-refs dd {
+            margin: 0;
+        }
+
+        @media (max-width: 520px) {
+            .study-refs {
+                grid-template-columns: 1fr;
+                gap: 0.1rem;
+            }
+
+            .study-refs dd {
+                margin-bottom: 0.5rem;
+            }
         }
 
         /* ── Viewer container ── */
@@ -328,23 +365,14 @@
                     <span class="study-id">Nuclei Mosaic</span>
                     <h2>1,061,277 Cell Nuclei From 100 Experiments</h2>
                     <p>
-                        Barkley RJR (2026). Nuclei mosaic,
-                        <a href="https://doi.org/10.5281/zenodo.18776682" target="_blank" rel="noopener">doi:10.5281/zenodo.18776682</a>, CC BY 4.0.
                         Every nucleus imaged across 100 experiments, cropped and stitched into one
                         263,936 &times; 263,680 pixel OME-Zarr with a 10-level pyramid, about 70 GB at
-                        full resolution, streamed from the Open Storage Network
-                        (<a href="https://doi.org/10.6075/J0RR1ZCR" target="_blank" rel="noopener">doi:10.6075/J0RR1ZCR</a>).
-                        Methods: Barkley RJR (2026). <em>Fluorescent Protein Tag Confounds in Reovirus Biology</em>,
-                        pp. 75&ndash;79. PhD dissertation, Cornell University.
-                        <a href="https://www.proquest.com/dissertations-theses/fluorescent-protein-tag-confounds-reovirus/docview/3385861345/se-2" target="_blank" rel="noopener">ProQuest</a>.
-                        Related preprint: Barkley RJR, Brodrick AJ, Parker JSL (2026).
-                        Reimag(in)ing representative images. <em>Elemental Microscopy</em>.
-                        <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>
-                        &middot;
-                        <a href="/?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.90&amp;xy=2115%2C1688&amp;inv=f&amp;bg=%23000000" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                        full resolution, streamed from the Open Storage Network.
                     </p>
                     <p>
-                        The same field two ways, as shared links from the viewer:
+                        <a href="/?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.90&amp;xy=2115%2C1688&amp;inv=f&amp;bg=%23000000" target="_blank" rel="noopener">Open in Find Nuclei Viewer &rarr;</a>
+                        &middot;
+                        One field two ways:
                         <a href="/?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.36&amp;xy=157680%2C116691&amp;inv=f&amp;bg=%23000000" target="_blank" rel="noopener">original contrast on black &rarr;</a>
                         &middot;
                         <a href="/?url=https%3A%2F%2Fnyu1.osn.mghpcc.org%2Fbarkley-replication%2Fnuclei_mosaic.zarr&amp;z=0&amp;t=0&amp;c=0%3Aon%3AFFFFFF%3A0%3A240%3A1.00&amp;cm=C&amp;pj=none%3A0%3A0&amp;l=&amp;zm=-1.36&amp;xy=157680%2C116691&amp;inv=t&amp;bg=%23ffffff" target="_blank" rel="noopener">inverted on white &rarr;</a>
@@ -356,10 +384,25 @@
                         <span class="study-tag">1M objects</span>
                         <span class="study-tag">Zarr v2</span>
                     </div>
-                    <p style="font-size: 0.8125rem; color: #6b7280; margin-top: 0.75rem;">
-                        This work used the Open Storage Network through allocation BIO250450 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services &amp; Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296.
-                        <a href="https://doi.org/10.1145/3569951.3597559" target="_blank" rel="noopener">doi:10.1145/3569951.3597559</a>
-                    </p>
+                    <dl class="study-refs">
+                        <dt>Data</dt>
+                        <dd>Barkley RJR (2026). Nuclei mosaic.
+                            <a href="https://doi.org/10.5281/zenodo.18776682" target="_blank" rel="noopener">doi:10.5281/zenodo.18776682</a>, CC BY 4.0.
+                            Streamed from the Open Storage Network (Kirkpatrick et al., 2021,
+                            <a href="https://doi.org/10.6075/J0RR1ZCR" target="_blank" rel="noopener">doi:10.6075/J0RR1ZCR</a>).</dd>
+                        <dt>Methods</dt>
+                        <dd>Barkley RJR (2026). <em>Fluorescent Protein Tag Confounds in Reovirus Biology</em>,
+                            pp. 75&ndash;79. PhD dissertation, Cornell University.
+                            <a href="https://www.proquest.com/dissertations-theses/fluorescent-protein-tag-confounds-reovirus/docview/3385861345/se-2" target="_blank" rel="noopener">ProQuest</a>.</dd>
+                        <dt>Preprint</dt>
+                        <dd>Barkley RJR, Brodrick AJ, Parker JSL (2026). Reimag(in)ing representative images.
+                            <em>Elemental Microscopy</em>.
+                            <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>.</dd>
+                        <dt>Acknowledgement</dt>
+                        <dd>This work used the Open Storage Network through allocation BIO250450 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services &amp; Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296.
+                            Boerner et al. (2023),
+                            <a href="https://doi.org/10.1145/3569951.3597559" target="_blank" rel="noopener">doi:10.1145/3569951.3597559</a>.</dd>
+                    </dl>
                 </div>
 
                 <div class="viewer-section">
