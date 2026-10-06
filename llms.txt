@@ -4,7 +4,7 @@
 
 ## What it does
 
-Find Nuclei Viewer is a zero-install web application for viewing and annotating bio-image data in OME-ZARR format. It runs entirely in the browser — no data is uploaded to any server.
+Find Nuclei Viewer is a zero-install web application for viewing and annotating bio-image data in OME-ZARR format. It runs entirely in the browser. No data is uploaded to any server. The same viewer embeds in any web page or MyST article as an interactive figure, and can tell the hosting page how readers use it.
 
 ## Key capabilities
 
@@ -17,13 +17,24 @@ Find Nuclei Viewer is a zero-install web application for viewing and annotating 
 - Z-projection (max, mean, min intensity) with configurable Z-range
 - High-Content Screening (HCS) plate navigation with well picker and field grid
 - GPU-accelerated multi-resolution tiled rendering via deck.gl WebGL
-- Shareable deep links — URL tracks zoom, position, channels, Z-slice in real-time
+- Shareable deep links: the URL tracks zoom, position, channels and Z-slice in real time
 - Reads OME-NGFF 0.6, the current spec, plus 0.3, 0.4 and 0.5, including sharded stores
 - Handles images exceeding 100,000 pixels in either dimension
 
+## Embedding in articles and web pages
+
+- Two lines of HTML: `<script src="https://find-nuclei.github.io/embed/v1/viewer.js"></script>` once per page, then `<find-nuclei-viewer url="https://example.org/image.zarr"></find-nuclei-viewer>` for each figure
+- MyST and Curvenote articles (Elemental Microscopy and other Curvenote sites): an `any:bundle` directive pointing at `https://find-nuclei.github.io/embed/v1/widget.mjs`; every JSON key becomes an attribute of the viewer
+- Attributes set the starting view and look: `x`, `y`, `zoom`, `z`, `t`, `channels`, `invert`, `grayscale`, `background`, `autoplay`, `fps`, and `id` to name the figure
+- The viewer's toolbar has an Embed button that turns the current view into HTML or MyST code
+- Reader interactions: each embedded viewer dispatches a `fn-viewer:interaction` DOM event (bubbles, composed, so it leaves shadow roots) for every reader action: ready, pan, zoom, channel, z, t, play, pause, visible, hidden. Each event carries the full view at that moment: centre, zoom, visible bounds, z-slice, timepoint, channels and contrast, and the figure's `id`
+- The viewer sends nothing anywhere itself. The hosting page collects the events with its own analytics and owns the data. Use it to measure reader engagement with interactive figures, time on figure, and where readers look
+- Guides: https://find-nuclei.github.io/docs/guides/embedding.html and https://find-nuclei.github.io/docs/guides/reader-analytics.html
+- Live demos: https://find-nuclei.github.io/publications.html, https://find-nuclei.github.io/publications/myst-embed.html, https://find-nuclei.github.io/publications/embed-events.html
+
 ## Who it's for
 
-Researchers and scientists working with microscopy data: digital pathology, spatial biology, high-content screening, confocal microscopy, light-sheet imaging, electron microscopy, super-resolution microscopy, spatial transcriptomics, live-cell imaging.
+Researchers and scientists working with microscopy data: digital pathology, spatial biology, high-content screening, confocal microscopy, light-sheet imaging, electron microscopy, super-resolution microscopy, spatial transcriptomics, live-cell imaging. Authors, journals, preprint servers and data portals that publish interactive microscopy figures.
 
 ## Technical details
 

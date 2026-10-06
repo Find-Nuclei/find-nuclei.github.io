@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications: Embedded OME-ZARR Viewer Demo | Find Nuclei</title>
-    <meta name="description" content="See how journals can embed interactive OME-ZARR microscopy viewers directly in publication pages. Two lines of HTML. No install, no iframe.">
+    <meta name="description" content="Embed interactive OME-Zarr microscopy viewers in journal articles, preprints and MyST pages with two lines of HTML, and see how readers use your figures. No install, no iframe.">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <!--
@@ -356,6 +356,7 @@
                 <button class="tab" data-panel="idr0066">IDR-0066</button>
                 <button class="tab" data-panel="idr0073">IDR-0073</button>
                 <button class="tab" data-panel="idr0079">IDR-0079</button>
+                <button class="tab" data-panel="readers">Readers</button>
                 <button class="tab" data-panel="howto">How It Works</button>
             </div>
 
@@ -722,6 +723,48 @@
   <span class="attr">height</span>=<span class="val">"400"</span>
 <span class="tag">&gt;&lt;/find-nuclei-viewer&gt;</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- ─── Reader Interactions ─── -->
+            <div class="study-panel" id="panel-readers">
+                <div class="study-meta">
+                    <span class="study-id">Reader Interactions</span>
+                    <h2>See What Readers Do With Your Figures</h2>
+                    <p>
+                        Every embedded viewer tells its page what the reader does: where they look and at
+                        what zoom, which channels they switch, which frame they stop on, and how long the
+                        figure stays on screen. The viewer sends nothing anywhere. Your page listens and
+                        keeps what it needs, with the analytics you already run.
+                    </p>
+                    <p>
+                        <a href="publications/embed-events.html">Try the live demo &rarr;</a>
+                        &middot;
+                        <a href="docs/guides/embedding.html#reader-interactions">Every field &rarr;</a>
+                        &middot;
+                        <a href="docs/guides/reader-analytics.html">Collect the events &rarr;</a>
+                    </p>
+                    <div class="study-tags">
+                        <span class="study-tag">Reader engagement</span>
+                        <span class="study-tag">Interactive figures</span>
+                        <span class="study-tag">MyST and Curvenote</span>
+                        <span class="study-tag">Publisher-owned data</span>
+                    </div>
+                </div>
+
+                <div class="code-section" style="margin-top: 0;">
+                    <h3>The Whole Listener</h3>
+                    <div class="code-block" id="code-readers">
+                        <button class="copy-btn" onclick="copyCode('code-readers')">Copy</button>
+document.addEventListener(<span class="val">'fn-viewer:interaction'</span>, (e) =&gt; {
+  <span class="comment">// e.detail: action, id, view, z, t, channels, time</span>
+  yourTracker.send(e.detail);
+});
+                    </div>
+                    <p style="color: #4b5563; font-size: 0.875rem; margin: 0.75rem 0 0;">
+                        Give each viewer an <code>id</code>, such as <code>id="fig-2-nuclei"</code>, and every event
+                        says which figure it came from.
+                    </p>
                 </div>
             </div>
 
