@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader Interactions | Find Nuclei Viewer</title>
+    <meta name="description" content="Three embedded Find Nuclei viewers and a live table of the events they give the page: pans, zooms, channels, timepoints and time on screen. The events stay in the browser.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <!-- No tracker on this page, by design: it shows that the events stay in the browser. -->
+    <style>
+        :root { --fn-accent: #667eea; --fn-bg: #000; --fn-panel: #0d1117; --fn-text: #e6e8ee; --fn-muted: #9aa3b2; --fn-line: #1f2733; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: var(--fn-bg);
+            color: var(--fn-text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page-container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.1rem 0;
+            border-bottom: 1px solid var(--fn-line);
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--fn-text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+        }
+        .brand img { width: 26px; height: 26px; }
+        .accent { color: var(--fn-accent); }
+        .header-links a { color: var(--fn-muted); text-decoration: none; font-size: 0.875rem; margin-left: 1.25rem; }
+        .header-links a:hover { color: var(--fn-accent); }
+        .page-body { padding-top: 2rem; }
+        .study-id {
+            display: inline-block;
+            color: var(--fn-accent);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+        h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin: 2.25rem 0 0.5rem; }
+        .lede { color: var(--fn-muted); font-size: 0.9375rem; line-height: 1.7; max-width: 880px; }
+        .lede a, .cite a, .log-note a { color: var(--fn-accent); text-decoration: none; }
+        .lede a:hover, .cite a:hover, .log-note a:hover { text-decoration: underline; }
+        pre {
+            background: var(--fn-panel);
+            border: 1px solid var(--fn-line);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            font-size: 0.8125rem;
+            line-height: 1.55;
+            overflow-x: auto;
+            color: var(--fn-text);
+            margin: 0.75rem 0 1rem;
+        }
+        .demo-host { margin: 0.75rem 0 0.5rem; border: 1px solid var(--fn-line); border-radius: 10px; overflow: hidden; background: #000; }
+
+        .log {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--fn-bg);
+            padding: 1rem 0 0.75rem;
+            margin-top: 1.25rem;
+            border-bottom: 1px solid var(--fn-line);
+        }
+        .log-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1.25rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.8125rem;
+            color: var(--fn-muted);
+        }
+        .log-head strong { color: var(--fn-text); font-variant-numeric: tabular-nums; }
+        .log-head button {
+            margin-left: auto;
+            background: var(--fn-panel);
+            color: var(--fn-text);
+            border: 1px solid var(--fn-line);
+            border-radius: 6px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8125rem;
+            cursor: pointer;
+        }
+        .log-head button:hover { border-color: var(--fn-accent); }
+        .log-table-wrap {
+            max-height: 240px;
+            overflow: auto;
+            border: 1px solid var(--fn-line);
+            border-radius: 8px;
+            background: var(--fn-panel);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+        th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--fn-line); white-space: nowrap; }
+        th { position: sticky; top: 0; background: var(--fn-panel); color: var(--fn-muted); font-weight: 600; }
+        tr.event { cursor: pointer; }
+        tr.event:hover { background: #111827; }
+        td.action { color: var(--fn-accent); font-weight: 600; }
+        tr.json td {
+            white-space: pre;
+            color: var(--fn-muted);
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.75rem;
+        }
+        tr.empty td { color: var(--fn-muted); }
+        .log-note { font-size: 0.8125rem; color: var(--fn-muted); margin-top: 0.6rem; line-height: 1.6; }
+
+        .cite {
+            border-top: 1px solid var(--fn-line);
+            padding-top: 1.25rem;
+            margin-top: 2rem;
+            font-size: 0.8125rem;
+            color: var(--fn-muted);
+            line-height: 1.7;
+        }
+        .cite strong { color: var(--fn-text); }
+        @media (max-width: 640px) {
+            .page-container { padding: 0 1rem 2rem; }
+            h1 { font-size: 1.5rem; }
+            .header-links { display: none; }
+            .log-table-wrap { max-height: 180px; }
+        }
+        @media (max-height: 760px) {
+            .log-table-wrap { max-height: 120px; }
+        }
+        @media (max-height: 500px) {
+            .log { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <a class="brand" href="../"><img src="../favicon.svg" alt="">Find Nuclei <span class="accent">Viewer</span></a>
+            <div class="header-links">
+                <a href="../publications.html">Publications</a>
+                <a href="../docs/guides/embedding.html#reader-interactions">Embedding guide</a>
+            </div>
+        </div>
+
+        <div class="page-body">
+            <span class="study-id">Reader interactions</span>
+            <h1>See what a publisher would record</h1>
+            <p class="lede">
+                Every viewer on this page tells the page what its reader does: where they look, which
+                channels they switch, which frame they stop on, and how long the figure is on screen.
+                The table is this page listening. Use the viewers and watch it fill.
+            </p>
+
+            <div class="log">
+                <div class="log-head">
+                    <span>On screen: mosaic <strong id="vis-mosaic">0 s</strong></span>
+                    <span>mosaic-inverted <strong id="vis-mosaic-inverted">0 s</strong></span>
+                    <span>timelapse <strong id="vis-timelapse">0 s</strong></span>
+                    <button type="button" id="clear">Clear</button>
+                </div>
+                <div class="log-table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Time</th><th>Viewer id</th><th>Action</th><th>x, y</th><th>Zoom</th><th>z, t</th><th>Channels</th></tr>
+                        </thead>
+                        <tbody id="rows">
+                            <tr class="empty"><td colspan="7">Waiting for the first viewer to load.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="log-note">
+                Click a row for the full event. The events stay in your browser: every request in the Network tab goes to this site or to the data bucket.
+            </p>
+
+            <h2>1. A plain element</h2>
+            <p class="lede">Drag, zoom, and set the contrast with the slider under the channel dot.</p>
+            <div class="demo-host" data-viewer="1">
+                <find-nuclei-viewer
+                    id="mosaic"
+                    url="https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr"
+                    channels="0:on:FFFFFF:0:240"
+                    x="2115" y="1688" zoom="-1.9"
+                    width="100%"
+                    height="460"
+                ></find-nuclei-viewer>
+            </div>
+
+            <h2>2. The MyST widget, inside a shadow root</h2>
+            <p class="lede">
+                The same data inverted on white, rendered the way a Curvenote article renders it. Its
+                events reach the page all the same.
+            </p>
+            <div class="demo-host" data-viewer="2" id="viewer-2"></div>
+
+            <h2>3. A time-lapse that plays on its own</h2>
+            <p class="lede">
+                Autoplay, and the pause while this figure is scrolled away, are the viewer's own doing,
+                so they stay out of the table. Press Pause, then Play, or drag the time slider, and those rows appear.
+            </p>
+            <div class="demo-host" data-viewer="3">
+                <find-nuclei-viewer
+                    id="timelapse"
+                    url="https://nyu1.osn.mghpcc.org/barkley-replication/video.zarr"
+                    channels="0:on:00FF00:21:199,1:on:FF00FF:24:2121"
+                    autoplay fps="4"
+                    width="100%"
+                    height="460"
+                ></find-nuclei-viewer>
+            </div>
+
+            <h2>Listening on your own page</h2>
+            <p class="lede">
+                This is the whole listener. Send <code>e.detail</code> wherever your own tracking goes.
+                Give each viewer an <code>id</code>, as this page does, and every event says which figure
+                it came from. Every field is in the <a href="../docs/guides/embedding.html#reader-interactions">embedding guide</a>.
+            </p>
+<pre>document.addEventListener('fn-viewer:interaction', (e) =&gt; {
+  yourTracker.send(e.detail);
+});</pre>
+
+            <div class="cite">
+                <p><strong>Data:</strong> Barkley RJR (2026). Nuclei mosaic.
+                <a href="https://doi.org/10.5281/zenodo.18776682" target="_blank" rel="noopener">doi:10.5281/zenodo.18776682</a>,
+                CC BY 4.0. Streamed from the Open Storage Network
+                (Kirkpatrick et al., 2021, <a href="https://doi.org/10.6075/J0RR1ZCR" target="_blank" rel="noopener">doi:10.6075/J0RR1ZCR</a>).</p>
+                <p><strong>Methods:</strong> Barkley RJR (2026). <em>Fluorescent Protein Tag Confounds in Reovirus Biology</em>,
+                pp. 75&ndash;79. PhD dissertation, Cornell University.
+                <a href="https://www.proquest.com/dissertations-theses/fluorescent-protein-tag-confounds-reovirus/docview/3385861345/se-2" target="_blank" rel="noopener">ProQuest</a>.</p>
+                <p><strong>Video:</strong> Barkley RJR, Brodrick AJ, Parker JSL (2026). Live imaging from
+                Reimag(in)ing representative images, <em>Elemental Microscopy</em>,
+                <a href="https://doi.org/10.69761/ggmj4852" target="_blank" rel="noopener">doi:10.69761/ggmj4852</a>, CC BY 4.0.</p>
+                <p><strong>Acknowledgement:</strong> This work used the Open Storage Network through allocation BIO250450 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services &amp; Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296.
+                Boerner et al. (2023), <a href="https://doi.org/10.1145/3569951.3597559" target="_blank" rel="noopener">doi:10.1145/3569951.3597559</a>.</p>
+                <p><strong>Viewer:</strong> Find Nuclei (2026). Find Nuclei Viewer.
+                <a href="https://find-nuclei.github.io">https://find-nuclei.github.io</a> &middot;
+                <a href="../CITATION.cff">CITATION.cff</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../embed/v1/viewer.js"></script>
+    <script>
+        // The listener. This is what a publisher's page would do, except that it
+        // shows each event instead of sending it.
+        const PAGE_START = Date.now();
+        const MAX_ROWS = 200;
+        const rows = document.getElementById('rows');
+        const VIEWER_IDS = ['mosaic', 'mosaic-inverted', 'timelapse'];
+        const onScreenMs = Object.fromEntries(VIEWER_IDS.map((id) => [id, 0]));
+        const visibleSince = Object.fromEntries(VIEWER_IDS.map((id) => [id, null]));
+
+        // Reason: the viewer's own `id` attribute arrives in every event, the
+        // same way it would on a publisher's page. Nothing here depends on
+        // where the element sits in this page's markup.
+        function viewerOf(e) {
+            return e.detail.id || '(no id)';
+        }
+
+        function channelText(channels) {
+            return channels
+                .map((c) => `${c.index} ${c.active ? 'on' : 'off'} ${c.min}–${c.max}`)
+                .join(' · ');
+        }
+
+        function addRow(viewer, d) {
+            rows.querySelector('tr.empty')?.remove();
+            const tr = document.createElement('tr');
+            tr.className = 'event';
+            const cells = [
+                `${((d.time - PAGE_START) / 1000).toFixed(1)} s`,
+                viewer,
+                d.action,
+                `${Math.round(d.view.x)}, ${Math.round(d.view.y)}`,
+                d.view.zoom.toFixed(2),
+                `${d.z}, ${d.t}`,
+                channelText(d.channels),
+            ];
+            cells.forEach((text, i) => {
+                const td = document.createElement('td');
+                td.textContent = text;
+                if (i === 2) td.className = 'action';
+                tr.appendChild(td);
+            });
+            tr.addEventListener('click', () => {
+                const next = tr.nextElementSibling;
+                if (next && next.classList.contains('json')) {
+                    next.remove();
+                    return;
+                }
+                const jsonRow = document.createElement('tr');
+                jsonRow.className = 'json';
+                const td = document.createElement('td');
+                td.colSpan = 7;
+                td.textContent = JSON.stringify(d, null, 2);
+                jsonRow.appendChild(td);
+                tr.after(jsonRow);
+            });
+            rows.prepend(tr);
+
+            const events = rows.querySelectorAll('tr.event');
+            if (events.length > MAX_ROWS) {
+                const last = events[events.length - 1];
+                if (last.nextElementSibling?.classList.contains('json')) last.nextElementSibling.remove();
+                last.remove();
+            }
+        }
+
+        document.addEventListener('fn-viewer:interaction', (e) => {
+            const d = e.detail;
+            const viewer = viewerOf(e);
+            if (d.action === 'visible' && viewer in visibleSince) visibleSince[viewer] = d.time;
+            if (d.action === 'hidden' && visibleSince[viewer] != null) {
+                onScreenMs[viewer] += d.time - visibleSince[viewer];
+                visibleSince[viewer] = null;
+            }
+            addRow(viewer, d);
+        });
+
+        document.getElementById('clear').addEventListener('click', () => {
+            rows.innerHTML = '<tr class="empty"><td colspan="7">Cleared. Use a viewer.</td></tr>';
+        });
+
+        // Time on screen: the closed visible-to-hidden intervals plus the open one.
+        setInterval(() => {
+            const now = Date.now();
+            for (const v of VIEWER_IDS) {
+                const open = visibleSince[v] !== null ? now - visibleSince[v] : 0;
+                document.getElementById(`vis-${v}`).textContent = `${Math.round((onScreenMs[v] + open) / 1000)} s`;
+            }
+        }, 500);
+    </script>
+    <script type="module">
+        // Viewer 2: drive widget.mjs the way anywidget does, as on myst-embed.html.
+        const host = document.getElementById('viewer-2');
+        const root = host.attachShadow({ mode: 'open' });
+        const state = {
+            id: 'mosaic-inverted',
+            url: 'https://nyu1.osn.mghpcc.org/barkley-replication/nuclei_mosaic.zarr',
+            channels: '0:on:FFFFFF:0:240',
+            x: 2115, y: 1688, zoom: -1.9,
+            invert: true, background: 'white',
+            height: '460',
+        };
+        const model = { get: (k) => state[k], on: () => {} };
+        const mod = await import('../embed/v1/widget.mjs');
+        await mod.default.render({ model, el: root });
+    </script>
+</body>
+</html>

@@ -17,8 +17,11 @@
 
 const VIEWER_SCRIPT = 'https://find-nuclei.github.io/embed/v1/viewer.js';
 
+// Reason: `id` names the figure. It reaches the host page in every
+// fn-viewer:interaction event as `detail.id`, so a publisher can tell
+// two figures of the same dataset apart.
 const ATTRS = [
-  'url', 'image', 'z', 't', 'channels', 'labels',
+  'id', 'url', 'image', 'z', 't', 'channels', 'labels',
   'x', 'y', 'zoom', 'width', 'height',
   'controls', 'theme', 'background', 'grayscale', 'invert', 'token',
   'autoplay', 'fps',
