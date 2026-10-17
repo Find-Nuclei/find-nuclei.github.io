@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/plate-manifest/v1.json",
+  "title": "Find Nuclei plate manifest (v1)",
+  "description": "A small JSON file that maps every well, field, plane, timepoint and channel of an Opera Phenix / Harmony plate to its image file. The Find Nuclei viewer builds it from the plate's Index.idx.xml and opens the plate from it. Full guide: https://find-nuclei.github.io/docs/guides/opera-phenix-plates",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a manifest that validates today will validate later.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "format",
+    "version",
+    "source",
+    "plate",
+    "imageSize",
+    "pixelSize",
+    "dtype",
+    "zStep",
+    "pattern",
+    "fields",
+    "planes",
+    "timepoints",
+    "channels",
+    "wells",
+    "fieldPositions",
+    "exceptions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "const": "https://find-nuclei.github.io/schemas/plate-manifest/v1.json"
+    },
+    "format": {
+      "const": "find-nuclei-plate-manifest"
+    },
+    "version": {
+      "const": 1
+    },
+    "partial": {
+      "type": "boolean",
+      "default": false,
+      "description": "true when only the start of the index was read: exceptions and missing images after that point are not listed. Save plate manifest in the viewer reads the whole index first and writes false."
+    },
+    "source": {
+      "type": "object",
+      "description": "Where the plate came from.",
+      "required": ["vendor", "schema", "imagesUrl", "indexFile", "etag", "lastModified"],
+      "additionalProperties": false,
+      "properties": {
+        "vendor": {
+          "const": "harmony"
+        },
+        "schema": {
+          "type": "string",
+          "description": "XML namespace of the index, for example http://www.perkinelmer.com/PEHH/HarmonyV5."
+        },
+        "imagesUrl": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "Folder holding the index and its TIFFs. A relative address resolves against the manifest's own address. null: read from a local folder, or from the manifest's own folder when opened by URL."
+        },
+        "indexFile": {
+          "type": "string",
+          "description": "File name of the index inside imagesUrl, usually Index.idx.xml."
+        },
+        "etag": {
+          "type": ["string", "null"],
+          "description": "ETag of the index when it was read, or null."
+        },
+        "lastModified": {
+          "type": ["string", "null"],
+          "description": "Last-Modified of the index when it was read, or null."
+        }
+      }
+    },
+    "plate": {
+      "type": "object",
+      "required": ["id", "name", "type", "rows", "columns"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": {
+          "type": ["string", "null"],
+          "description": "Plate type from the index, for example \"384 PerkinElmer CellCarrier Ultra\"."
+        },
+        "rows": { "type": "integer", "minimum": 1 },
+        "columns": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "imageSize": {
+      "type": "object",
+      "description": "Size of one field image in pixels.",
+      "required": ["x", "y"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "integer", "minimum": 1 },
+        "y": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "pixelSize": {
+      "type": "object",
+      "description": "Size of one pixel in metres.",
+      "required": ["x", "y", "unit"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "unit": { "const": "m" }
+      }
+    },
+    "dtype": {
+      "enum": ["uint8", "uint16"]
+    },
+    "zStep": {
+      "type": ["number", "null"],
+      "description": "Metres between consecutive planes, or null with a single plane."
+    },
+    "pattern": {
+      "type": ["string", "null"],
+      "description": "File name of one image, relative to imagesUrl, with {name} or {name:width} placeholders. Names: row, col, field, plane, timepoint, channel, sk (timepoint + 1). Width pads with zeros. null: every image is listed in exceptions with its url.",
+      "pattern": "^([^{}]|\\{(row|col|field|plane|timepoint|channel|sk)(:[0-9]+)?\\})*$"
+    },
+    "fields": {
+      "type": "array",
+      "description": "Field IDs, sorted.",
+      "items": { "type": "integer" }
+    },
+    "planes": {
+      "type": "array",
+      "description": "Plane IDs, sorted.",
+      "items": { "type": "integer" }
+    },
+    "timepoints": {
+      "type": "array",
+      "description": "Timepoint IDs, sorted, counting from 0.",
+      "items": { "type": "integer" }
+    },
+    "channels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type", "excitationNm", "emissionNm"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "description": "Channel type from the index, for example Fluorescence or Brightfield."
+          },
+          "excitationNm": { "type": ["number", "null"] },
+          "emissionNm": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "wells": {
+      "type": "array",
+      "description": "Wells present on the plate as [row, column], counting from 1, sorted by row then column.",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          { "type": "integer", "minimum": 1 },
+          { "type": "integer", "minimum": 1 }
+        ],
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "fieldPositions": {
+      "type": "object",
+      "description": "Field position in metres, keyed by field ID.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["x", "y"],
+        "additionalProperties": false,
+        "properties": {
+          "x": { "type": "number" },
+          "y": { "type": "number" }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "description": "Images that do not follow the pattern or are not Ok, sorted by row, col, field, plane, timepoint, channel. An image without an entry is at its pattern name.",
+      "items": {
+        "type": "object",
+        "required": ["row", "col", "field", "plane", "timepoint", "channel", "state"],
+        "additionalProperties": false,
+        "properties": {
+          "row": { "type": "integer", "minimum": 1 },
+          "col": { "type": "integer", "minimum": 1 },
+          "field": { "type": "integer" },
+          "plane": { "type": "integer" },
+          "timepoint": { "type": "integer" },
+          "channel": { "type": "integer" },
+          "state": {
+            "type": "string",
+            "description": "Image state from the index. Anything other than Ok shows as black."
+          },
+          "url": {
+            "type": "string",
+            "description": "File name relative to imagesUrl, when it differs from the pattern."
+          }
+        }
+      }
+    }
+  }
+}

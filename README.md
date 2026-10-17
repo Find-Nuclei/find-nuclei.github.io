@@ -10,14 +10,16 @@ Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data with GPU-accelerate
 
 **Opening data**
 
-- **Local files, straight from disk.** No upload and no server. Browse ZARR folders on your own machine and the data never leaves it.
+- **Local files, straight from disk.** No upload and no server. ZARR folders open in Chrome and Edge. Zipped datasets (`.ozx`, `.zip`) open in any browser. The data never leaves your machine.
 - **Remote URLs.** Anything served over HTTPS with CORS and range requests: S3, R2, GCS, Azure Blob, your own nginx.
+- **`s3://` addresses.** Paste `s3://bucket/path` of a public bucket and the image or plate opens, as from its https address.
+- **Opera Phenix plates.** Open a Harmony plate straight from its `Index.idx.xml` and TIFFs, by URL, `s3://` or a local folder. Nothing is converted.
 
 **Looking at it**
 
 - **Multi-channel display** with per-channel colour, contrast, gamma and histograms.
 - **Auto-contrast from the pixel data**, percentile based (2% to 98%), one click per channel or all at once.
-- **Grayscale and inverted modes.** Inverted flips the backgroud and pixel intensity, which prints well and makes a coloured mask overlay far easier to read.
+- **Grayscale and inverted modes.** Inverted flips the background and pixel intensity, which prints well and makes a coloured mask overlay far easier to read.
 - **Z-projection**: maximum, mean and minimum, over a Z-range you choose.
 - **GPU-accelerated tiled rendering** via deck.gl WebGL, comfortable on images past 100,000 pixels a side.
 - **HCS plates.** Well picker grid, field view and plate overview for 96, 384 and 1536-well screens.
@@ -43,6 +45,7 @@ Full guides at **[find-nuclei.github.io/docs](https://find-nuclei.github.io/docs
 | | |
 |---|---|
 | [Getting Started](https://find-nuclei.github.io/docs/getting-started.html) | Open your first image |
+| [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html) | What opens, and in which browser |
 | [Local Files](https://find-nuclei.github.io/docs/guides/local-files.html) · [Remote URLs](https://find-nuclei.github.io/docs/guides/remote-urls.html) · [Authenticated Sources](https://find-nuclei.github.io/docs/guides/authenticated-sources.html) | Getting data in |
 | [Channels](https://find-nuclei.github.io/docs/guides/channels.html) · [HCS Plates](https://find-nuclei.github.io/docs/guides/hcs-plates.html) | Display and navigation |
 | [Labels](https://find-nuclei.github.io/docs/guides/labels.html) · [Analytics & Phenotyping](https://find-nuclei.github.io/docs/guides/analytics-phenotyping.html) · [Analytics Data Format](https://find-nuclei.github.io/docs/guides/analytics-format.html) | Segmentation and measurements |

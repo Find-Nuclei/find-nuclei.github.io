@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = '954d3abfa150';
+const BUILD_ID = 'f9f0472d24fe';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/5025552-C-so2le5.jpg",
@@ -180,14 +180,21 @@ const PRECACHE_PATHS = [
     "assets/blosc-CINP29Do.js",
     "assets/browser-CSeI90Bu.js",
     "assets/chunk-INHXZS53-CYqy14ta.js",
-    "assets/fn-plate-tables-CrW-lzKe.js",
+    "assets/cpg-BR00116991-B2QOt5sw.jpg",
+    "assets/cpg-BR00117004-CnJprfbo.jpg",
+    "assets/cpg-BR00117011-B8y8AGWl.jpg",
+    "assets/cpg-BR00117020-D3MXHf2D.jpg",
+    "assets/cpg-BR00117022-DcfMw7K1.jpg",
+    "assets/cpg-BR00118045-5xp_j0y3.jpg",
+    "assets/fn-plate-tables-DNBNN8lL.js",
     "assets/gzip-BduOtoNN.js",
-    "assets/index-BPljKujj.js",
-    "assets/index-C2A2O2-8.css",
-    "assets/index-CGTCTMpn.js",
+    "assets/harmony-index-worker-BjcGvdL0.js",
     "assets/index-CI0Eyzzp.js",
+    "assets/index-CMotUrPy.js",
+    "assets/index-Cif_Sl19.css",
+    "assets/index-DL_rWkSu.js",
     "assets/index-DSGHM4gd.js",
-    "assets/index-Dx3r6b-R.js",
+    "assets/index-mVeIRRsN.js",
     "assets/lz4-CvXMSXgq.js",
     "assets/zlib-BDjr_O7m.js",
     "assets/zstd-Dvw5UDYA.js",
