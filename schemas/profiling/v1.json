@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/profiling/v1.json",
+  "title": "Find Nuclei profiling descriptor (v1)",
+  "description": "Descriptor for an extendedMeasurements entry of kind \"profiling\" in a run manifest. Documents per-well profiles (median per well, robust z against negative-control wells, feature selection) and compound activity (mAP for groups with replicates, distance from DMSO for single wells, Benjamini-Hochberg q-values). Points at three parquet tables beside it.",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a descriptor that validates today will validate later.",
+  "type": "object",
+  "required": [
+    "version",
+    "kind",
+    "generatedAt",
+    "producer",
+    "compartments",
+    "channelRoles",
+    "normalization",
+    "featureSelection",
+    "activity",
+    "data"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Pointer to this schema. Advisory."
+    },
+    "version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "profiling",
+      "description": "Matches extendedMeasurements.<id>.kind in the run manifest."
+    },
+    "generatedAt": {
+      "type": "string",
+      "description": "ISO-8601 timestamp."
+    },
+    "producer": {
+      "type": "object",
+      "required": ["tool", "module"],
+      "properties": {
+        "tool": {"type": "string"},
+        "module": {"const": "profiling"},
+        "version": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "compartments": {
+      "type": "array",
+      "description": "Compartments whose measurements were aggregated. Feature names are {compartment}__{column}.",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "channelRoles": {
+      "type": "object",
+      "description": "Channel index (as a string) to stain role, e.g. {\"0\": \"DNA\"}. Empty when not set.",
+      "propertyNames": {"pattern": "^[0-9]+$"},
+      "additionalProperties": {"type": "string"}
+    },
+    "normalization": {
+      "type": "object",
+      "required": ["method", "reference", "scale"],
+      "properties": {
+        "method": {"const": "robust_z"},
+        "reference": {"const": "negative"},
+        "scale": {
+          "type": "number",
+          "description": "MAD scale factor: z = (x - median_neg) / (scale * MAD_neg)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "featureSelection": {
+      "type": "object",
+      "required": ["nanCutoff", "correlationThreshold", "nInput", "nKept"],
+      "properties": {
+        "nanCutoff": {"type": "number", "minimum": 0, "maximum": 1},
+        "correlationThreshold": {"type": "number", "minimum": 0, "maximum": 1},
+        "nInput": {"type": "integer", "minimum": 0},
+        "nKept": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "activity": {
+      "type": "object",
+      "required": [
+        "method",
+        "distance",
+        "distancePFloor",
+        "nNegatives",
+        "nPermutations",
+        "randomState",
+        "fdrAlpha"
+      ],
+      "properties": {
+        "method": {
+          "enum": ["map", "distance"],
+          "description": "map: groups with 2 or more wells are tested by mAP, single wells by distance. distance: every group is tested by the mean distance of its wells against the leave-one-out negatives."
+        },
+        "distance": {
+          "const": "rms_robust_z",
+          "description": "distance_to_negative is the RMS of a well's robust-z vector over the kept features."
+        },
+        "distancePFloor": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "description": "Smallest possible distance p-value, 1 / (nNegatives + 1)."
+        },
+        "nNegatives": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Negative-control wells with QC-passed cells."
+        },
+        "nPermutations": {"type": "integer", "minimum": 1},
+        "randomState": {"type": "integer"},
+        "fdrAlpha": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "data": {
+      "type": "object",
+      "required": ["wellProfiles", "wellActivity", "compoundActivity"],
+      "description": "Tables beside this descriptor, as paths relative to it.",
+      "properties": {
+        "wellProfiles": {
+          "$ref": "#/$defs/relativePath",
+          "description": "well_id, compound, dose, control_type, n_cells, then the kept robust-z features."
+        },
+        "wellActivity": {
+          "$ref": "#/$defs/relativePath",
+          "description": "well_id, compound, dose, control_type, n_cells, n_fields (fields of the well that produced measurements; null when the run records no fields), distance_to_negative, distance_p, ap."
+        },
+        "compoundActivity": {
+          "$ref": "#/$defs/relativePath",
+          "description": "group, compound, dose, n_wells, map, p_value, q_value, active, mean_distance, test (map | distance | null)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Sentences for the user, e.g. too few negative-control wells to call single-well compounds active, or how many compounds must beat every negative well before any is called active.",
+      "items": {"type": "string"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+      "description": "Relative path; no leading slash, no .. segments."
+    }
+  }
+}

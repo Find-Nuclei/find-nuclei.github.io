@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://find-nuclei.github.io/schemas/plate-manifest/v1.json",
   "title": "Find Nuclei plate manifest (v1)",
-  "description": "A small JSON file that maps every well, field, plane, timepoint and channel of an Opera Phenix / Harmony plate to its image file. The Find Nuclei viewer builds it from the plate's Index.idx.xml and opens the plate from it. Full guide: https://find-nuclei.github.io/docs/guides/opera-phenix-plates",
+  "description": "A small JSON file that maps every well, field, plane, timepoint and channel of an HCS plate (Opera Phenix / Harmony or Yokogawa CellVoyager) to its image file. The Find Nuclei viewer builds it from the plate's index (Index.idx.xml or Index.xml for Harmony, the .mlf measurement log for Yokogawa) and opens the plate from it. Full guide: https://find-nuclei.github.io/docs/guides/opera-phenix-plates",
   "x-stability": "unstable",
   "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a manifest that validates today will validate later.",
   "type": "object",
@@ -48,7 +48,11 @@
       "additionalProperties": false,
       "properties": {
         "vendor": {
-          "const": "harmony"
+          "enum": ["harmony", "yokogawa"]
+        },
+        "instrument": {
+          "type": ["string", "null"],
+          "description": "Instrument name, for example \"CV8000 AZ01\" or \"Phenix\". Optional."
         },
         "schema": {
           "type": "string",
@@ -118,8 +122,8 @@
     },
     "pattern": {
       "type": ["string", "null"],
-      "description": "File name of one image, relative to imagesUrl, with {name} or {name:width} placeholders. Names: row, col, field, plane, timepoint, channel, sk (timepoint + 1). Width pads with zeros. null: every image is listed in exceptions with its url.",
-      "pattern": "^([^{}]|\\{(row|col|field|plane|timepoint|channel|sk)(:[0-9]+)?\\})*$"
+      "description": "File name of one image, relative to imagesUrl, with {name} or {name:width} placeholders. Names: row, col, field, plane, timepoint, channel, sk (timepoint + 1), rowname (A, B ... AA) and action (the channel's action). Width pads with zeros. null: every image is listed in exceptions with its url.",
+      "pattern": "^([^{}]|\\{(row|col|field|plane|timepoint|channel|sk|rowname|action)(:[0-9]+)?\\})*$"
     },
     "fields": {
       "type": "array",
@@ -130,6 +134,11 @@
       "type": "array",
       "description": "Plane IDs, sorted.",
       "items": { "type": "integer" }
+    },
+    "planesPerChannel": {
+      "type": "object",
+      "description": "Optional. Planes the files hold per channel ID; planes is what is shown.",
+      "additionalProperties": { "type": "integer", "minimum": 1 }
     },
     "timepoints": {
       "type": "array",
@@ -145,6 +154,11 @@
         "additionalProperties": false,
         "properties": {
           "id": { "type": "integer" },
+          "action": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Optional. Action number in the file name, for pattern name {action} (Yokogawa)."
+          },
           "name": { "type": "string" },
           "type": {
             "type": "string",

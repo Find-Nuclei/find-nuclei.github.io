@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = '658947220705';
+const BUILD_ID = 'e561fd4865ff';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/5025552-C-so2le5.jpg",
@@ -180,21 +180,29 @@ const PRECACHE_PATHS = [
     "assets/blosc-CINP29Do.js",
     "assets/browser-CSeI90Bu.js",
     "assets/chunk-INHXZS53-CYqy14ta.js",
+    "assets/cpg-1053600674-DBCdIm8W.jpg",
+    "assets/cpg-1053601756-Cw0fdfU_.jpg",
+    "assets/cpg-110000293081-BzKubZ3v.jpg",
+    "assets/cpg-ACPJUM012-C-Ys-IQc.jpg",
     "assets/cpg-BR00116991-B2QOt5sw.jpg",
     "assets/cpg-BR00117004-CnJprfbo.jpg",
     "assets/cpg-BR00117011-B8y8AGWl.jpg",
     "assets/cpg-BR00117020-D3MXHf2D.jpg",
     "assets/cpg-BR00117022-DcfMw7K1.jpg",
     "assets/cpg-BR00118045-5xp_j0y3.jpg",
-    "assets/fn-plate-tables-DCv_5eNy.js",
+    "assets/cpg-CP-CC9-R1-29-B5d7amfr.jpg",
+    "assets/cpg-CPBroadPhenixC1PlaneP1-BEWwkgda.jpg",
+    "assets/cpg-CPBroadPhenixNC1PlaneP1-B8J4PXYH.jpg",
+    "assets/cpg-Dest210726-160150-E9RrWjZB.jpg",
+    "assets/fn-plate-tables-DDxRVk_n.js",
     "assets/gzip-BduOtoNN.js",
-    "assets/harmony-index-worker-CFGbF7Vz.js",
-    "assets/index-BGM8naRO.js",
+    "assets/harmony-index-worker-DynatgKH.js",
+    "assets/index-B9iDUjGD.js",
     "assets/index-CI0Eyzzp.js",
     "assets/index-Cif_Sl19.css",
-    "assets/index-CuZTUZnP.js",
     "assets/index-DSGHM4gd.js",
-    "assets/index-mmOl2Ndu.js",
+    "assets/index-i6TG2-i-.js",
+    "assets/index-qgDGbASQ.js",
     "assets/lz4-CvXMSXgq.js",
     "assets/zlib-BDjr_O7m.js",
     "assets/zstd-Dvw5UDYA.js",

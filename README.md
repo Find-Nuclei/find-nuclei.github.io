@@ -13,7 +13,7 @@ Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data with GPU-accelerate
 - **Local files, straight from disk.** No upload and no server. ZARR folders open in Chrome and Edge. Zipped datasets (`.ozx`, `.zip`) open in any browser. The data never leaves your machine.
 - **Remote URLs.** Anything served over HTTPS with CORS and range requests: S3, R2, GCS, Azure Blob, your own nginx.
 - **`s3://` addresses.** Paste `s3://bucket/path` of a public bucket and the image or plate opens, as from its https address.
-- **Opera Phenix plates.** Open a Harmony plate straight from its `Index.idx.xml` and TIFFs, by URL, `s3://` or a local folder. Nothing is converted.
+- **Opera Phenix and Yokogawa CellVoyager plates.** Open an Opera Phenix plate exported by Harmony (V5 `Index.idx.xml` or V6 `Index.xml`), or a Yokogawa CellVoyager CV8000 or CV7000 measurement folder, straight from its TIFFs, by URL, `s3://` or a local folder. Nothing is converted. Guides: [Opera Phenix Plates](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html), [Yokogawa CellVoyager Plates](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html).
 
 **Looking at it**
 
@@ -125,7 +125,7 @@ In a MyST article (Curvenote journals such as *Elemental Microscopy*), use the w
 
 ## Requirements
 
-- **Format:** OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6 (the current spec), including sharded stores, plus `bioformats2raw` layouts.
+- **Format:** OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6 (the current spec), including sharded stores, plus `bioformats2raw` layouts. HCS instrument plates without conversion: Opera Phenix (Harmony V5 and V6) and Yokogawa CellVoyager (CV8000, CV7000).
 - **Any modern browser** for remote URLs, including Firefox and Safari.
 - **Any modern browser** for a dataset zipped into a single `.ozx` or `.zip` file, opened in place with nothing unpacked.
 - **Chrome or Edge** to open a dataset *folder* from disk.
