@@ -152,6 +152,10 @@ The machine-readable form is [CITATION.cff](CITATION.cff); GitHub's "Cite this r
 
 Copyright (c) 2026 Find Nuclei. All rights reserved.
 
+The Find Nuclei Viewer is free to use under the [Terms of Use](https://find-nuclei.github.io/terms.html). It is proprietary software: its source code is not public, and the built files here may not be copied, modified, or redistributed except as the Terms of Use allow.
+
+The JSON Schemas in [`schemas/`](schemas/) are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), so anyone can read, validate, and write files in these formats. See [`schemas/LICENSE`](schemas/LICENSE).
+
 For licensing inquiries: info@find-nuclei.com
 
 ---

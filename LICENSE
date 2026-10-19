@@ -1,7 +1,17 @@
 Copyright (c) 2026 Find Nuclei. All rights reserved.
 
-This repository contains the public landing page for the Find Nuclei Viewer.
+This repository hosts find-nuclei.github.io: the Find Nuclei Viewer, the
+embeddable viewer, the documentation, and the published JSON Schemas.
 
-The viewer software itself is proprietary and closed-source.
+The Find Nuclei Viewer is free to use under the Terms of Use:
+https://find-nuclei.github.io/terms.html
+
+The viewer is proprietary software. Its source code is not public, and the
+built files in this repository may not be copied, modified, or redistributed
+except as the Terms of Use allow.
+
+The JSON Schemas in schemas/ are licensed separately under the Creative
+Commons Attribution 4.0 International License (CC BY 4.0), so anyone can
+read, validate, and write files in these formats. See schemas/LICENSE.
 
 For licensing inquiries, contact: info@find-nuclei.com

@@ -1,0 +1,17 @@
+The JSON Schemas in this folder (analytics-bundle, analytics-run, embedding,
+phenotype, plate-manifest, profiling, and any added later) are
+Copyright (c) 2026 Find Nuclei and are licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+You are free to share and adapt them, for any purpose, including
+commercially, as long as you give appropriate credit, provide a link to the
+license, and indicate if changes were made.
+
+Suggested credit: "Schemas by Find Nuclei, https://find-nuclei.github.io/schemas/,
+CC BY 4.0"
+
+License text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+This license covers the schema files only. The Find Nuclei Viewer and the
+other files in this repository are covered by the LICENSE file at the
+repository root.
