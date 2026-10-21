@@ -1,0 +1,9 @@
+{
+  "$schema": "https://find-nuclei.github.io/schemas/display/v1.json",
+  "channels": [
+    { "index": 0, "label": "Red", "color": "FF0000", "active": true, "window": { "start": 0, "end": 255 } },
+    { "index": 1, "label": "Green", "color": "00FF00", "active": true, "window": { "start": 0, "end": 255 } },
+    { "index": 2, "label": "Blue", "color": "0000FF", "active": true, "window": { "start": 0, "end": 255 } }
+  ],
+  "image": { "model": "color", "invert": false, "background": "#ffffff" }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://find-nuclei.github.io/schemas/display/v1.json",
+  "channels": [
+    { "index": 0, "label": "Hoechst", "color": "0000FF", "active": true, "window": { "start": 120, "end": 4200, "min": 0, "max": 65535 } },
+    { "index": 1, "label": "ConA", "color": "00FF00", "active": true, "window": { "start": 150, "end": 6100, "min": 0, "max": 65535 } },
+    { "index": 2, "label": "Phalloidin", "color": "FF0000", "active": true, "window": { "start": 90, "end": 5200, "min": 0, "max": 65535 } },
+    { "index": 3, "label": "Syto14", "color": "FFFF00", "active": false, "window": { "start": 200, "end": 7800, "min": 0, "max": 65535 } },
+    { "index": 4, "label": "MitoTracker", "color": "FF00FF", "active": true, "window": { "start": 110, "end": 3900, "min": 0, "max": 65535 } }
+  ],
+  "image": { "model": "color", "invert": false, "background": "#000000" }
+}

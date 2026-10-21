@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/display/v1.json",
+  "title": "Find Nuclei display",
+  "description": "How a plate or image is drawn: each channel's colour, window and on/off, and the image mode. Windows are raw pixel values. Field names follow the OME-NGFF `omero` block (transitional) so a display maps 1:1 to it.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "channels"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "const": "https://find-nuclei.github.io/schemas/display/v1.json",
+      "description": "Pointer to this schema."
+    },
+    "channels": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "$ref": "#/$defs/channel"
+      }
+    },
+    "image": {
+      "$ref": "#/$defs/image"
+    }
+  },
+  "$defs": {
+    "channel": {
+      "type": "object",
+      "required": [
+        "index",
+        "label",
+        "color",
+        "active",
+        "window"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Channel position in the data. Not in omero; used when label is empty."
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Channel name. Channels match by label and occurrence, then by index."
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^[0-9A-Fa-f]{6}$",
+          "description": "Hex RGB without a leading #. Written upper-case."
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "window": {
+          "$ref": "#/$defs/window"
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false,
+      "description": "Raw pixel values. end must be greater than start. min and max are the channel's data range, as in omero; when both are present min must not exceed max. Readers ignore them for drawing.",
+      "properties": {
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number",
+          "description": "Lowest value in the channel's data range."
+        },
+        "max": {
+          "type": "number",
+          "description": "Highest value in the channel's data range."
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": [
+        "model",
+        "invert",
+        "background"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "enum": [
+            "color",
+            "greyscale"
+          ],
+          "description": "Rendering model, as omero rdefs.model."
+        },
+        "invert": {
+          "type": "boolean",
+          "description": "Invert the whole image."
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      }
+    }
+  }
+}
