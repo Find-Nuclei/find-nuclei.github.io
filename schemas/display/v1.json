@@ -57,6 +57,11 @@
         },
         "window": {
           "$ref": "#/$defs/window"
+        },
+        "invert": {
+          "type": "boolean",
+          "default": false,
+          "description": "Draw this channel inverted, after its window and gamma. Not in omero. Writers include it only when true; absent means false."
         }
       }
     },
@@ -103,7 +108,7 @@
         },
         "invert": {
           "type": "boolean",
-          "description": "Invert the whole image."
+          "description": "Invert the whole image. A channel inverted on its own is inverted again."
         },
         "background": {
           "type": "string",
