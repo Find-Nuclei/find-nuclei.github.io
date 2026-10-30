@@ -12,6 +12,6 @@ store with relative paths, so the two must stay siblings.
 | [`bbbc013/`](bbbc013/) | BBBC013, 96-well plate, U2OS FKHR-GFP translocation | Nuclei, cells, cytoplasm, measurements | CC BY 3.0 |
 
 Open in the viewer:
-https://find-nuclei.github.io/?url=https://find-nuclei.github.io/examples/bbbc013/BBBC013.zarr&analyticsUrl=https://find-nuclei.github.io/examples/bbbc013/BBBC013.zarr.analytics/0b1e47a7-stardist-cellpose/&tab=labels
+https://find-nuclei.github.io/?url=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr&analyticsUrl=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr.analytics%2F0b1e47a7-stardist-cellpose%2F&tab=labels&c=0%3Aon%3A808080%3A3%3A134%3A1.00%2C1%3Aon%3AFFFFFF%3A1%3A100%3A1.00&v=plate&w=A%2F1&f=0&zm=0.77&xy=4446%2C2322&cm=C&inv=t&bg=%23ffffff&l=ext%3Acells%2Cext%3Anuclei&lv=cells%3Acategory%3Aphenotype_class&ls=cells%3A0.5%3Afc%2Cnuclei%3A1%3Afc%3A808080
 
 Guide: https://find-nuclei.github.io/docs/guides/example-plate-results.html

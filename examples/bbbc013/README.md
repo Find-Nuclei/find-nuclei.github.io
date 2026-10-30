@@ -18,9 +18,7 @@ Two inhibitors, Wortmannin (rows A to D) and LY294002 (rows E to H), run as
     (`measurements.parquet`), well and plate summaries and histograms.
 
 The masks and measurements are our output, made with the Find Nuclei Analysis
-Tool. They are not part of the original collection. Cellpose is listed as a
-research-only model in our licence review, so its masks are here as a viewing
-example only.
+Tool. They are not part of the original collection.
 
 ## Source and licence
 

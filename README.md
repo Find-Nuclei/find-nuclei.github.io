@@ -28,9 +28,9 @@ Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data with GPU-accelerate
 
 - **Annotations.** Polygons, lines, points and distance measurements, with areas and lengths in real units. Auto-saved to browser storage, exportable as CSV or GeoJSON.
 - **Segmentation labels.** Load them from inside the ZARR or attach them from a local folder or a URL. Opacity, colour modes, drag to reorder.
-- **Analytics and phenotyping.** Attach a measurements table and colour objects by any column, as a continuous heatmap or one colour per category. Filter by value, and build named phenotype groups out of those filters.
+- **Analytics and phenotyping.** Attach a measurements table and colour objects by any column, as a continuous heatmap or one colour per category. Filter by value, and build named phenotype groups out of those filters. See it on [a plate with results](https://find-nuclei.github.io/?url=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr&analyticsUrl=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr.analytics%2F0b1e47a7-stardist-cellpose%2F&tab=labels&c=0%3Aon%3A808080%3A3%3A134%3A1.00%2C1%3Aon%3AFFFFFF%3A1%3A100%3A1.00&v=plate&w=A%2F1&f=0&zm=0.77&xy=4446%2C2322&cm=C&inv=t&bg=%23ffffff&l=ext%3Acells%2Cext%3Anuclei&lv=cells%3Acategory%3Aphenotype_class&ls=cells%3A0.5%3Afc%2Cnuclei%3A1%3Afc%3A808080).
 - **Annotation templates.** Reusable bundles of colour, class label and keyboard shortcut, applied to everything you draw next.
-- **Shareable deep links.** The URL tracks zoom, position, channels and Z-slice as you work, Google Maps style. Copy it to hand someone the exact view.
+- **Shareable deep links.** The URL tracks zoom, position, channels and Z-slice as you work, Google Maps style. With analysis results, it also keeps which masks are shown and how they are coloured. Copy it to hand someone the exact view.
 
 **Throughout**
 
@@ -60,6 +60,7 @@ Click any link to open directly in the viewer:
 
 | Example | Description |
 |---------|-------------|
+| [Plate with analysis results](https://find-nuclei.github.io/?url=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr&analyticsUrl=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr.analytics%2F0b1e47a7-stardist-cellpose%2F&tab=labels&c=0%3Aon%3A808080%3A3%3A134%3A1.00%2C1%3Aon%3AFFFFFF%3A1%3A100%3A1.00&v=plate&w=A%2F1&f=0&zm=0.77&xy=4446%2C2322&cm=C&inv=t&bg=%23ffffff&l=ext%3Acells%2Cext%3Anuclei&lv=cells%3Acategory%3Aphenotype_class&ls=cells%3A0.5%3Afc%2Cnuclei%3A1%3Afc%3A808080) | BBBC013, 96 wells: cells coloured by phenotype, nuclei on top, a measurement table behind every mask. [Guide](https://find-nuclei.github.io/docs/guides/example-plate-results.html) |
 | [Nuclear segmentation, labels on](https://find-nuclei.github.io/?url=https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0062A/6001240.zarr&tab=labels&l=src0_0) | Image plus its segmentation mask, coloured per object |
 | [Chicken Embryo MIP](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.5%2Fidr0066%2FExpD_chicken_embryo_MIP.ome.zarr&z=0&channels=0%3Aon%3AFFFFFF%3A0%3A90&zoom=-3.52&center=3255%2C4489) | v0.5 sharded, single channel |
 | [Zebrafish Lateral Line](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0079A%2Fidr0079_images.zarr&z=71&channels=0%3Aon%3A00FF00%3A8%3A90%2C1%3Aon%3AFF0000%3A7%3A80&zoom=-0.57&center=792%2C394) | 3D multi-channel with labels |
@@ -68,7 +69,9 @@ Click any link to open directly in the viewer:
 | [Large Image 9822152](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0083A%2F9822152.zarr&z=0&channels=0%3Aon%3Affffff%3A0%3A5193&zoom=-7.08&center=72192%2C46592) | 144K×93K pixels, multi-resolution |
 | [RGB Image 9798462](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0073A%2F9798462.zarr&z=0&channels=0%3Aon%3AFF0000%3A91%3A246%2C1%3Aon%3A00FF00%3A85%3A246%2C2%3Aon%3A0000FF%3A101%3A246&zoom=-4.39&center=10558%2C8217) | 3-channel RGB, 21K×16K |
 
-All datasets from the [Image Data Resource (IDR)](https://idr.openmicroscopy.org/), read straight from its public bucket. Nothing is copied or re-hosted.
+BBBC013 is hosted here, in [`examples/`](examples/), with our segmentation and measurements. Images from the [Broad Bioimage Benchmark Collection](https://bbbc.broadinstitute.org/BBBC013) (CC BY 3.0, Ilya Ravkin; Ljosa et al., *Nature Methods* 2012).
+
+The other datasets come from the [Image Data Resource (IDR)](https://idr.openmicroscopy.org/), read straight from its public bucket. Nothing is copied or re-hosted.
 
 ---
 
