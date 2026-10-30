@@ -1,0 +1,10 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.5",
+      "imageRef": "../../../../../../../BBBC013.zarr/D/6/0"
+    }
+  }
+}

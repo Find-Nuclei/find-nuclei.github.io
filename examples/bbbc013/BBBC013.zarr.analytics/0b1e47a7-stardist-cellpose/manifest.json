@@ -1,0 +1,47 @@
+{
+  "$schema": "https://find-nuclei.github.io/schemas/analytics-run/v1.json",
+  "version": 1,
+  "kind": "run",
+  "bundles": [
+    {
+      "path": "nuclei",
+      "targetLabel": "nuclei"
+    },
+    {
+      "path": "cells",
+      "targetLabel": "cells"
+    },
+    {
+      "path": "cytoplasm",
+      "targetLabel": "cytoplasm"
+    }
+  ],
+  "producer": {
+    "tool": "find-nuclei-analysis",
+    "version": "0.1.0",
+    "pipelineId": "stardist-fluorescence",
+    "generatedAt": "2026-04-21T21:27:48.593694+00:00"
+  },
+  "run": {
+    "id": "0b1e47a7-stardist-cellpose",
+    "elapsedS": 856.9,
+    "segmenters": {
+      "nuclei": "stardist",
+      "cells": "cellpose"
+    }
+  },
+  "target": {
+    "scope": "plate",
+    "imageHint": "BBBC013.zarr"
+  },
+  "artifacts": {
+    "pipeline": {
+      "path": "pipeline.json"
+    }
+  },
+  "plateMetadata": {
+    "wells": "../BBBC013.zarr/tables/wells.parquet",
+    "fields": "../BBBC013.zarr/tables/fields.parquet",
+    "plate": "../BBBC013.zarr/tables/plate.parquet"
+  }
+}

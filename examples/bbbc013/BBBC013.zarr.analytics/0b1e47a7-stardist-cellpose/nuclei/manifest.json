@@ -1,0 +1,93 @@
+{
+  "$schema": "https://find-nuclei.github.io/schemas/analytics-bundle/v1.json",
+  "version": 1,
+  "format": "parquet",
+  "target": {
+    "labelName": "nuclei",
+    "imageHint": "BBBC013.zarr",
+    "scope": "plate"
+  },
+  "measurements": {
+    "path": "measurements.parquet",
+    "rowCount": 18648,
+    "objectIdColumn": "object_id",
+    "centroidColumns": {
+      "x": "centroid_x",
+      "y": "centroid_y"
+    },
+    "coordinateSpace": "field",
+    "wellColumn": "well_id",
+    "fieldColumn": "field_id",
+    "labelValueColumn": "label_value"
+  },
+  "histograms": {
+    "path": "histograms.json"
+  },
+  "plateMetadata": {
+    "wells": "../../../BBBC013.zarr/tables/wells.parquet",
+    "fields": "../../../BBBC013.zarr/tables/fields.parquet",
+    "plate": "../../../BBBC013.zarr/tables/plate.parquet"
+  },
+  "producer": {
+    "tool": "find-nuclei-analysis",
+    "generatedAt": "2026-04-21T21:27:48.016102Z",
+    "version": "0.1.0",
+    "pipelineId": "stardist-fluorescence"
+  },
+  "run": {
+    "id": "0b1e47a7-stardist-cellpose",
+    "generatedAt": "2026-04-21T21:27:48.016102Z",
+    "segmenters": {
+      "nuclei": "stardist",
+      "cells": "cellpose"
+    },
+    "elapsedS": 856.9,
+    "producer": {
+      "tool": "find-nuclei-analysis",
+      "generatedAt": "2026-04-21T21:27:48.016102Z",
+      "version": "0.1.0",
+      "pipelineId": "stardist-fluorescence"
+    }
+  },
+  "labels": {
+    "nuclei": {
+      "path": "labels",
+      "scope": "per-field",
+      "format": "ome-ngff-0.5",
+      "rootType": "plate"
+    }
+  },
+  "artifacts": {
+    "pipeline": {
+      "path": "../pipeline.json"
+    }
+  },
+  "aggregates": {
+    "wells": {
+      "path": "wells_summary.parquet",
+      "rowCount": 96
+    },
+    "plate": {
+      "path": "plate_summary.parquet",
+      "rowCount": 1
+    }
+  },
+  "relationships": {
+    "cell_id": {
+      "type": "many-to-one",
+      "references": "../cells/measurements.parquet#object_id",
+      "nullable": true
+    }
+  },
+  "extendedMeasurements": {
+    "phenotype": {
+      "path": "phenotype_scores.parquet",
+      "descriptor": "phenotype.json",
+      "kind": "classification",
+      "fk": "object_id",
+      "joinTo": "measurements.parquet",
+      "producer": "find-nuclei-analysis",
+      "generatedAt": "2026-04-23T12:48:06.881102+00:00"
+    }
+  }
+}
