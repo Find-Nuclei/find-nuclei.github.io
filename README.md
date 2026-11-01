@@ -21,6 +21,8 @@ Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data with GPU-accelerate
 - **Auto-contrast from the pixel data**, percentile based (2% to 98%), one click per channel or all at once.
 - **Grayscale and inverted modes.** Inverted flips the background and pixel intensity, which prints well and makes a coloured mask overlay far easier to read.
 - **Z-projection**: maximum, mean and minimum, over a Z-range you choose.
+- **3D.** Turn a z-stack around as a volume, one click from the flat view. Two looks: MIP for bright, sparse signal, Composite for solid shapes. Side views (XY, XZ and YZ) sit next to it, linked by one crosshair. Your channels and annotations come along, and plate fields open in 3D too. Desktop browsers with WebGPU. Guide: [3D Rendering](https://find-nuclei.github.io/docs/guides/3d-rendering.html).
+- **Anatomical orientation.** When an image records it (OME-NGFF RFC-4), 3D labels the axes superior and inferior, left and right, anterior and posterior, and shows the planes the radiological way.
 - **GPU-accelerated tiled rendering** via deck.gl WebGL, comfortable on images past 100,000 pixels a side.
 - **HCS plates.** Well picker grid, field view and plate overview for 96, 384 and 1536-well screens.
 
@@ -47,7 +49,7 @@ Full guides at **[find-nuclei.github.io/docs](https://find-nuclei.github.io/docs
 | [Getting Started](https://find-nuclei.github.io/docs/getting-started.html) | Open your first image |
 | [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html) | What opens, and in which browser |
 | [Local Files](https://find-nuclei.github.io/docs/guides/local-files.html) · [Remote URLs](https://find-nuclei.github.io/docs/guides/remote-urls.html) · [Authenticated Sources](https://find-nuclei.github.io/docs/guides/authenticated-sources.html) | Getting data in |
-| [Channels](https://find-nuclei.github.io/docs/guides/channels.html) · [HCS Plates](https://find-nuclei.github.io/docs/guides/hcs-plates.html) | Display and navigation |
+| [Channels](https://find-nuclei.github.io/docs/guides/channels.html) · [Z-Projection](https://find-nuclei.github.io/docs/guides/z-projection.html) · [3D Rendering](https://find-nuclei.github.io/docs/guides/3d-rendering.html) · [HCS Plates](https://find-nuclei.github.io/docs/guides/hcs-plates.html) | Display and navigation |
 | [Labels](https://find-nuclei.github.io/docs/guides/labels.html) · [Analytics & Phenotyping](https://find-nuclei.github.io/docs/guides/analytics-phenotyping.html) · [Analytics Data Format](https://find-nuclei.github.io/docs/guides/analytics-format.html) | Segmentation and measurements |
 | [Annotations](https://find-nuclei.github.io/docs/guides/annotations.html) · [Templates](https://find-nuclei.github.io/docs/guides/templates.html) | Drawing regions |
 | [Sharing Views](https://find-nuclei.github.io/docs/guides/sharing.html) · [Embedding](https://find-nuclei.github.io/docs/guides/embedding.html) · [Data Server](https://find-nuclei.github.io/docs/guides/data-server.html) | Publishing and hosting |
@@ -61,6 +63,9 @@ Click any link to open directly in the viewer:
 | Example | Description |
 |---------|-------------|
 | [Plate with analysis results](https://find-nuclei.github.io/?url=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr&analyticsUrl=https%3A%2F%2Ffind-nuclei.github.io%2Fexamples%2Fbbbc013%2FBBBC013.zarr.analytics%2F0b1e47a7-stardist-cellpose%2F&tab=labels&c=0%3Aon%3A808080%3A3%3A134%3A1.00%2C1%3Aon%3AFFFFFF%3A1%3A100%3A1.00&v=plate&w=A%2F1&f=0&zm=0.77&xy=4446%2C2322&cm=C&inv=t&bg=%23ffffff&l=ext%3Acells%2Cext%3Anuclei&lv=cells%3Acategory%3Aphenotype_class&ls=cells%3A0.5%3Afc%2Cnuclei%3A1%3Afc%3A808080) | BBBC013, 96 wells: cells coloured by phenotype, nuclei on top, a measurement table behind every mask. [Guide](https://find-nuclei.github.io/docs/guides/example-plate-results.html) |
+| [Zebrafish lateral line in 3D](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0079A%2Fidr0079_images.zarr&c=0%3Aon%3A00FF00%3A5%3A200%3A1.00%2C1%3Aon%3AFF0000%3A10%3A160%3A1.00&mode=3d&rm=composite&cam=25%2C-20%2C1.7) | 3D, membranes and nuclei, with side views. [Guide](https://find-nuclei.github.io/docs/guides/3d-rendering.html) |
+| [Neurons in marmoset visual cortex, in 3D](https://find-nuclei.github.io/?url=https%3A%2F%2Fome-zarr-scivis.s3.us-east-1.amazonaws.com%2Fv0.5%2F96x2%2Fmarmoset_neurons.ome.zarr&c=0%3Aon%3A00FF00%3A10%3A140%3A1.00&mode=3d&rm=mip&cam=20%2C-25%2C1.4) | 3D, maximum intensity projection of GFP neurons |
+| [Cerebral aneurysm, in 3D](https://find-nuclei.github.io/?url=https%3A%2F%2Fome-zarr-scivis.s3.us-east-1.amazonaws.com%2Fv0.5%2F96x2%2Faneurism.ome.zarr&mode=3d&rm=composite&cam=30%2C-20%2C1.7) | 3D, rotational angiography in Composite |
 | [Nuclear segmentation, labels on](https://find-nuclei.github.io/?url=https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0062A/6001240.zarr&tab=labels&l=src0_0) | Image plus its segmentation mask, coloured per object |
 | [Chicken Embryo MIP](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.5%2Fidr0066%2FExpD_chicken_embryo_MIP.ome.zarr&z=0&channels=0%3Aon%3AFFFFFF%3A0%3A90&zoom=-3.52&center=3255%2C4489) | v0.5 sharded, single channel |
 | [Zebrafish Lateral Line](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0079A%2Fidr0079_images.zarr&z=71&channels=0%3Aon%3A00FF00%3A8%3A90%2C1%3Aon%3AFF0000%3A7%3A80&zoom=-0.57&center=792%2C394) | 3D multi-channel with labels |
@@ -70,6 +75,8 @@ Click any link to open directly in the viewer:
 | [RGB Image 9798462](https://find-nuclei.github.io/?url=https%3A%2F%2Fuk1s3.embassy.ebi.ac.uk%2Fidr%2Fzarr%2Fv0.4%2Fidr0073A%2F9798462.zarr&z=0&channels=0%3Aon%3AFF0000%3A91%3A246%2C1%3Aon%3A00FF00%3A85%3A246%2C2%3Aon%3A0000FF%3A101%3A246&zoom=-4.39&center=10558%2C8217) | 3-channel RGB, 21K×16K |
 
 BBBC013 is hosted here, in [`examples/`](examples/), with our segmentation and measurements. Images from the [Broad Bioimage Benchmark Collection](https://bbbc.broadinstitute.org/BBBC013) (CC BY 3.0, Ilya Ravkin; Ljosa et al., *Nature Methods* 2012).
+
+The marmoset neurons and the aneurysm come from [OME-Zarr Open SciVis Datasets](https://github.com/InsightSoftwareConsortium/OMEZarrOpenSciVisDatasets) (McCormick 2025, [doi:10.5281/zenodo.17495294](https://doi.org/10.5281/zenodo.17495294), CC BY 4.0), courtesy of Frederick Federer (Moran Eye Institute, University of Utah) and of volvis.org and Philips Research, Hamburg.
 
 The other datasets come from the [Image Data Resource (IDR)](https://idr.openmicroscopy.org/), read straight from its public bucket. Nothing is copied or re-hosted.
 
@@ -132,6 +139,7 @@ In a MyST article (Curvenote journals such as *Elemental Microscopy*), use the w
 - **Any modern browser** for remote URLs, including Firefox and Safari.
 - **Any modern browser** for a dataset zipped into a single `.ozx` or `.zip` file, opened in place with nothing unpacked.
 - **Chrome or Edge** to open a dataset *folder* from disk.
+- **3D:** a desktop browser with WebGPU, and an image with more than one Z plane opened from a URL.
 
 ---
 
@@ -145,7 +153,7 @@ All data is processed locally in your browser. No files are uploaded to any serv
 
 If you use the viewer in a publication, cite it as:
 
-> Find Nuclei (2026). Find Nuclei Viewer, release 2026-09-19. https://find-nuclei.github.io
+> Find Nuclei (2026). Find Nuclei Viewer, release 2026-11-01. https://find-nuclei.github.io
 
 The machine-readable form is [CITATION.cff](CITATION.cff); GitHub's "Cite this repository" button reads it.
 

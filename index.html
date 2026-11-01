@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Nuclei Viewer | Free Online OME-ZARR Bio-Image Viewer</title>
-    <meta name="description" content="View OME-ZARR microscopy images in your browser, including the new OME-NGFF 0.6. Opens Opera Phenix and Yokogawa CellVoyager plates without conversion. Multi-channel fluorescence, HCS plate viewer, segmentation overlays, z-projection. Install it and it works offline. No upload, no account.">
-    <meta name="keywords" content="OME-ZARR viewer, OME-NGFF viewer, bio-image viewer, microscopy viewer, ZARR image viewer, fluorescence microscopy, HCS plate viewer, high content screening, segmentation overlay, z-projection, browser image viewer, OME-ZARR online, NGFF viewer, OME-NGFF 0.6, OME-Zarr 0.6 viewer, microscopy data visualization, Opera Phenix viewer, Harmony plate viewer, Yokogawa CellVoyager viewer, CV8000, Cell Painting viewer, JUMP Cell Painting">
+    <title>Find Nuclei Viewer | Free OME-ZARR Bio-Image Viewer in 2D and 3D</title>
+    <meta name="description" content="View OME-ZARR microscopy images in your browser, including the new OME-NGFF 0.6. Opens Opera Phenix and Yokogawa CellVoyager plates without conversion. Multi-channel fluorescence, HCS plate viewer, segmentation overlays, z-projection, and 3D volume rendering with orthogonal views and anatomical orientation on desktop. Install it and it works offline. No upload, no account.">
+    <meta name="keywords" content="OME-ZARR viewer, OME-NGFF viewer, bio-image viewer, microscopy viewer, ZARR image viewer, fluorescence microscopy, HCS plate viewer, high content screening, segmentation overlay, z-projection, browser image viewer, OME-ZARR online, NGFF viewer, OME-NGFF 0.6, OME-Zarr 0.6 viewer, microscopy data visualization, Opera Phenix viewer, Harmony plate viewer, Yokogawa CellVoyager viewer, CV8000, Cell Painting viewer, JUMP Cell Painting, 3D microscopy viewer, 3D volume rendering, WebGPU volume rendering, maximum intensity projection, orthogonal views">
     <meta name="author" content="Find Nuclei">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://find-nuclei.github.io/">
@@ -18,15 +18,15 @@
     <!-- Open Graph / Social sharing -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://find-nuclei.github.io/">
-    <meta property="og:title" content="Find Nuclei Viewer | Free Online OME-ZARR Bio-Image Viewer">
-    <meta property="og:description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plates, segmentation overlays, z-projection. No upload, no account.">
+    <meta property="og:title" content="Find Nuclei Viewer | Free OME-ZARR Bio-Image Viewer in 2D and 3D">
+    <meta property="og:description" content="View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plates, segmentation overlays, z-projection, 3D. No upload, no account.">
     <meta property="og:image" content="https://find-nuclei.github.io/screenshots/og-preview.jpg">
     <meta property="og:site_name" content="Find Nuclei Viewer">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Find Nuclei Viewer | Free Online OME-ZARR Bio-Image Viewer">
-    <meta name="twitter:description" content="View OME-ZARR microscopy images in your browser. Multi-channel, HCS plates, segmentation overlays. No upload, no account.">
+    <meta name="twitter:title" content="Find Nuclei Viewer | Free OME-ZARR Bio-Image Viewer in 2D and 3D">
+    <meta name="twitter:description" content="View OME-ZARR microscopy images in your browser. Multi-channel, HCS plates, segmentation overlays, 3D. No upload, no account.">
     <meta name="twitter:image" content="https://find-nuclei.github.io/screenshots/og-preview.jpg">
 
     <!-- Structured Data: WebApplication -->
@@ -36,10 +36,10 @@
       "@type": "WebApplication",
       "name": "Find Nuclei Viewer",
       "url": "https://find-nuclei.github.io/",
-      "description": "Browser-based OME-ZARR viewer for microscopy and bio-image data. Supports multi-channel fluorescence, HCS plate navigation, segmentation overlays, z-projection, and shareable deep links.",
+      "description": "Browser-based OME-ZARR viewer for microscopy and bio-image data. Supports multi-channel fluorescence, HCS plate navigation, segmentation overlays, z-projection, 3D volume rendering, and shareable deep links.",
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "Any (browser-based)",
-      "browserRequirements": "WebGL2. Every browser can open a remote URL or a dataset zipped into one .ozx or .zip file. Reading a dataset folder from disk needs Chrome or Edge.",
+      "browserRequirements": "WebGL2. Every browser can open a remote URL or a dataset zipped into one .ozx or .zip file. Reading a dataset folder from disk needs Chrome or Edge. 3D volume rendering needs WebGPU on a desktop browser.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -52,6 +52,8 @@
         "Opera Phenix (Harmony V5 and V6) and Yokogawa CellVoyager (CV8000, CV7000) plates, opened without conversion",
         "Segmentation label overlays",
         "Z-projection (max, mean, min)",
+        "3D volume rendering with WebGPU (MIP and Composite) and orthogonal XY, XZ and YZ planes, on desktop browsers",
+        "Anatomical orientation (OME-NGFF RFC-4): labelled axes and the radiological convention in 3D",
         "Shape annotations (polygon, line, point)",
         "Shareable deep links",
         "Local file support (no upload)",
@@ -182,8 +184,8 @@
             font-size: var(--fn-font-size-sm, 0.875rem);
         }
     </style>
-  <script type="module" crossorigin src="./assets/index-rq6wSf3u.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BcCxD9FB.css">
+  <script type="module" crossorigin src="./assets/index-B2gIqZAg.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CvN29hdW.css">
 </head>
 <body>
     <div id="root"></div>
