@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = '60140be8c0f3';
+const BUILD_ID = 'de39f9469c7e';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/3d-aneurism-BcgHj3ku.jpg",
@@ -172,6 +172,7 @@ const PRECACHE_PATHS = [
     "assets/3d-marmoset_neurons-DDgts7wC.jpg",
     "assets/3d-mri_woman-DTdu3R85.jpg",
     "assets/3d-neocortical_layer_1_axons-iiA4-SjR.jpg",
+    "assets/3d-phenix-jump-scope-CAJRat_v.jpg",
     "assets/3d-skull-CJfI0Nlq.jpg",
     "assets/5025552-C-so2le5.jpg",
     "assets/bbbc013-results-BWa7lccp.jpg",
@@ -202,16 +203,16 @@ const PRECACHE_PATHS = [
     "assets/cpg-CPBroadPhenixC1PlaneP1-BEWwkgda.jpg",
     "assets/cpg-CPBroadPhenixNC1PlaneP1-B8J4PXYH.jpg",
     "assets/cpg-Dest210726-160150-E9RrWjZB.jpg",
-    "assets/fetch-CwsF0zTC.js",
-    "assets/fn-plate-tables-Begg7f4e.js",
+    "assets/fetch-VUViN0SO.js",
+    "assets/fn-plate-tables-BDEqSepB.js",
     "assets/gzip-BduOtoNN.js",
     "assets/harmony-index-worker-DynatgKH.js",
-    "assets/index-0odFMjr6.js",
-    "assets/index-B2gIqZAg.js",
-    "assets/index-BPqW1fBA.js",
+    "assets/index-0WkSRvtq.js",
     "assets/index-CI0Eyzzp.js",
-    "assets/index-CvN29hdW.css",
+    "assets/index-CJT4wxIV.js",
+    "assets/index-Cfz41zwu.js",
     "assets/index-DSGHM4gd.js",
+    "assets/index-DgHOX-ie.css",
     "assets/lz4-CvXMSXgq.js",
     "assets/zlib-BDjr_O7m.js",
     "assets/zstd-Dvw5UDYA.js",

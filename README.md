@@ -139,7 +139,7 @@ In a MyST article (Curvenote journals such as *Elemental Microscopy*), use the w
 - **Any modern browser** for remote URLs, including Firefox and Safari.
 - **Any modern browser** for a dataset zipped into a single `.ozx` or `.zip` file, opened in place with nothing unpacked.
 - **Chrome or Edge** to open a dataset *folder* from disk.
-- **3D:** a desktop browser with WebGPU, and an image with more than one Z plane opened from a URL.
+- **3D:** a desktop browser with WebGPU, and an image with more than one Z plane. It opens from a URL, a local folder (Chrome and Edge), an `.ozx` or `.zip` file, or a token-protected store.
 
 ---
 
