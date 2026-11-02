@@ -9,6 +9,7 @@ Find Nuclei Viewer is a zero-install web application for viewing and annotating 
 ## Key capabilities
 
 - Opens local ZARR files directly from disk (no upload, no server required)
+- Opens a dataset zipped into one .ozx or .zip file, from disk or from its https:// or s3:// address. By address it reads only the parts it needs, by HTTP range requests (the server must allow CORS and range requests; S3, R2 and GCS do). Dropbox file links work as pasted, but they are not the best way to share data for viewing: Dropbox takes several seconds to answer each read, so opening a large image can take a minute or more. For data viewed often, use object storage (S3, R2, GCS) or any web server that supports range requests. Dropbox folder links, Google Drive, OneDrive and Proton Drive are not supported. Guide: https://find-nuclei.github.io/docs/guides/remote-urls.html#zipped-datasets
 - Shape annotations (polygons, lines, points, distance measurements) with browser-local persistence
 - Export annotations as CSV spreadsheet or GeoJSON
 - Segmentation label overlays from ZARR or local/network drive
@@ -41,9 +42,9 @@ Researchers and scientists working with microscopy data: digital pathology, spat
 
 - Format: OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6. In 0.6: coordinate systems with scale and translation, labels, plates and time-lapses. Scenes and affine transforms are not rendered yet
 - HCS instrument plates, opened from their own files without conversion, by URL, s3:// or a local folder: Opera Phenix plates exported by Harmony (V5 Index.idx.xml, V6 Index.xml) and Yokogawa CellVoyager CV8000 and CV7000 measurement folders. Together they cover most JUMP Cell Painting plates in the Cell Painting Gallery. Guides: https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html and https://find-nuclei.github.io/docs/guides/yokogawa-plates.html
-- Browsers: Chrome and Edge open everything, including dataset folders from disk. Firefox and Safari open web links and zipped datasets (.ozx or .zip) from disk
+- Browsers: Chrome and Edge open everything, including dataset folders from disk. Firefox and Safari open web links and zipped datasets (.ozx or .zip) from disk or by address
 - Rendering: deck.gl with WebGL, multi-resolution tiled loading
-- 3D rendering: WebGPU, loaded only when a user switches to 3D. Desktop browsers only. The image needs more than one z-section and opens from a URL, a local folder (Chrome and Edge), an .ozx or .zip file, or a token-protected store. A link with `mode=3d` opens in 3D. Details: https://find-nuclei.github.io/docs/guides/3d-rendering.html
+- 3D rendering: WebGPU, loaded only when a user switches to 3D. Desktop browsers only. The image needs more than one z-section and opens from a URL, a local folder (Chrome and Edge), an .ozx or .zip file (from disk or its address), or a token-protected store. A link with `mode=3d` opens in 3D. Details: https://find-nuclei.github.io/docs/guides/3d-rendering.html
 - Privacy: all processing is client-side, no server backend required
 - No account or installation required
 
