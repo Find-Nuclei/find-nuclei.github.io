@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = '1a51b1473618';
+const BUILD_ID = 'db7d8eb73ac9';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/3d-allen-colony-DSWBz49A.jpg",
@@ -204,17 +204,21 @@ const PRECACHE_PATHS = [
     "assets/cpg-CPBroadPhenixC1PlaneP1-BEWwkgda.jpg",
     "assets/cpg-CPBroadPhenixNC1PlaneP1-B8J4PXYH.jpg",
     "assets/cpg-Dest210726-160150-E9RrWjZB.jpg",
-    "assets/fetch-0k3cI2qi.js",
-    "assets/fn-plate-tables-Be-K3DqQ.js",
+    "assets/czi-directory-worker-D9135kQI.js",
+    "assets/fetch-Dft9JYrf.js",
+    "assets/fn-plate-tables-CDzodlfq.js",
     "assets/gzip-BduOtoNN.js",
     "assets/harmony-index-worker-DynatgKH.js",
-    "assets/index-BI3pwI6y.js",
+    "assets/index-ATzHLuwd.js",
+    "assets/index-C5lRvcqW.js",
     "assets/index-CI0Eyzzp.js",
-    "assets/index-DHC2HmLm.js",
+    "assets/index-CPsO0Cp3.js",
     "assets/index-DSGHM4gd.js",
-    "assets/index-DbzRQdOa.js",
-    "assets/index-EGvkfFTq.css",
+    "assets/index-QOvbxkBT.css",
     "assets/lz4-CvXMSXgq.js",
+    "assets/zeiss-S-BIAD4045-DMSO-rep1-h10-ZUz2.jpg",
+    "assets/zeiss-S-BIAD4045-RT53-rep1-DLA69DjX.jpg",
+    "assets/zeiss-zenodo-7015307-W96-D6juuZ1b.jpg",
     "assets/zlib-BDjr_O7m.js",
     "assets/zstd-Dvw5UDYA.js",
     "favicon-128.png",
