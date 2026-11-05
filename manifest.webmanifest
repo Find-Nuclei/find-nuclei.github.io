@@ -47,6 +47,40 @@
         }
       ],
       "launch_type": "single-client"
+    },
+    {
+      "action": "./",
+      "name": "Zeiss CZI file",
+      "accept": {
+        "application/octet-stream": [
+          ".czi"
+        ]
+      },
+      "icons": [
+        {
+          "src": "./logo192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
+    },
+    {
+      "action": "./",
+      "name": "Aperio SVS file",
+      "accept": {
+        "application/octet-stream": [
+          ".svs"
+        ]
+      },
+      "icons": [
+        {
+          "src": "./logo192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
     }
   ]
 }

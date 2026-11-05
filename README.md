@@ -15,6 +15,7 @@ Browser-based viewer for OME-ZARR (OME-NGFF) microscopy data with GPU-accelerate
 - **`s3://` addresses.** Paste `s3://bucket/path` of a public bucket and the image or plate opens, as from its https address.
 - **Opera Phenix and Yokogawa CellVoyager plates.** Open an Opera Phenix plate exported by Harmony (V5 `Index.idx.xml` or V6 `Index.xml`), or a Yokogawa CellVoyager CV8000 or CV7000 measurement folder, straight from its TIFFs, by URL, `s3://` or a local folder. Nothing is converted. Guides: [Opera Phenix Plates](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html), [Yokogawa CellVoyager Plates](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html).
 - **Zeiss CZI files.** Open a `.czi` from ZEN as it is, by URL, `s3://` or from your disk: Z-stacks, time series, scenes, mosaics, stored pyramids and Celldiscoverer 7 plates. Plates saved as one file per field open from a folder or a zip made without compression. Guide: [Zeiss CZI files](https://find-nuclei.github.io/docs/guides/zeiss-czi.html).
+- **Aperio SVS slides.** Open a `.svs` from an Aperio scanner as it is, by URL, `s3://` or from your disk, with JPEG or JPEG 2000 tiles. Guide: [Aperio SVS slides](https://find-nuclei.github.io/docs/guides/aperio-svs.html).
 
 **Looking at it**
 
