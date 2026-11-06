@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = '38db2c1e7e68';
+const BUILD_ID = 'd09473fb3a40';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/3d-allen-colony-DSWBz49A.jpg",
@@ -206,22 +206,28 @@ const PRECACHE_PATHS = [
     "assets/cpg-Dest210726-160150-E9RrWjZB.jpg",
     "assets/czi-directory-worker-D9135kQI.js",
     "assets/czi-jxr-worker-IjqnX0MW.js",
-    "assets/fetch-BD15dNVm.js",
-    "assets/fn-plate-tables-f6mTz_o9.js",
+    "assets/fetch-dNC-v2cu.js",
+    "assets/fn-plate-tables-D8IW3mt6.js",
     "assets/gzip-BduOtoNN.js",
     "assets/harmony-index-worker-DynatgKH.js",
-    "assets/index-CAdzN98B.js",
+    "assets/index-BE2bYUuO.js",
     "assets/index-CI0Eyzzp.js",
-    "assets/index-CrhkpSpP.css",
+    "assets/index-CXYaJqgG.js",
+    "assets/index-C_OKDv8m.css",
     "assets/index-DSGHM4gd.js",
-    "assets/index-Dy7Z1chw.js",
-    "assets/index-DzyQ4kAt.js",
+    "assets/index-DmTEcQ_G.js",
     "assets/jpegxr-B8hufdT0.js",
     "assets/lz4-CvXMSXgq.js",
     "assets/openjpegwasm_decode-5tEY2GDT.js",
     "assets/openjpegwasm_decode-BP3l1OXH.wasm",
     "assets/openjpegwasm_decode-BSfv9JJz.js",
     "assets/svs-jpeg-worker-BkiWhgvQ.js",
+    "assets/viewer-3d-4Di0PkjB.js",
+    "assets/viewer-3d-VA-lmr9i.css",
+    "assets/viewer-3d-build.worker-Bu7H7GKh.js",
+    "assets/viewer-3d-grow3d.worker-q5fjwhup.js",
+    "assets/viewer-3d-label-read.worker-BXu7SpM8.js",
+    "assets/viewer-3d-label-surface.worker-CoTbCwbe.js",
     "assets/zeiss-zenodo-7015307-W96-D6juuZ1b.jpg",
     "assets/zlib-BDjr_O7m.js",
     "assets/zstd-Dvw5UDYA.js",
