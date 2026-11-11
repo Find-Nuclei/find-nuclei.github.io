@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 168" width="560" height="168"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Where the install icon appears in Chrome</title>
+  <desc id="desc">The right-hand end of the Chrome address bar. The install icon, a small
+  screen with a downward arrow, sits before the bookmark star. Hovering it shows the
+  tooltip "Install Find Nuclei Viewer".</desc>
+
+  <!-- Reason: an illustration rather than a doctored screenshot. It stays sharp at any
+       size, is a few KB, and reads honestly as a diagram, so nobody mistakes it for a
+       capture of their own browser. -->
+
+  <style>
+    .bar   { fill: #ffffff; stroke: #d4d4d8; stroke-width: 1.5; }
+    .url   { fill: #3f3f46; font: 15px ui-sans-serif, system-ui, -apple-system, sans-serif; }
+    .ico   { fill: none; stroke: #52525b; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .ring  { fill: #f5f3ff; stroke: #6d28d9; stroke-width: 2; }
+    .hot   { fill: none; stroke: #6d28d9; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .tip   { fill: #27272a; }
+    .tiptx { fill: #fafafa; font: 13px ui-sans-serif, system-ui, -apple-system, sans-serif; }
+    .lead  { stroke: #6d28d9; stroke-width: 1.6; fill: none; }
+  </style>
+
+  <!-- address bar -->
+  <rect class="bar" x="8" y="14" width="544" height="44" rx="22"/>
+  <text class="url" x="34" y="42">find-nuclei.github.io</text>
+
+  <!-- neighbouring icons, drawn plainly so the highlighted one stands out -->
+  <!-- page/reading -->
+  <g class="ico" transform="translate(370 26)">
+    <path d="M2 1 h10 l4 4 v14 h-14 z"/>
+    <path d="M12 1 v4 h4"/>
+  </g>
+
+  <!-- install icon: a screen with a downward arrow. This is the one. -->
+  <circle class="ring" cx="428" cy="36" r="19"/>
+  <g class="hot" transform="translate(417 26)">
+    <rect x="1" y="2" width="20" height="14" rx="2"/>
+    <path d="M11 6 v6"/>
+    <path d="M8 9.5 l3 3 3 -3"/>
+    <path d="M7 19 h8"/>
+  </g>
+
+  <!-- bookmark star -->
+  <g class="ico" transform="translate(470 26)">
+    <path d="M10 1.5 l2.7 5.6 6 .8 -4.4 4.2 1.1 6.1 -5.4 -2.9 -5.4 2.9 1.1 -6.1 -4.4 -4.2 6 -.8 z"/>
+  </g>
+
+  <!-- extensions puzzle -->
+  <g class="ico" transform="translate(508 26)">
+    <path d="M4 3 h5 a2 2 0 1 1 4 0 h3 v4 a2 2 0 1 0 0 4 v6 h-12 v-5 a2 2 0 1 1 0 -4 z"/>
+  </g>
+
+  <!-- leader line down to the tooltip -->
+  <path class="lead" d="M428 56 v18"/>
+
+  <!-- tooltip, as Chrome shows it on hover -->
+  <rect class="tip" x="330" y="76" width="196" height="30" rx="6"/>
+  <path class="tip" d="M428 70 l7 7 h-14 z"/>
+  <text class="tiptx" x="346" y="96">Install Find Nuclei Viewer</text>
+
+  <text class="url" x="8" y="140" font-size="13" fill="#71717a">
+    Chrome and Edge show this once the page can be installed.
+  </text>
+  <text class="url" x="8" y="158" font-size="13" fill="#71717a">
+    Not there? Use the three dot menu, Cast Save and Share, Install page as app.
+  </text>
+</svg>

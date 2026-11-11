@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/phenotype/v1.json",
+  "title": "Find Nuclei phenotype descriptor (v1)",
+  "description": "Descriptor for an extendedMeasurements entry of kind \"classification\". Carries classifier metadata, plate-level QC and dose-response fits alongside the scored table it describes. Referenced from a bundle manifest via extendedMeasurements.<id>.descriptor. Full specification: https://find-nuclei.github.io/docs/guides/analytics-bundle",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a manifest that validates today will validate later.",
+  "type": "object",
+  "required": [
+    "version",
+    "kind",
+    "data"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Pointer to this schema. Advisory."
+    },
+    "version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "classification",
+      "description": "Matches extendedMeasurements.<id>.kind in the bundle manifest."
+    },
+    "generatedAt": {
+      "type": "string",
+      "description": "ISO-8601 timestamp."
+    },
+    "compartment": {
+      "type": "string",
+      "description": "Compartment the scores belong to (e.g. nuclei, cells)."
+    },
+    "producer": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "data": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "description": "Back-pointer to the scored table, so either file is self-describing.",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath",
+          "description": "The scored parquet this descriptor documents."
+        },
+        "fk": {
+          "type": "string",
+          "description": "Foreign-key column joining to measurements. Conventionally object_id."
+        },
+        "joinTo": {
+          "$ref": "#/$defs/relativePath",
+          "description": "Measurements table this joins against."
+        }
+      },
+      "additionalProperties": true
+    },
+    "classifier": {
+      "type": "object",
+      "description": "Model description. Free-form beyond `type`.",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "cv_folds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Held-out performance.",
+      "properties": {
+        "accuracy": {
+          "type": "number"
+        },
+        "roc_auc": {
+          "type": "number"
+        },
+        "f1": {
+          "type": "number"
+        },
+        "confusion_matrix": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "training": {
+      "type": "object",
+      "description": "How the training set was assembled.",
+      "properties": {
+        "n_positive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_negative": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "label_source": {
+          "type": "string"
+        },
+        "positive_wells": {
+          "$ref": "#/$defs/wellList"
+        },
+        "negative_wells": {
+          "$ref": "#/$defs/wellList"
+        },
+        "qc_excluded": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "scoring": {
+      "type": "object",
+      "description": "Population-level outcome of applying the model.",
+      "properties": {
+        "n_scored": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_predicted_positive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_predicted_negative": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_excluded_by_qc": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "positive_threshold": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": true
+    },
+    "features": {
+      "type": "array",
+      "description": "Model features, ranked by importance.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "coefficient": {
+            "type": "number"
+          },
+          "importance": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "qc_criteria": {
+      "type": "array",
+      "description": "Object-level filters applied before scoring.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "string"
+          },
+          "op": {
+            "type": "string"
+          },
+          "value": {},
+          "flag": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "plateStats": {
+      "type": "object",
+      "description": "Plate-level control statistics and assay quality. Consumed by dashboard UIs.",
+      "properties": {
+        "controls": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "quality": {
+          "type": "object",
+          "description": "Assay quality metrics, e.g. z_prime and ssmd.",
+          "additionalProperties": true
+        },
+        "per_well": {
+          "additionalProperties": true
+        },
+        "hits": {
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "doseResponse": {
+      "type": "array",
+      "description": "Per-compound dose-response fits.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+      "description": "Relative path from this descriptor. No leading slash and no `..` segments."
+    },
+    "wellList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Well ids in A01 style."
+    }
+  }
+}

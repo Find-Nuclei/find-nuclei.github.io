@@ -1,0 +1,71 @@
+# Find Nuclei Viewer
+
+> Free browser-based viewer that opens the files instruments write, built on OME-ZARR (OME-NGFF): OME-Zarr, OME-TIFF and Zeiss CZI files, Opera Phenix and Yokogawa CellVoyager plates, and whole-slide images (Aperio SVS, Hamamatsu NDPI, Leica SCN, Philips TIFF, 3DHISTECH MRXS, DICOM WSI, Akoya QPTIFF), with GPU-accelerated rendering.
+
+## What it does
+
+Find Nuclei Viewer is a zero-install web application for viewing and annotating bio-image data in OME-ZARR format. It runs entirely in the browser. No data is uploaded to any server. The same viewer embeds in any web page or MyST article as an interactive figure, and can tell the hosting page how readers use it.
+
+## Key capabilities
+
+- Opens files from disk with no upload and no server: one file (a zipped dataset, a CZI, an OME-TIFF or a slide) in any browser, folders in Chrome and Edge. A folder of several images, of any mix of formats, shows a list to pick from. Guide: https://find-nuclei.github.io/docs/guides/local-files.html
+- Opens a dataset zipped into one .ozx or .zip file, from disk or from its https:// or s3:// address. By address it reads only the parts it needs, by HTTP range requests (the server must allow CORS and range requests; S3, R2 and GCS do). Dropbox file links work as pasted, but they are not the best way to share data for viewing: Dropbox takes several seconds to answer each read, so opening a large image can take a minute or more. For data viewed often, use object storage (S3, R2, GCS) or any web server that supports range requests. Dropbox folder links, Google Drive, OneDrive and Proton Drive are not supported. Guides: https://find-nuclei.github.io/docs/guides/ome-zarr.html#a-dataset-in-a-single-file and https://find-nuclei.github.io/docs/guides/remote-urls.html
+- Shape annotations (polygons, lines, points, distance measurements) with browser-local persistence
+- Export annotations as CSV, GeoJSON (QuPath style) or OME-XML. Import GeoJSON, OME-XML, Aperio ImageScope XML, ASAP XML (the CAMELYON16 and CAMELYON17 outlines) and Hamamatsu NDP.view (.ndpa). The GeoJSON round trip is tested with QuPath 0.5; Visiopharm imports it as QuPath GeoJSON and exports labels as GeoJSON for Xenium, which opens here; 10X Genomics Xenium Explorer imports the same layout. A link with `ann=` opens a slide with its annotations. Guide: https://find-nuclei.github.io/docs/guides/annotation-exchange.html
+- Pixel size, Z step and magnification can be set in Image Info when a file leaves them out or gets them wrong (Philips TIFF states no magnification). Measurements, the scale bar, the zoom bar and the 3D view follow; links carry them as px=, py=, pz= and mag=. The viewer never guesses a magnification. Guide: https://find-nuclei.github.io/docs/guides/calibration.html
+- Segmentation label overlays from ZARR or local/network drive
+- Multi-channel fluorescence visualization with custom colors and intensity ranges
+- Per-channel histograms and auto-contrast (2%–98% percentile)
+- Z-projection (max, mean, min intensity) with configurable Z-range
+- 3D view of a z-stack: WebGPU volume rendering (MIP or Composite) next to orthogonal XY, XZ and YZ planes with a shared crosshair. Up to four channels at once, a per-channel opacity ramp in Composite, and annotations and label images that carry between 2D and 3D (labels show as a surface per object or as a coloured volume, in the colours set in 2D). Reads OME-NGFF anatomical orientation (RFC-4): axes labelled superior/inferior, left/right, anterior/posterior, and a radiological (medical) plane convention. Opens from a URL, a local folder (Chrome and Edge), an .ozx or .zip file, or a token-protected store, in a desktop browser with WebGPU. Guide: https://find-nuclei.github.io/docs/guides/3d-rendering.html
+- High-Content Screening (HCS) plate navigation with well picker and field grid
+- GPU-accelerated multi-resolution tiled rendering via deck.gl WebGL
+- Shareable deep links: the URL tracks zoom, position, channels and Z-slice in real time
+- Reads OME-NGFF 0.6, the current spec, plus 0.3, 0.4 and 0.5, including sharded stores
+- Handles images exceeding 100,000 pixels in either dimension
+
+## Embedding in articles and web pages
+
+- Two lines of HTML: `<script src="https://find-nuclei.github.io/embed/v1/viewer.js"></script>` once per page, then `<find-nuclei-viewer url="https://example.org/image.zarr"></find-nuclei-viewer>` for each figure
+- MyST and Curvenote articles (Elemental Microscopy and other Curvenote sites): an `any:bundle` directive pointing at `https://find-nuclei.github.io/embed/v1/widget.mjs`; every JSON key becomes an attribute of the viewer
+- Attributes set the starting view and look: `x`, `y`, `zoom`, `z`, `t`, `channels`, `invert`, `grayscale`, `background`, `autoplay`, `fps`, and `id` to name the figure
+- The viewer's toolbar has an Embed button that turns the current view into HTML or MyST code
+- Reader interactions: each embedded viewer dispatches a `fn-viewer:interaction` DOM event (bubbles, composed, so it leaves shadow roots) for every reader action: ready, pan, zoom, channel, z, t, play, pause, visible, hidden. Each event carries the full view at that moment: centre, zoom, visible bounds, z-slice, timepoint, channels and contrast, and the figure's `id`
+- The viewer sends nothing anywhere itself. The hosting page collects the events with its own analytics and owns the data. Use it to measure reader engagement with interactive figures, time on figure, and where readers look
+- Guides: https://find-nuclei.github.io/docs/guides/embedding.html and https://find-nuclei.github.io/docs/guides/reader-analytics.html
+- Live demos: https://find-nuclei.github.io/publications.html, https://find-nuclei.github.io/publications/myst-embed.html, https://find-nuclei.github.io/publications/embed-events.html
+
+## Who it's for
+
+Researchers and scientists working with microscopy data: digital pathology, spatial biology, high-content screening, confocal microscopy, light-sheet imaging, electron microscopy, super-resolution microscopy, spatial transcriptomics, live-cell imaging. Authors, journals, preprint servers and data portals that publish interactive microscopy figures.
+
+## Technical details
+
+- Format: OME-ZARR (OME-NGFF) v0.3, v0.4, v0.5 and v0.6. In 0.6: coordinate systems with scale and translation, labels, plates and time-lapses. Scenes and affine transforms are not rendered yet
+- HCS instrument plates, opened from their own files without conversion, by URL, s3://, a local folder, or a zip of the folder in any browser: Opera Phenix plates exported by Harmony (V5 Index.idx.xml, V6 Index.xml) and Yokogawa CellVoyager CV8000 and CV7000 measurement folders. Together they cover most JUMP Cell Painting plates in the Cell Painting Gallery. Guides: https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html and https://find-nuclei.github.io/docs/guides/yokogawa-plates.html
+- Zeiss CZI files from ZEN, opened without conversion, by URL, s3:// or from disk: Z-stacks, time series, scenes, mosaics, stored pyramids and Celldiscoverer 7 plates (Field view). Plates saved as one CZI per field open from a folder, or from a zip made without compression, on disk or by URL. Guide: https://find-nuclei.github.io/docs/guides/zeiss-czi.html
+- Whole-slide images, opened without conversion, by URL, s3://, gs:// or from disk. The label and macro pictures show beside the slide. Guides:
+  - Aperio SVS, JPEG or JPEG 2000 tiles: https://find-nuclei.github.io/docs/guides/aperio-svs.html
+  - Hamamatsu NDPI, files over 4 GB included: https://find-nuclei.github.io/docs/guides/hamamatsu-ndpi.html
+  - Leica SCN, every scanned region, brightfield and fluorescence: https://find-nuclei.github.io/docs/guides/leica-scn.html
+  - Philips TIFF: https://find-nuclei.github.io/docs/guides/philips-tiff.html
+  - Akoya QPTIFF from PhenoCycler-Fusion and Vectra, brightfield and multiplex fluorescence with marker names and colours (59 markers tested), plus inForm component exports: https://find-nuclei.github.io/docs/guides/akoya-qptiff.html
+  - 3DHISTECH MRXS, from a folder or a zip made without compression: https://find-nuclei.github.io/docs/guides/mrxs.html
+  - DICOM WSI, from a folder of .dcm files or a zip made without compression: https://find-nuclei.github.io/docs/guides/dicom-wsi.html
+- OME-TIFF files with pyramids, channels, Z and time, and 3D for a Z-stack: https://find-nuclei.github.io/docs/guides/ome-tiff.html
+- Private storage: a presigned S3 link, or a Bearer token from a server that asks for one. The browser reads the files straight from that storage; nothing passes through Find Nuclei servers. The viewer never asks for AWS keys. Guide: https://find-nuclei.github.io/docs/guides/authenticated-sources.html
+- Browsers: Chrome and Edge open everything, including folders from disk. Firefox and Safari open every address, and every single file from disk: zipped datasets (.ozx or .zip), CZI, OME-TIFF and single-file slides (SVS, NDPI, SCN, Philips TIFF, QPTIFF)
+- Every format and how it opens: https://find-nuclei.github.io/docs/guides/supported-formats.html
+- Rendering: deck.gl with WebGL, multi-resolution tiled loading
+- 3D rendering: WebGPU, loaded only when a user switches to 3D. Desktop browsers only. The image needs more than one z-section and opens from a URL, a local folder (Chrome and Edge), an .ozx or .zip file (from disk or its address), or a token-protected store. A link with `mode=3d` opens in 3D, and a copied 3D link carries the camera, render mode, layout and Surface labels. Details: https://find-nuclei.github.io/docs/guides/3d-rendering.html
+- Privacy: all processing is client-side, no server backend required
+- No account or installation required
+
+## Links
+
+- Launch: https://find-nuclei.github.io
+- Source: https://github.com/Find-Nuclei/find-nuclei.github.io
+- Issues: https://github.com/Find-Nuclei/find-nuclei.github.io/issues
+- Terms of Service: https://find-nuclei.github.io/terms.html
+- Privacy Policy: https://find-nuclei.github.io/privacy.html
+- Contact: info@find-nuclei.com

@@ -1,0 +1,2165 @@
+{
+  "$schema": "https://find-nuclei.github.io/schemas/phenotype/v1.json",
+  "version": 1,
+  "kind": "classification",
+  "generatedAt": "2026-04-23T06:57:57.813313+00:00",
+  "compartment": "cells",
+  "producer": {
+    "tool": "find-nuclei-analysis",
+    "module": "phenotyping"
+  },
+  "data": {
+    "path": "phenotype_scores.parquet",
+    "fk": "object_id",
+    "joinTo": "measurements.parquet"
+  },
+  "classifier": {
+    "type": "logistic",
+    "cv_folds": 5
+  },
+  "metrics": {
+    "accuracy": 0.9481902058197303,
+    "roc_auc": 0.9860869766862717,
+    "f1": 0.9496204278812974,
+    "confusion_matrix": [
+      [
+        1296,
+        73
+      ],
+      [
+        73,
+        1376
+      ]
+    ]
+  },
+  "training": {
+    "n_positive": 1449,
+    "n_negative": 1369,
+    "label_source": "wells_parquet",
+    "positive_wells": [
+      "A12",
+      "B12",
+      "C12",
+      "D12",
+      "E01",
+      "F01",
+      "G01",
+      "H01"
+    ],
+    "negative_wells": [
+      "A01",
+      "B01",
+      "C01",
+      "D01",
+      "E12",
+      "F12",
+      "G12",
+      "H12"
+    ],
+    "qc_excluded": 189
+  },
+  "scoring": {
+    "n_scored": 15142,
+    "n_predicted_positive": 6679,
+    "n_predicted_negative": 8463,
+    "n_excluded_by_qc": 189,
+    "positive_threshold": 0.5
+  },
+  "features": [
+    {
+      "name": "ch1_std",
+      "coefficient": 5.829559991789817,
+      "importance": 5.829559991789817
+    },
+    {
+      "name": "ch1_sum",
+      "coefficient": -3.741955097623727,
+      "importance": 3.741955097623727
+    },
+    {
+      "name": "perimeter",
+      "coefficient": -2.3232388530546206,
+      "importance": 2.3232388530546206
+    },
+    {
+      "name": "ch0_sum",
+      "coefficient": 1.9936239435732706,
+      "importance": 1.9936239435732706
+    },
+    {
+      "name": "ch1_max",
+      "coefficient": -1.9587882890573443,
+      "importance": 1.9587882890573443
+    },
+    {
+      "name": "ch1_min",
+      "coefficient": -1.8477446619952054,
+      "importance": 1.8477446619952054
+    },
+    {
+      "name": "ch1_p25",
+      "coefficient": 1.5926188398891374,
+      "importance": 1.5926188398891374
+    },
+    {
+      "name": "ch0_std",
+      "coefficient": -1.1876976051437258,
+      "importance": 1.1876976051437258
+    },
+    {
+      "name": "ch0_p25",
+      "coefficient": 0.9572941490406247,
+      "importance": 0.9572941490406247
+    },
+    {
+      "name": "ch1_median",
+      "coefficient": 0.9353088538064362,
+      "importance": 0.9353088538064362
+    },
+    {
+      "name": "centroid_x",
+      "coefficient": 0.7928896805469902,
+      "importance": 0.7928896805469902
+    },
+    {
+      "name": "ch1_p75",
+      "coefficient": -0.6172629655074264,
+      "importance": 0.6172629655074264
+    },
+    {
+      "name": "ch1_mean",
+      "coefficient": 0.6056765799194663,
+      "importance": 0.6056765799194663
+    },
+    {
+      "name": "bbox_min_col",
+      "coefficient": -0.5360162545079366,
+      "importance": 0.5360162545079366
+    },
+    {
+      "name": "area_px",
+      "coefficient": 0.3480053394263273,
+      "importance": 0.3480053394263273
+    },
+    {
+      "name": "area_um2",
+      "coefficient": 0.3480053394263273,
+      "importance": 0.3480053394263273
+    },
+    {
+      "name": "bbox_min_row",
+      "coefficient": 0.3414381576797567,
+      "importance": 0.3414381576797567
+    },
+    {
+      "name": "bbox_max_col",
+      "coefficient": -0.3236065020409622,
+      "importance": 0.3236065020409622
+    },
+    {
+      "name": "centroid_y",
+      "coefficient": -0.2931635975294127,
+      "importance": 0.2931635975294127
+    },
+    {
+      "name": "ch0_median",
+      "coefficient": -0.28857469836539845,
+      "importance": 0.28857469836539845
+    },
+    {
+      "name": "ch0_max",
+      "coefficient": -0.23159383216865093,
+      "importance": 0.23159383216865093
+    },
+    {
+      "name": "circularity",
+      "coefficient": -0.2221980575893336,
+      "importance": 0.2221980575893336
+    },
+    {
+      "name": "ch0_p75",
+      "coefficient": 0.18993716200834254,
+      "importance": 0.18993716200834254
+    },
+    {
+      "name": "solidity",
+      "coefficient": -0.1826264752197986,
+      "importance": 0.1826264752197986
+    },
+    {
+      "name": "eccentricity",
+      "coefficient": -0.09911644321803213,
+      "importance": 0.09911644321803213
+    },
+    {
+      "name": "bbox_max_row",
+      "coefficient": 0.04472245115339017,
+      "importance": 0.04472245115339017
+    },
+    {
+      "name": "ch0_mean",
+      "coefficient": 0.04182105435107796,
+      "importance": 0.04182105435107796
+    },
+    {
+      "name": "ch0_min",
+      "coefficient": -0.024537901230263184,
+      "importance": 0.024537901230263184
+    },
+    {
+      "name": "orientation",
+      "coefficient": 0.012292798192944663,
+      "importance": 0.012292798192944663
+    }
+  ],
+  "qc_criteria": [
+    {
+      "column": "area_px",
+      "op": "ge",
+      "value": 100,
+      "flag": "area_px_ge"
+    }
+  ],
+  "plateStats": {
+    "controls": {
+      "positive_wells": [
+        "A12",
+        "B12",
+        "C12",
+        "D12",
+        "E01",
+        "F01",
+        "G01",
+        "H01"
+      ],
+      "negative_wells": [
+        "A01",
+        "B01",
+        "C01",
+        "D01",
+        "E12",
+        "F12",
+        "G12",
+        "H12"
+      ],
+      "n_positive_wells": 8,
+      "n_negative_wells": 8,
+      "n_positive_objects": 1449,
+      "n_negative_objects": 1369,
+      "positive_mean": 0.9017293821439102,
+      "positive_std": 0.05362157483533927,
+      "positive_cv": 0.05946526296819905,
+      "negative_mean": 0.09090414742476187,
+      "negative_std": 0.013570007053291132,
+      "negative_cv": 0.14927819508480122,
+      "signal_window": 59.75127584937393,
+      "sn_ratio": 20.731122534837457,
+      "sb_ratio": 9.919562612808614
+    },
+    "quality": {
+      "z_prime": 0.7513955695573384,
+      "ssmd": 14.659117325992815,
+      "icc_between": 0.726425859111824
+    },
+    "per_well": [
+      {
+        "well_id": "A01",
+        "n": 252,
+        "mean": 0.09119115810578025,
+        "std": 0.156257970715593,
+        "robust_z": 0.013617310540181208,
+        "control_type": "negative",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A02",
+        "n": 209,
+        "mean": 0.13316484036391574,
+        "std": 0.25151638265820253,
+        "robust_z": 2.005071648740622,
+        "control_type": "empty",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A03",
+        "n": 188,
+        "mean": 0.1832601654205655,
+        "std": 0.30099520604021157,
+        "robust_z": 4.381859841734819,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 0.98,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A04",
+        "n": 148,
+        "mean": 0.08016390783847954,
+        "std": 0.20186859343180727,
+        "robust_z": -0.5095739893839888,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 1.95,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A05",
+        "n": 172,
+        "mean": 0.11021107317023618,
+        "std": 0.2180686035601139,
+        "robust_z": 0.9160230640876476,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 3.91,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A06",
+        "n": 184,
+        "mean": 0.14907889354739318,
+        "std": 0.21040890398962495,
+        "robust_z": 2.760118824627746,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 7.81,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A07",
+        "n": 151,
+        "mean": 0.3503598171567508,
+        "std": 0.29694193048053974,
+        "robust_z": 12.30995450627453,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 15.63,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A08",
+        "n": 167,
+        "mean": 0.8383502772381464,
+        "std": 0.23425282260502217,
+        "robust_z": 35.46281283194989,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 31.25,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A09",
+        "n": 164,
+        "mean": 0.8824127973430367,
+        "std": 0.19239337208558827,
+        "robust_z": 37.553372727917086,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 62.5,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A10",
+        "n": 134,
+        "mean": 0.7418774910122428,
+        "std": 0.30196105404474705,
+        "robust_z": 30.885631648123162,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 125.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A11",
+        "n": 145,
+        "mean": 0.7214420660548734,
+        "std": 0.31049985501369265,
+        "robust_z": 29.916066589855372,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 250.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "A12",
+        "n": 170,
+        "mean": 0.9135033945140141,
+        "std": 0.14183397568714898,
+        "robust_z": 39.028475727758966,
+        "control_type": "positive",
+        "compound": "Wortmannin",
+        "dose": 150.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B01",
+        "n": 132,
+        "mean": 0.0914418132874184,
+        "std": 0.1500528625301286,
+        "robust_z": 0.025509723166642292,
+        "control_type": "negative",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B02",
+        "n": 165,
+        "mean": 0.08894525558287415,
+        "std": 0.21667067847090182,
+        "robust_z": -0.09294022937043203,
+        "control_type": "empty",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B03",
+        "n": 197,
+        "mean": 0.1421145094554749,
+        "std": 0.2607113779438703,
+        "robust_z": 2.4296914671362173,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 0.98,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B04",
+        "n": 178,
+        "mean": 0.08599092762570176,
+        "std": 0.16508833350744248,
+        "robust_z": -0.23310923314272936,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 1.95,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B05",
+        "n": 184,
+        "mean": 0.10336957543508926,
+        "std": 0.20574353834812653,
+        "robust_z": 0.591426087804823,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 3.91,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B06",
+        "n": 157,
+        "mean": 0.18851280960747369,
+        "std": 0.26784476438860266,
+        "robust_z": 4.631073169951077,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 7.81,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B07",
+        "n": 157,
+        "mean": 0.49986285096344785,
+        "std": 0.357384135429738,
+        "robust_z": 19.403172190095137,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 15.63,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B08",
+        "n": 145,
+        "mean": 0.8852950738944836,
+        "std": 0.20075182477772321,
+        "robust_z": 37.690123230457516,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 31.25,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B09",
+        "n": 135,
+        "mean": 0.8783550529878205,
+        "std": 0.2040098469164543,
+        "robust_z": 37.36085179182653,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 62.5,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B10",
+        "n": 148,
+        "mean": 0.9050399263427186,
+        "std": 0.13856255526142786,
+        "robust_z": 38.62692386241884,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 125.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B11",
+        "n": 155,
+        "mean": 0.816883718947943,
+        "std": 0.2675654941834953,
+        "robust_z": 34.44432533375161,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 250.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "B12",
+        "n": 147,
+        "mean": 0.8259351497394098,
+        "std": 0.22362701825758322,
+        "robust_z": 34.87377326747665,
+        "control_type": "positive",
+        "compound": "Wortmannin",
+        "dose": 150.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C01",
+        "n": 124,
+        "mean": 0.1140979556300592,
+        "std": 0.24038912433042472,
+        "robust_z": 1.1004374046996022,
+        "control_type": "negative",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C02",
+        "n": 173,
+        "mean": 0.10117324626862369,
+        "std": 0.15197339296355145,
+        "robust_z": 0.4872205711247546,
+        "control_type": "empty",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C03",
+        "n": 167,
+        "mean": 0.10104291807290756,
+        "std": 0.20104973064177373,
+        "robust_z": 0.48103710956537704,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 0.98,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C04",
+        "n": 178,
+        "mean": 0.08094000731037168,
+        "std": 0.1562054003455081,
+        "robust_z": -0.47275170987394877,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 1.95,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C05",
+        "n": 156,
+        "mean": 0.12095867973247237,
+        "std": 0.22107069197036436,
+        "robust_z": 1.4259465819245494,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 3.91,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C06",
+        "n": 141,
+        "mean": 0.1707972217754957,
+        "std": 0.23768084556851296,
+        "robust_z": 3.7905516254081157,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 7.81,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C07",
+        "n": 127,
+        "mean": 0.6321787882427953,
+        "std": 0.34355514623169653,
+        "robust_z": 25.680942762795876,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 15.63,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C08",
+        "n": 146,
+        "mean": 0.802157758313556,
+        "std": 0.26347588394863464,
+        "robust_z": 33.7456475763615,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 31.25,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C09",
+        "n": 112,
+        "mean": 0.7520741156498408,
+        "std": 0.2688336914677507,
+        "robust_z": 31.369413658113732,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 62.5,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C10",
+        "n": 176,
+        "mean": 0.890422897731015,
+        "std": 0.2008207630243601,
+        "robust_z": 37.93341441854023,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 125.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C11",
+        "n": 149,
+        "mean": 0.8478661766296144,
+        "std": 0.16732427591120286,
+        "robust_z": 35.91429762207323,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 250.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "C12",
+        "n": 177,
+        "mean": 0.9383270718557855,
+        "std": 0.12913432519533635,
+        "robust_z": 40.20624277779606,
+        "control_type": "positive",
+        "compound": "Wortmannin",
+        "dose": 150.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D01",
+        "n": 129,
+        "mean": 0.08229277306321982,
+        "std": 0.1774980866070427,
+        "robust_z": -0.40856932028728693,
+        "control_type": "negative",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D02",
+        "n": 154,
+        "mean": 0.12535423229169912,
+        "std": 0.22575155519459827,
+        "robust_z": 1.634494932746534,
+        "control_type": "empty",
+        "compound": "Wortmannin",
+        "dose": 0.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D03",
+        "n": 159,
+        "mean": 0.0898789140012086,
+        "std": 0.17740316376301313,
+        "robust_z": -0.04864251690968818,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 0.98,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D04",
+        "n": 157,
+        "mean": 0.08376717200921602,
+        "std": 0.19251116492481013,
+        "robust_z": -0.33861600622766125,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 1.95,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D05",
+        "n": 166,
+        "mean": 0.129786082510183,
+        "std": 0.24313941887294885,
+        "robust_z": 1.8447654372397073,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 3.91,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D06",
+        "n": 151,
+        "mean": 0.2005029760722124,
+        "std": 0.2729971381720829,
+        "robust_z": 5.199950326715689,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 7.81,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D07",
+        "n": 147,
+        "mean": 0.5691845641817016,
+        "std": 0.35003179159651027,
+        "robust_z": 22.692162316598058,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 15.63,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D08",
+        "n": 136,
+        "mean": 0.8928760197222955,
+        "std": 0.20618826005899168,
+        "robust_z": 38.0498035502258,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 31.25,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D09",
+        "n": 128,
+        "mean": 0.7301378631296016,
+        "std": 0.308224043659827,
+        "robust_z": 30.32864137188374,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 62.5,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D10",
+        "n": 129,
+        "mean": 0.8694939427979242,
+        "std": 0.1905025462591355,
+        "robust_z": 36.940433677913724,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 125.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D11",
+        "n": 156,
+        "mean": 0.875498765606122,
+        "std": 0.16842081913688736,
+        "robust_z": 37.225334353483895,
+        "control_type": null,
+        "compound": "Wortmannin",
+        "dose": 250.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "D12",
+        "n": 147,
+        "mean": 0.8168802843611335,
+        "std": 0.25151557457072277,
+        "robust_z": 34.444162378718026,
+        "control_type": "positive",
+        "compound": "Wortmannin",
+        "dose": 150.0,
+        "dose_unit": "nM"
+      },
+      {
+        "well_id": "E01",
+        "n": 166,
+        "mean": 0.919224021704639,
+        "std": 0.15322776120113843,
+        "robust_z": 39.299892654344895,
+        "control_type": "positive",
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E02",
+        "n": 166,
+        "mean": 0.11430648334060482,
+        "std": 0.2023554205019069,
+        "robust_z": 1.1103310664290444,
+        "control_type": "empty",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E03",
+        "n": 175,
+        "mean": 0.09739316092698963,
+        "std": 0.19601162176546122,
+        "robust_z": 0.3078732528201767,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.31,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E04",
+        "n": 171,
+        "mean": 0.05460515907585344,
+        "std": 0.14230512678975388,
+        "robust_z": -1.722216730358697,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.63,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E05",
+        "n": 145,
+        "mean": 0.07576364895394468,
+        "std": 0.1619319882200234,
+        "robust_z": -0.7183456332659961,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 1.25,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E06",
+        "n": 126,
+        "mean": 0.19654560435314242,
+        "std": 0.30754960477046595,
+        "robust_z": 5.012191601394749,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 2.5,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E07",
+        "n": 137,
+        "mean": 0.39587938790569127,
+        "std": 0.3461833455923877,
+        "robust_z": 14.469644620749278,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 5.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E08",
+        "n": 142,
+        "mean": 0.75546768665943,
+        "std": 0.3010124822531559,
+        "robust_z": 31.530422684376315,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 10.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E09",
+        "n": 144,
+        "mean": 0.8415433877745273,
+        "std": 0.21738568768282157,
+        "robust_z": 35.614310949053895,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 20.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E10",
+        "n": 130,
+        "mean": 0.8662635541512224,
+        "std": 0.21740011306641935,
+        "robust_z": 36.78716688933453,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 40.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E11",
+        "n": 159,
+        "mean": 0.8757023730310868,
+        "std": 0.17413749353947827,
+        "robust_z": 37.23499457074199,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "E12",
+        "n": 163,
+        "mean": 0.08353569658512809,
+        "std": 0.16495254561455672,
+        "robust_z": -0.34959842932439444,
+        "control_type": "negative",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F01",
+        "n": 171,
+        "mean": 0.8956944531058123,
+        "std": 0.1878123043293669,
+        "robust_z": 38.18352499391557,
+        "control_type": "positive",
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F02",
+        "n": 150,
+        "mean": 0.06000074982314329,
+        "std": 0.11257359791953689,
+        "robust_z": -1.4662212583683434,
+        "control_type": "empty",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F03",
+        "n": 89,
+        "mean": 0.0964686137101112,
+        "std": 0.207824536164896,
+        "robust_z": 0.26400782413082635,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.31,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F04",
+        "n": 152,
+        "mean": 0.0811129572955268,
+        "std": 0.1561489194766104,
+        "robust_z": -0.4645460443306999,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.63,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F05",
+        "n": 134,
+        "mean": 0.10532620424733367,
+        "std": 0.24463204241178266,
+        "robust_z": 0.6842589470338193,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 1.25,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F06",
+        "n": 150,
+        "mean": 0.19463041024164296,
+        "std": 0.25914608379838894,
+        "robust_z": 4.9213246243593405,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 2.5,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F07",
+        "n": 149,
+        "mean": 0.4014102263259142,
+        "std": 0.35569629618658094,
+        "robust_z": 14.732056960417282,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 5.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F08",
+        "n": 132,
+        "mean": 0.7765476936687253,
+        "std": 0.2994691566299386,
+        "robust_z": 32.53057013748237,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 10.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F09",
+        "n": 141,
+        "mean": 0.8100215642845666,
+        "std": 0.2789858887810237,
+        "robust_z": 34.11874828311925,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 20.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F10",
+        "n": 138,
+        "mean": 0.8666708936468165,
+        "std": 0.19001896364254242,
+        "robust_z": 36.80649323770284,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 40.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F11",
+        "n": 171,
+        "mean": 0.9272962628203555,
+        "std": 0.130336267076679,
+        "robust_z": 39.682882631017186,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "F12",
+        "n": 162,
+        "mean": 0.077460775710362,
+        "std": 0.16255818284707452,
+        "robust_z": -0.6378249293459046,
+        "control_type": "negative",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G01",
+        "n": 248,
+        "mean": 0.9402872282231988,
+        "std": 0.10153041392640183,
+        "robust_z": 40.2992430029712,
+        "control_type": "positive",
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G02",
+        "n": 112,
+        "mean": 0.09062936763009495,
+        "std": 0.1837983222789477,
+        "robust_z": -0.013037012353930386,
+        "control_type": "empty",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G03",
+        "n": 149,
+        "mean": 0.12949769259245353,
+        "std": 0.26526590233944486,
+        "robust_z": 1.8310826883871374,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.31,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G04",
+        "n": 132,
+        "mean": 0.06169699313342204,
+        "std": 0.15079082598707044,
+        "robust_z": -1.3857424698235674,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.63,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G05",
+        "n": 161,
+        "mean": 0.138566371361088,
+        "std": 0.23060800250628222,
+        "robust_z": 2.2613489577241075,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 1.25,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G06",
+        "n": 177,
+        "mean": 0.16040496175598606,
+        "std": 0.2169987766170361,
+        "robust_z": 3.2974876342080552,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 2.5,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G07",
+        "n": 138,
+        "mean": 0.46130087678008325,
+        "std": 0.3795733906267521,
+        "robust_z": 17.573587396825058,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 5.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G08",
+        "n": 142,
+        "mean": 0.8091602233839822,
+        "std": 0.27918607220926095,
+        "robust_z": 34.077881697657695,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 10.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G09",
+        "n": 147,
+        "mean": 0.9132015126325127,
+        "std": 0.17075358131522092,
+        "robust_z": 39.01415284851185,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 20.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G10",
+        "n": 171,
+        "mean": 0.8880972222155762,
+        "std": 0.15256949025266872,
+        "robust_z": 37.82307202432321,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 40.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G11",
+        "n": 169,
+        "mean": 0.7890800081253478,
+        "std": 0.22718946912046678,
+        "robust_z": 33.12516967342124,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "G12",
+        "n": 172,
+        "mean": 0.07899637166085859,
+        "std": 0.18129088731063417,
+        "robust_z": -0.5649681044780619,
+        "control_type": "negative",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H01",
+        "n": 223,
+        "mean": 0.9639834536472885,
+        "std": 0.07611713062948315,
+        "robust_z": 41.423517748026065,
+        "control_type": "positive",
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H02",
+        "n": 152,
+        "mean": 0.1302388815144189,
+        "std": 0.24335775894081668,
+        "robust_z": 1.8662486260572342,
+        "control_type": "empty",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H03",
+        "n": 125,
+        "mean": 0.05819258771823762,
+        "std": 0.14508636804630973,
+        "robust_z": -1.5520100687433518,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.31,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H04",
+        "n": 154,
+        "mean": 0.14324591346888133,
+        "std": 0.25869980274775783,
+        "robust_z": 2.4833712805225896,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 0.63,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H05",
+        "n": 225,
+        "mean": 0.09121915881074247,
+        "std": 0.18756077746870808,
+        "robust_z": 0.014945812648400779,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 1.25,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H06",
+        "n": 146,
+        "mean": 0.09266803602845473,
+        "std": 0.16225588399954086,
+        "robust_z": 0.08368824041511462,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 2.5,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H07",
+        "n": 133,
+        "mean": 0.29781982180262806,
+        "std": 0.3256454057698305,
+        "robust_z": 9.81717817482177,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 5.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H08",
+        "n": 145,
+        "mean": 0.8297240638065873,
+        "std": 0.22871044941696814,
+        "robust_z": 35.05353946739557,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 10.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H09",
+        "n": 185,
+        "mean": 0.8032313283339556,
+        "std": 0.23139813229336356,
+        "robust_z": 33.79658343806023,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 20.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H10",
+        "n": 145,
+        "mean": 0.8031923011798761,
+        "std": 0.23803084132747826,
+        "robust_z": 33.79473178266289,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 40.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H11",
+        "n": 224,
+        "mean": 0.8508256836078042,
+        "std": 0.21850364310859452,
+        "robust_z": 36.05471234609969,
+        "control_type": null,
+        "compound": "LY294002",
+        "dose": 80.0,
+        "dose_unit": "uM"
+      },
+      {
+        "well_id": "H12",
+        "n": 235,
+        "mean": 0.10821663535526864,
+        "std": 0.2054505699682436,
+        "robust_z": 0.8213963450292242,
+        "control_type": "negative",
+        "compound": "LY294002",
+        "dose": 0.0,
+        "dose_unit": "uM"
+      }
+    ],
+    "hits": {
+      "threshold": 3.0,
+      "n_hits": 55,
+      "top": [
+        {
+          "well_id": "H01",
+          "n": 223,
+          "mean": 0.9639834536472885,
+          "std": 0.07611713062948315,
+          "robust_z": 41.423517748026065,
+          "control_type": "positive",
+          "compound": "LY294002",
+          "dose": 80.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "G01",
+          "n": 248,
+          "mean": 0.9402872282231988,
+          "std": 0.10153041392640183,
+          "robust_z": 40.2992430029712,
+          "control_type": "positive",
+          "compound": "LY294002",
+          "dose": 80.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "C12",
+          "n": 177,
+          "mean": 0.9383270718557855,
+          "std": 0.12913432519533635,
+          "robust_z": 40.20624277779606,
+          "control_type": "positive",
+          "compound": "Wortmannin",
+          "dose": 150.0,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "F11",
+          "n": 171,
+          "mean": 0.9272962628203555,
+          "std": 0.130336267076679,
+          "robust_z": 39.682882631017186,
+          "control_type": null,
+          "compound": "LY294002",
+          "dose": 80.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "E01",
+          "n": 166,
+          "mean": 0.919224021704639,
+          "std": 0.15322776120113843,
+          "robust_z": 39.299892654344895,
+          "control_type": "positive",
+          "compound": "LY294002",
+          "dose": 80.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "A12",
+          "n": 170,
+          "mean": 0.9135033945140141,
+          "std": 0.14183397568714898,
+          "robust_z": 39.028475727758966,
+          "control_type": "positive",
+          "compound": "Wortmannin",
+          "dose": 150.0,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "G09",
+          "n": 147,
+          "mean": 0.9132015126325127,
+          "std": 0.17075358131522092,
+          "robust_z": 39.01415284851185,
+          "control_type": null,
+          "compound": "LY294002",
+          "dose": 20.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "B10",
+          "n": 148,
+          "mean": 0.9050399263427186,
+          "std": 0.13856255526142786,
+          "robust_z": 38.62692386241884,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 125.0,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "F01",
+          "n": 171,
+          "mean": 0.8956944531058123,
+          "std": 0.1878123043293669,
+          "robust_z": 38.18352499391557,
+          "control_type": "positive",
+          "compound": "LY294002",
+          "dose": 80.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "D08",
+          "n": 136,
+          "mean": 0.8928760197222955,
+          "std": 0.20618826005899168,
+          "robust_z": 38.0498035502258,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 31.25,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "C10",
+          "n": 176,
+          "mean": 0.890422897731015,
+          "std": 0.2008207630243601,
+          "robust_z": 37.93341441854023,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 125.0,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "G10",
+          "n": 171,
+          "mean": 0.8880972222155762,
+          "std": 0.15256949025266872,
+          "robust_z": 37.82307202432321,
+          "control_type": null,
+          "compound": "LY294002",
+          "dose": 40.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "B08",
+          "n": 145,
+          "mean": 0.8852950738944836,
+          "std": 0.20075182477772321,
+          "robust_z": 37.690123230457516,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 31.25,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "A09",
+          "n": 164,
+          "mean": 0.8824127973430367,
+          "std": 0.19239337208558827,
+          "robust_z": 37.553372727917086,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 62.5,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "B09",
+          "n": 135,
+          "mean": 0.8783550529878205,
+          "std": 0.2040098469164543,
+          "robust_z": 37.36085179182653,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 62.5,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "E11",
+          "n": 159,
+          "mean": 0.8757023730310868,
+          "std": 0.17413749353947827,
+          "robust_z": 37.23499457074199,
+          "control_type": null,
+          "compound": "LY294002",
+          "dose": 80.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "D11",
+          "n": 156,
+          "mean": 0.875498765606122,
+          "std": 0.16842081913688736,
+          "robust_z": 37.225334353483895,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 250.0,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "D10",
+          "n": 129,
+          "mean": 0.8694939427979242,
+          "std": 0.1905025462591355,
+          "robust_z": 36.940433677913724,
+          "control_type": null,
+          "compound": "Wortmannin",
+          "dose": 125.0,
+          "dose_unit": "nM"
+        },
+        {
+          "well_id": "F10",
+          "n": 138,
+          "mean": 0.8666708936468165,
+          "std": 0.19001896364254242,
+          "robust_z": 36.80649323770284,
+          "control_type": null,
+          "compound": "LY294002",
+          "dose": 40.0,
+          "dose_unit": "uM"
+        },
+        {
+          "well_id": "E10",
+          "n": 130,
+          "mean": 0.8662635541512224,
+          "std": 0.21740011306641935,
+          "robust_z": 36.78716688933453,
+          "control_type": null,
+          "compound": "LY294002",
+          "dose": 40.0,
+          "dose_unit": "uM"
+        }
+      ]
+    }
+  },
+  "doseResponse": [
+    {
+      "compound": "LY294002",
+      "dose_unit": "uM",
+      "points": [
+        {
+          "dose": 0.0,
+          "response": 0.11430648334060482,
+          "n": 166,
+          "well_id": "E02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.08353569658512809,
+          "n": 163,
+          "well_id": "E12"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.06000074982314329,
+          "n": 150,
+          "well_id": "F02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.077460775710362,
+          "n": 162,
+          "well_id": "F12"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.09062936763009495,
+          "n": 112,
+          "well_id": "G02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.07899637166085859,
+          "n": 172,
+          "well_id": "G12"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.1302388815144189,
+          "n": 152,
+          "well_id": "H02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.10821663535526864,
+          "n": 235,
+          "well_id": "H12"
+        },
+        {
+          "dose": 0.31,
+          "response": 0.09739316092698963,
+          "n": 175,
+          "well_id": "E03"
+        },
+        {
+          "dose": 0.31,
+          "response": 0.0964686137101112,
+          "n": 89,
+          "well_id": "F03"
+        },
+        {
+          "dose": 0.31,
+          "response": 0.12949769259245353,
+          "n": 149,
+          "well_id": "G03"
+        },
+        {
+          "dose": 0.31,
+          "response": 0.05819258771823762,
+          "n": 125,
+          "well_id": "H03"
+        },
+        {
+          "dose": 0.63,
+          "response": 0.05460515907585344,
+          "n": 171,
+          "well_id": "E04"
+        },
+        {
+          "dose": 0.63,
+          "response": 0.0811129572955268,
+          "n": 152,
+          "well_id": "F04"
+        },
+        {
+          "dose": 0.63,
+          "response": 0.06169699313342204,
+          "n": 132,
+          "well_id": "G04"
+        },
+        {
+          "dose": 0.63,
+          "response": 0.14324591346888133,
+          "n": 154,
+          "well_id": "H04"
+        },
+        {
+          "dose": 1.25,
+          "response": 0.07576364895394468,
+          "n": 145,
+          "well_id": "E05"
+        },
+        {
+          "dose": 1.25,
+          "response": 0.10532620424733367,
+          "n": 134,
+          "well_id": "F05"
+        },
+        {
+          "dose": 1.25,
+          "response": 0.138566371361088,
+          "n": 161,
+          "well_id": "G05"
+        },
+        {
+          "dose": 1.25,
+          "response": 0.09121915881074247,
+          "n": 225,
+          "well_id": "H05"
+        },
+        {
+          "dose": 2.5,
+          "response": 0.19654560435314242,
+          "n": 126,
+          "well_id": "E06"
+        },
+        {
+          "dose": 2.5,
+          "response": 0.19463041024164296,
+          "n": 150,
+          "well_id": "F06"
+        },
+        {
+          "dose": 2.5,
+          "response": 0.16040496175598606,
+          "n": 177,
+          "well_id": "G06"
+        },
+        {
+          "dose": 2.5,
+          "response": 0.09266803602845473,
+          "n": 146,
+          "well_id": "H06"
+        },
+        {
+          "dose": 5.0,
+          "response": 0.39587938790569127,
+          "n": 137,
+          "well_id": "E07"
+        },
+        {
+          "dose": 5.0,
+          "response": 0.4014102263259142,
+          "n": 149,
+          "well_id": "F07"
+        },
+        {
+          "dose": 5.0,
+          "response": 0.46130087678008325,
+          "n": 138,
+          "well_id": "G07"
+        },
+        {
+          "dose": 5.0,
+          "response": 0.29781982180262806,
+          "n": 133,
+          "well_id": "H07"
+        },
+        {
+          "dose": 10.0,
+          "response": 0.75546768665943,
+          "n": 142,
+          "well_id": "E08"
+        },
+        {
+          "dose": 10.0,
+          "response": 0.7765476936687253,
+          "n": 132,
+          "well_id": "F08"
+        },
+        {
+          "dose": 10.0,
+          "response": 0.8091602233839822,
+          "n": 142,
+          "well_id": "G08"
+        },
+        {
+          "dose": 10.0,
+          "response": 0.8297240638065873,
+          "n": 145,
+          "well_id": "H08"
+        },
+        {
+          "dose": 20.0,
+          "response": 0.8415433877745273,
+          "n": 144,
+          "well_id": "E09"
+        },
+        {
+          "dose": 20.0,
+          "response": 0.8100215642845666,
+          "n": 141,
+          "well_id": "F09"
+        },
+        {
+          "dose": 20.0,
+          "response": 0.9132015126325127,
+          "n": 147,
+          "well_id": "G09"
+        },
+        {
+          "dose": 20.0,
+          "response": 0.8032313283339556,
+          "n": 185,
+          "well_id": "H09"
+        },
+        {
+          "dose": 40.0,
+          "response": 0.8662635541512224,
+          "n": 130,
+          "well_id": "E10"
+        },
+        {
+          "dose": 40.0,
+          "response": 0.8666708936468165,
+          "n": 138,
+          "well_id": "F10"
+        },
+        {
+          "dose": 40.0,
+          "response": 0.8880972222155762,
+          "n": 171,
+          "well_id": "G10"
+        },
+        {
+          "dose": 40.0,
+          "response": 0.8031923011798761,
+          "n": 145,
+          "well_id": "H10"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.919224021704639,
+          "n": 166,
+          "well_id": "E01"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.8757023730310868,
+          "n": 159,
+          "well_id": "E11"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.8956944531058123,
+          "n": 171,
+          "well_id": "F01"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.9272962628203555,
+          "n": 171,
+          "well_id": "F11"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.9402872282231988,
+          "n": 248,
+          "well_id": "G01"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.7890800081253478,
+          "n": 169,
+          "well_id": "G11"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.9639834536472885,
+          "n": 223,
+          "well_id": "H01"
+        },
+        {
+          "dose": 80.0,
+          "response": 0.8508256836078042,
+          "n": 224,
+          "well_id": "H11"
+        }
+      ],
+      "fit": {
+        "bottom": 0.09560160536322147,
+        "top": 0.8781013333025682,
+        "ec50": 5.71246460617515,
+        "hill_slope": 3.4062205684374693,
+        "ec50_ci_low": 5.064430996158818,
+        "ec50_ci_high": 6.251742792572707,
+        "r_squared": 0.9870434151994603,
+        "rmse": 0.04118669757626531,
+        "n_points": 48,
+        "converged": true,
+        "failure_reason": null
+      }
+    },
+    {
+      "compound": "Wortmannin",
+      "dose_unit": "nM",
+      "points": [
+        {
+          "dose": 0.0,
+          "response": 0.09119115810578025,
+          "n": 252,
+          "well_id": "A01"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.13316484036391574,
+          "n": 209,
+          "well_id": "A02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.0914418132874184,
+          "n": 132,
+          "well_id": "B01"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.08894525558287415,
+          "n": 165,
+          "well_id": "B02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.1140979556300592,
+          "n": 124,
+          "well_id": "C01"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.10117324626862369,
+          "n": 173,
+          "well_id": "C02"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.08229277306321982,
+          "n": 129,
+          "well_id": "D01"
+        },
+        {
+          "dose": 0.0,
+          "response": 0.12535423229169912,
+          "n": 154,
+          "well_id": "D02"
+        },
+        {
+          "dose": 0.98,
+          "response": 0.1832601654205655,
+          "n": 188,
+          "well_id": "A03"
+        },
+        {
+          "dose": 0.98,
+          "response": 0.1421145094554749,
+          "n": 197,
+          "well_id": "B03"
+        },
+        {
+          "dose": 0.98,
+          "response": 0.10104291807290756,
+          "n": 167,
+          "well_id": "C03"
+        },
+        {
+          "dose": 0.98,
+          "response": 0.0898789140012086,
+          "n": 159,
+          "well_id": "D03"
+        },
+        {
+          "dose": 1.95,
+          "response": 0.08016390783847954,
+          "n": 148,
+          "well_id": "A04"
+        },
+        {
+          "dose": 1.95,
+          "response": 0.08599092762570176,
+          "n": 178,
+          "well_id": "B04"
+        },
+        {
+          "dose": 1.95,
+          "response": 0.08094000731037168,
+          "n": 178,
+          "well_id": "C04"
+        },
+        {
+          "dose": 1.95,
+          "response": 0.08376717200921602,
+          "n": 157,
+          "well_id": "D04"
+        },
+        {
+          "dose": 3.91,
+          "response": 0.11021107317023618,
+          "n": 172,
+          "well_id": "A05"
+        },
+        {
+          "dose": 3.91,
+          "response": 0.10336957543508926,
+          "n": 184,
+          "well_id": "B05"
+        },
+        {
+          "dose": 3.91,
+          "response": 0.12095867973247237,
+          "n": 156,
+          "well_id": "C05"
+        },
+        {
+          "dose": 3.91,
+          "response": 0.129786082510183,
+          "n": 166,
+          "well_id": "D05"
+        },
+        {
+          "dose": 7.81,
+          "response": 0.14907889354739318,
+          "n": 184,
+          "well_id": "A06"
+        },
+        {
+          "dose": 7.81,
+          "response": 0.18851280960747369,
+          "n": 157,
+          "well_id": "B06"
+        },
+        {
+          "dose": 7.81,
+          "response": 0.1707972217754957,
+          "n": 141,
+          "well_id": "C06"
+        },
+        {
+          "dose": 7.81,
+          "response": 0.2005029760722124,
+          "n": 151,
+          "well_id": "D06"
+        },
+        {
+          "dose": 15.63,
+          "response": 0.3503598171567508,
+          "n": 151,
+          "well_id": "A07"
+        },
+        {
+          "dose": 15.63,
+          "response": 0.49986285096344785,
+          "n": 157,
+          "well_id": "B07"
+        },
+        {
+          "dose": 15.63,
+          "response": 0.6321787882427953,
+          "n": 127,
+          "well_id": "C07"
+        },
+        {
+          "dose": 15.63,
+          "response": 0.5691845641817016,
+          "n": 147,
+          "well_id": "D07"
+        },
+        {
+          "dose": 31.25,
+          "response": 0.8383502772381464,
+          "n": 167,
+          "well_id": "A08"
+        },
+        {
+          "dose": 31.25,
+          "response": 0.8852950738944836,
+          "n": 145,
+          "well_id": "B08"
+        },
+        {
+          "dose": 31.25,
+          "response": 0.802157758313556,
+          "n": 146,
+          "well_id": "C08"
+        },
+        {
+          "dose": 31.25,
+          "response": 0.8928760197222955,
+          "n": 136,
+          "well_id": "D08"
+        },
+        {
+          "dose": 62.5,
+          "response": 0.8824127973430367,
+          "n": 164,
+          "well_id": "A09"
+        },
+        {
+          "dose": 62.5,
+          "response": 0.8783550529878205,
+          "n": 135,
+          "well_id": "B09"
+        },
+        {
+          "dose": 62.5,
+          "response": 0.7520741156498408,
+          "n": 112,
+          "well_id": "C09"
+        },
+        {
+          "dose": 62.5,
+          "response": 0.7301378631296016,
+          "n": 128,
+          "well_id": "D09"
+        },
+        {
+          "dose": 125.0,
+          "response": 0.7418774910122428,
+          "n": 134,
+          "well_id": "A10"
+        },
+        {
+          "dose": 125.0,
+          "response": 0.9050399263427186,
+          "n": 148,
+          "well_id": "B10"
+        },
+        {
+          "dose": 125.0,
+          "response": 0.890422897731015,
+          "n": 176,
+          "well_id": "C10"
+        },
+        {
+          "dose": 125.0,
+          "response": 0.8694939427979242,
+          "n": 129,
+          "well_id": "D10"
+        },
+        {
+          "dose": 150.0,
+          "response": 0.9135033945140141,
+          "n": 170,
+          "well_id": "A12"
+        },
+        {
+          "dose": 150.0,
+          "response": 0.8259351497394098,
+          "n": 147,
+          "well_id": "B12"
+        },
+        {
+          "dose": 150.0,
+          "response": 0.9383270718557855,
+          "n": 177,
+          "well_id": "C12"
+        },
+        {
+          "dose": 150.0,
+          "response": 0.8168802843611335,
+          "n": 147,
+          "well_id": "D12"
+        },
+        {
+          "dose": 250.0,
+          "response": 0.7214420660548734,
+          "n": 145,
+          "well_id": "A11"
+        },
+        {
+          "dose": 250.0,
+          "response": 0.816883718947943,
+          "n": 155,
+          "well_id": "B11"
+        },
+        {
+          "dose": 250.0,
+          "response": 0.8478661766296144,
+          "n": 149,
+          "well_id": "C11"
+        },
+        {
+          "dose": 250.0,
+          "response": 0.875498765606122,
+          "n": 156,
+          "well_id": "D11"
+        }
+      ],
+      "fit": {
+        "bottom": 0.10971837619126407,
+        "top": 0.8461168128911202,
+        "ec50": 14.745866486147785,
+        "hill_slope": 4.2897797272305915,
+        "ec50_ci_low": 12.449614566416841,
+        "ec50_ci_high": 16.80875117161126,
+        "r_squared": 0.9753717866962881,
+        "rmse": 0.05485634733114371,
+        "n_points": 48,
+        "converged": true,
+        "failure_reason": null
+      }
+    }
+  ]
+}

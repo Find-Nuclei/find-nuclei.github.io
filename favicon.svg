@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded gradient background -->
+  <rect width="512" height="512" rx="96" ry="96" fill="url(#bg-gradient)"/>
+
+  <!-- Microscope icon - maximal height, base nearly at bottom -->
+  <g transform="translate(28, 16) scale(20.5)" fill="none" stroke="white" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Base bottom line -->
+    <path d="M6 18h8"/>
+    <!-- Floor line -->
+    <path d="M3 22h18"/>
+    <!-- Large arc (arm + body) -->
+    <path d="M14 22a7 7 0 1 0 0-14h-1"/>
+    <!-- Stage connector -->
+    <path d="M9 14h2"/>
+    <!-- Body tube -->
+    <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/>
+    <!-- Eyepiece -->
+    <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
+  </g>
+</svg>

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/embedding/v1.json",
+  "title": "Find Nuclei embedding descriptor (v1)",
+  "description": "Descriptor for an extendedMeasurements entry of kind \"embedding\". Documents a dimensionality reduction (PCA, UMAP, …) computed over a measurements table, alongside the table of per-object coordinates it describes. Referenced from a bundle manifest via extendedMeasurements.<id>.descriptor. Full specification: https://find-nuclei.github.io/docs/guides/analytics-bundle",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a manifest that validates today will validate later.",
+  "type": "object",
+  "required": [
+    "version",
+    "kind",
+    "method",
+    "data"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Pointer to this schema. Advisory."
+    },
+    "version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "embedding",
+      "description": "Matches extendedMeasurements.<id>.kind in the bundle manifest."
+    },
+    "method": {
+      "type": "string",
+      "description": "Reduction method. Known values include pca and umap; unknown methods still load as a raw column set."
+    },
+    "generatedAt": {
+      "type": "string",
+      "description": "ISO-8601 timestamp."
+    },
+    "compartment": {
+      "type": "string",
+      "description": "Compartment the embedding was computed over (e.g. nuclei, cells)."
+    },
+    "producer": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "data": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "description": "Back-pointer to the coordinates table, so either file is self-describing.",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath",
+          "description": "Parquet holding the per-object embedding coordinates."
+        },
+        "fk": {
+          "type": "string",
+          "description": "Foreign-key column joining to measurements. Conventionally object_id."
+        },
+        "joinTo": {
+          "$ref": "#/$defs/relativePath",
+          "description": "Measurements table this joins against."
+        }
+      },
+      "additionalProperties": true
+    },
+    "components": {
+      "type": "array",
+      "description": "Column names holding the embedding coordinates, in order.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "n_points": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of embedded objects. Lets a consumer size a scatter plot before streaming."
+    },
+    "input_features": {
+      "type": "array",
+      "description": "Measurement columns the reduction was computed from.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "explained_variance_ratio": {
+      "type": "array",
+      "description": "Per-component explained variance. Meaningful for linear methods such as PCA; typically absent for UMAP.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "params": {
+      "type": "object",
+      "description": "Method parameters as passed to the implementation (e.g. n_components, random_state, n_neighbors).",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+      "description": "Relative path from this descriptor. No leading slash and no `..` segments."
+    }
+  }
+}

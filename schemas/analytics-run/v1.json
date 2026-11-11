@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/analytics-run/v1.json",
+  "title": "Find Nuclei analytics run manifest (v1)",
+  "description": "Index of the analytics bundles produced by a single run. A run manifest is deliberately thin: it lists child bundles and shared run-level artifacts. All data semantics live in each child bundle's own manifest.json. Full specification: https://find-nuclei.github.io/docs/guides/analytics-bundle",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a manifest that validates today will validate later.",
+  "type": "object",
+  "required": [
+    "version",
+    "kind",
+    "bundles"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Pointer to this schema. Advisory."
+    },
+    "version": {
+      "const": 1,
+      "description": "Schema version. Consumers refuse majors they do not know; additive changes stay at 1."
+    },
+    "kind": {
+      "const": "run",
+      "description": "Discriminator separating a run manifest from a bundle manifest sharing the same filename. Absent or any other value means bundle manifest."
+    },
+    "bundles": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One entry per child bundle. Order drives load order; first wins on label-name collision. Consumers do not walk directories, so this listing is authoritative.",
+      "items": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/strictRelativePath",
+            "description": "Relative subdirectory of the run containing the bundle."
+          },
+          "targetLabel": {
+            "type": "string",
+            "description": "Advisory. The child bundle's own target.labelName always wins."
+          },
+          "id": {
+            "type": "string",
+            "description": "Addressable identifier. Defaults to path when omitted."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "producer": {
+      "$ref": "#/$defs/producer"
+    },
+    "run": {
+      "type": "object",
+      "description": "Free-form run metadata (identifier, elapsed time, segmenter choices).",
+      "additionalProperties": true
+    },
+    "target": {
+      "$ref": "#/$defs/target"
+    },
+    "artifacts": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "plateMetadata": {
+      "$ref": "#/$defs/plateMetadata"
+    },
+    "relations": {
+      "type": "array",
+      "deprecated": true,
+      "description": "DEPRECATED. Relationships now belong on each sub-bundle under `relationships`. Readers may ingest this as a fallback; producers should not emit it.",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "strictRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+      "description": "Relative path from the manifest. No leading slash and no `..` segments."
+    },
+    "anyRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relative path from the manifest. May escape the manifest directory."
+    },
+    "producer": {
+      "type": "object",
+      "description": "Free-form provenance. Displayed, never used for routing.",
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "pipelineId": {
+          "type": "string"
+        },
+        "generatedAt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "target": {
+      "type": "object",
+      "description": "Advisory pointer at the imaged data this run was computed from.",
+      "properties": {
+        "scope": {
+          "enum": [
+            "image",
+            "plate"
+          ],
+          "description": "\"image\" = a single field. \"plate\" = an HCS plate spanning many wells and fields."
+        },
+        "imageHint": {
+          "type": "string",
+          "description": "Source OME-Zarr directory name. Advisory only; paths and URLs change."
+        },
+        "labelName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "object",
+      "description": "Producer-side artifacts shared across sub-bundles.",
+      "properties": {
+        "pipeline": {
+          "$ref": "#/$defs/pathRef"
+        },
+        "log": {
+          "$ref": "#/$defs/pathRef"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/pathRef"
+      }
+    },
+    "pathRef": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/anyRelativePath"
+        }
+      },
+      "additionalProperties": true
+    },
+    "plateMetadata": {
+      "type": "object",
+      "description": "Pointers to the source plate's sidecar parquets, so consumers can enrich per-well views without re-walking the zarr. These paths routinely escape the run directory.",
+      "properties": {
+        "wells": {
+          "$ref": "#/$defs/anyRelativePath"
+        },
+        "fields": {
+          "$ref": "#/$defs/anyRelativePath"
+        },
+        "plate": {
+          "$ref": "#/$defs/anyRelativePath"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

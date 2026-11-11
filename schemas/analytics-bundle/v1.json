@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/analytics-bundle/v1.json",
+  "title": "Find Nuclei analytics bundle manifest (v1)",
+  "description": "Contract between a producer of per-object measurements and a consumer that renders them against a label mask. One bundle describes one measurements table plus its optional sidecars. Full specification: https://find-nuclei.github.io/docs/guides/analytics-bundle",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming a manifest that validates today will validate later.",
+  "type": "object",
+  "required": [
+    "version",
+    "format",
+    "target",
+    "measurements"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Pointer to this schema. Advisory."
+    },
+    "version": {
+      "const": 1,
+      "description": "Schema version. Consumers refuse majors they do not know; additive changes stay at 1."
+    },
+    "kind": {
+      "description": "Absent for bundle manifests. Present only to let a reader distinguish this from a run manifest.",
+      "not": {
+        "const": "run"
+      }
+    },
+    "format": {
+      "enum": [
+        "csv",
+        "parquet"
+      ],
+      "description": "Format of the primary measurements file."
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "labelName"
+      ],
+      "properties": {
+        "labelName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact OME-Zarr label name this bundle attaches to (e.g. \"nuclei\", not \"labels/nuclei\")."
+        },
+        "imageHint": {
+          "type": "string",
+          "description": "Advisory. Helps a consumer warn when a bundle is attached to the wrong image."
+        },
+        "scope": {
+          "enum": [
+            "image",
+            "plate"
+          ],
+          "description": "\"image\" = single field (default). \"plate\" = HCS plate. Plate scope requires measurements.wellColumn and measurements.fieldColumn."
+        }
+      },
+      "additionalProperties": true
+    },
+    "measurements": {
+      "type": "object",
+      "required": [
+        "path",
+        "rowCount",
+        "objectIdColumn"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/strictRelativePath"
+        },
+        "rowCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Precomputed row count, so a consumer can show table size before streaming columns."
+        },
+        "objectIdColumn": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Integer-typed column holding the object identifier. Conventionally object_id."
+        },
+        "labelValueColumn": {
+          "type": "string",
+          "description": "Column holding the pixel value in the label mask. For plate-unique bundles this equals objectIdColumn."
+        },
+        "wellColumn": {
+          "type": "string",
+          "description": "HCS well id column. Required when target.scope is \"plate\"."
+        },
+        "fieldColumn": {
+          "type": "string",
+          "description": "Field id column. Required when target.scope is \"plate\"."
+        },
+        "centroidColumns": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "string"
+            },
+            "y": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        },
+        "coordinateSpace": {
+          "enum": [
+            "field",
+            "plate"
+          ],
+          "description": "Coordinate space of the centroids. Defaults to \"field\"."
+        }
+      },
+      "additionalProperties": true
+    },
+    "extendedMeasurements": {
+      "type": "object",
+      "description": "Map of {id -> descriptor} pointing at sibling tables that extend the core measurements.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/strictRelativePath"
+          },
+          "descriptor": {
+            "$ref": "#/$defs/strictRelativePath",
+            "description": "JSON descriptor documenting this extension's semantics."
+          },
+          "kind": {
+            "type": "string",
+            "description": "Render hint. Known values: classification, regression, embedding, annotation, custom. Unknown kinds still load as a raw column set."
+          },
+          "fk": {
+            "type": "string",
+            "description": "Foreign-key column joining to measurements. Defaults to object_id."
+          },
+          "joinTo": {
+            "$ref": "#/$defs/strictRelativePath",
+            "description": "Measurements table this extension joins against. Defaults to measurements.path."
+          },
+          "producer": {
+            "type": "string"
+          },
+          "generatedAt": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "Map of {labelName -> declaration}. When present, a consumer auto-attaches the mask(s).",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "path",
+          "rootType"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/strictRelativePath",
+            "description": "Relative path to the label tree root. Must stay inside the bundle: consumers reject `..` segments as path traversal."
+          },
+          "rootType": {
+            "enum": [
+              "plate",
+              "labels-group"
+            ],
+            "description": "\"plate\" = an NGFF plate; navigate row/col/field/labels/<name>/. \"labels-group\" = the path IS the NGFF labels group."
+          },
+          "scope": {
+            "enum": [
+              "per-field",
+              "image"
+            ],
+            "description": "Advisory; inferred from rootType."
+          },
+          "format": {
+            "type": "string",
+            "description": "Container format. Only ome-ngff-0.5 today."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Map of {columnName -> foreign key} from this bundle's measurements to sibling bundles.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "e.g. many-to-one."
+          },
+          "references": {
+            "type": "string",
+            "description": "Target as <relative path>#<column>."
+          },
+          "nullable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "aggregates": {
+      "type": "object",
+      "description": "Precomputed summaries, letting a consumer paint plate heatmaps without a full table scan.",
+      "properties": {
+        "wells": {
+          "$ref": "#/$defs/aggregateRef"
+        },
+        "plate": {
+          "$ref": "#/$defs/aggregateRef"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/aggregateRef"
+      }
+    },
+    "histograms": {
+      "$ref": "#/$defs/sidecar",
+      "description": "Precomputed per-column histograms; skips the load-time histogram pass."
+    },
+    "spatialIndex": {
+      "$ref": "#/$defs/sidecar",
+      "description": "Precomputed centroid grid index."
+    },
+    "phenotypes": {
+      "$ref": "#/$defs/sidecar",
+      "description": "User-editable phenotype filter groups. Distinct from the phenotype classifier descriptor."
+    },
+    "producer": {
+      "$ref": "#/$defs/producer"
+    },
+    "run": {
+      "type": "object",
+      "description": "Free-form run metadata, copied down from the parent run manifest so a standalone bundle stays self-describing.",
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "object",
+      "description": "Pointers to producer-side artifacts. Paths may point up into the parent run directory.",
+      "additionalProperties": {
+        "$ref": "#/$defs/pathRef"
+      }
+    },
+    "plateMetadata": {
+      "type": "object",
+      "description": "Pointers to the source plate's sidecar parquets. These paths routinely escape the bundle directory.",
+      "properties": {
+        "wells": {
+          "$ref": "#/$defs/anyRelativePath"
+        },
+        "fields": {
+          "$ref": "#/$defs/anyRelativePath"
+        },
+        "plate": {
+          "$ref": "#/$defs/anyRelativePath"
+        }
+      },
+      "additionalProperties": true
+    },
+    "sources": {
+      "type": "object",
+      "description": "Provenance for derived bundles: which upstream bundles were combined to produce this one.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "strictRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+      "description": "Relative path from the manifest. No leading slash and no `..` segments."
+    },
+    "anyRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relative path from the manifest. May escape the manifest directory."
+    },
+    "sidecar": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/strictRelativePath"
+        }
+      },
+      "additionalProperties": true
+    },
+    "aggregateRef": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/strictRelativePath"
+        },
+        "rowCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "pathRef": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/anyRelativePath"
+        }
+      },
+      "additionalProperties": true
+    },
+    "producer": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "pipelineId": {
+          "type": "string"
+        },
+        "generatedAt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

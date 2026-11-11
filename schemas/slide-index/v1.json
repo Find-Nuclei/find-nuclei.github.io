@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://find-nuclei.github.io/schemas/slide-index/v1.json",
+  "title": "Find Nuclei slide index (v1)",
+  "description": "A JSON file that holds the structure of one whole-slide or microscopy file (header, directories, descriptions and tile tables) as byte ranges of the original, which stays untouched. Opening the index in the Find Nuclei viewer opens the slide without reading its structure from the slide's host, so a slide far away opens at once. Read for Aperio SVS, Hamamatsu NDPI, Philips TIFF, Leica SCN, Akoya QPTIFF and OME-TIFF. Full guide: https://find-nuclei.github.io/docs/guides/remote-urls#slide-index",
+  "x-stability": "unstable",
+  "x-stability-note": "UNSTABLE: this format is published for transparency and tooling, not as a stable contract. It is still converging alongside the Find Nuclei platform and may change without preserving backward compatibility until that ships. Pin a copy rather than assuming an index that validates today will validate later.",
+  "type": "object",
+  "required": ["$schema", "format", "version", "source", "ranges", "created", "generator"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "const": "https://find-nuclei.github.io/schemas/slide-index/v1.json"
+    },
+    "format": {
+      "const": "find-nuclei-slide-index"
+    },
+    "version": {
+      "const": 1
+    },
+    "source": {
+      "type": "object",
+      "description": "The file the index describes, and the version it was read at. A reader uses the ranges only while the file still has one of these versions; otherwise it reads the file as usual.",
+      "required": ["url", "name", "size", "etag", "lastModified", "md5"],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https?://",
+          "description": "Where the file's bytes are read by HTTP Range, for example https://camelyon-dataset.s3.amazonaws.com/CAMELYON16/images/tumor_001.tif."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The file's name. Its extension picks the reader: .svs, .ndpi, .scn, .qptiff, .ome.tiff, .tif or .tiff."
+        },
+        "size": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "The file's size in bytes, when the host says."
+        },
+        "etag": {
+          "type": ["string", "null"],
+          "description": "The host's ETag header when the index was written, exactly as sent, quotes included."
+        },
+        "lastModified": {
+          "type": ["string", "null"],
+          "description": "The host's Last-Modified header when the index was written, exactly as sent."
+        },
+        "md5": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{32}$",
+          "description": "The file's MD5 in hex, when a portal names it (the NCI GDC does)."
+        }
+      }
+    },
+    "ranges": {
+      "type": "array",
+      "description": "Byte ranges of the file, ascending by offset and not overlapping. Each is the file's bytes at that place, base64 encoded.",
+      "items": {
+        "type": "object",
+        "required": ["offset", "length", "data"],
+        "additionalProperties": false,
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "length": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "data": {
+            "type": "string",
+            "contentEncoding": "base64",
+            "description": "The bytes from offset to offset + length, base64 (RFC 4648, with padding)."
+          }
+        }
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the index was written."
+    },
+    "generator": {
+      "type": "string",
+      "description": "What wrote it, for example \"find-nuclei-viewer build-slide-index\"."
+    },
+    "colorLut": {
+      "type": "object",
+      "description": "Optional. The slide's scanner colour profile (ICC) baked to an sRGB lookup table. The viewer writes it when the profile is too large to be among the ranges (past 1 MB); the platform writes it at import for every slide that has a profile. A reader that opens the slide from the index draws with it, with no download of the profile. A reader that does not know it ignores it.",
+      "required": ["profileId", "description", "size", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "profileId": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{32}$",
+          "description": "The profile ID (an MD5, bytes 84 to 99 of the profile header) in hex; null when the profile leaves it zero."
+        },
+        "description": {
+          "type": "string",
+          "description": "The profile's name, as its description tag gives it."
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 65,
+          "description": "Grid points per axis of device RGB; the viewer bakes 33."
+        },
+        "data": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "description": "RGBA, size * size * size * 4 bytes, base64 (RFC 4648, with padding): a 2D atlas size * size wide and size high, the blue slices side by side, red along x within a slice, green along y. Each texel is the sRGB colour of that device RGB, alpha 255."
+        }
+      }
+    }
+  }
+}
