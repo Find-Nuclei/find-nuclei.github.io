@@ -139,6 +139,13 @@
             overflow: auto;
         }
 
+        /* Reason: modals App renders outside the landing and viewer roots (the example
+           gallery, the upgrade notice, storage consent) inherit from body; with no font
+           here they fell back to the browser's serif default (2026-11-13). */
+        body {
+            font-family: var(--fn-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif);
+        }
+
         #root {
             width: 100%;
             min-height: 100%;
@@ -201,7 +208,7 @@
             font-size: var(--fn-font-size-sm, 0.875rem);
         }
     </style>
-  <script type="module" crossorigin src="./assets/index-0bueg31w.js"></script>
+  <script type="module" crossorigin src="./assets/index-D_IrTZ_y.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BbMA5ODT.css">
 </head>
 <body>
