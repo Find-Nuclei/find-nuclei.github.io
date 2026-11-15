@@ -9,6 +9,10 @@ Two inhibitors, Wortmannin (rows A to D) and LY294002 (rows E to H), run as
 
 - `BBBC013.zarr/`: the plate as OME-Zarr 0.5 (Zarr v3), converted from the
   original BMP images. `tables/` holds plate, well and field metadata as Parquet.
+- `BBBC013_platemap.csv`: the same plate map as a CSV file, one row per well
+  (`well`, `compound`, `dose`, `dose_unit`, `control_type`, `replicate`). Paste
+  its address into **Import plate map** on a platform plate to load compounds,
+  doses and controls from a link.
 - `BBBC013.zarr.analytics/0b1e47a7-stardist-cellpose/`: one analysis run in the
   [Find Nuclei analytics format](https://find-nuclei.github.io/docs/guides/analytics-format.html).
   - `nuclei/`: 18,648 nuclei, segmented with StarDist (`2D_versatile_fluo`).
