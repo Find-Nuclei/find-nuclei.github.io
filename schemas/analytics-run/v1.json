@@ -53,6 +53,20 @@
     "producer": {
       "$ref": "#/$defs/producer"
     },
+    "phenotype": {
+      "type": "object",
+      "description": "Names the bundle whose extendedMeasurements.phenotype is the run's phenotype. The bundle may be a listed one or one the run does not list (a derived bundle such as joined). Absent: the bundle whose path or target label is cells.",
+      "required": [
+        "bundle"
+      ],
+      "properties": {
+        "bundle": {
+          "$ref": "#/$defs/strictRelativePath",
+          "description": "Folder name of the bundle, relative to the run."
+        }
+      },
+      "additionalProperties": false
+    },
     "run": {
       "type": "object",
       "description": "Free-form run metadata (identifier, elapsed time, segmenter choices).",

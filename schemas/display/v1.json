@@ -113,6 +113,10 @@
         "background": {
           "type": "string",
           "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "icc": {
+          "type": "boolean",
+          "description": "Optional. Draw through the slide's scanner colour profile (ICC). Writers set it only for an image with a profile; absent means on. A reader that does not know it ignores it."
         }
       }
     }
