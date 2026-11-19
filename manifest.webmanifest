@@ -183,6 +183,24 @@
         }
       ],
       "launch_type": "single-client"
+    },
+    {
+      "action": "./",
+      "name": "TIFF file",
+      "accept": {
+        "image/tiff": [
+          ".tif",
+          ".tiff"
+        ]
+      },
+      "icons": [
+        {
+          "src": "./logo192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
     }
   ]
 }
