@@ -114,6 +114,39 @@
           "description": "RGBA, size * size * size * 4 bytes, base64 (RFC 4648, with padding): a 2D atlas size * size wide and size high, the blue slices side by side, red along x within a slice, green along y. Each texel is the sRGB colour of that device RGB, alpha 255."
         }
       }
+    },
+    "colorLutV2": {
+      "type": "object",
+      "description": "Optional. The same table with its nodes spaced for profiles that bend sharply in the shadows: node i on each axis stands for device value (i / (size - 1)) squared, so a reader takes the square root of each device value before finding its place in the grid. Written instead of colorLut for such a profile. A reader that knows it takes it before colorLut; a reader that does not ignores it and opens the slide without a table.",
+      "required": ["profileId", "description", "size", "spacing", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "profileId": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{32}$",
+          "description": "The profile ID (an MD5, bytes 84 to 99 of the profile header) in hex; null when the profile leaves it zero."
+        },
+        "description": {
+          "type": "string",
+          "description": "The profile's name, as its description tag gives it."
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 65,
+          "description": "Grid points per axis of device RGB; the viewer bakes 33."
+        },
+        "spacing": {
+          "type": "string",
+          "enum": ["sqrt"],
+          "description": "How the nodes are spaced. Only sqrt is defined."
+        },
+        "data": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "description": "RGBA, size * size * size * 4 bytes, base64 (RFC 4648, with padding): a 2D atlas size * size wide and size high, the blue slices side by side, red along x within a slice, green along y. Each texel is the sRGB colour of that device RGB, alpha 255."
+        }
+      }
     }
   }
 }

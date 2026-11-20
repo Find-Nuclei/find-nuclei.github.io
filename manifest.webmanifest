@@ -1,7 +1,7 @@
 {
   "name": "Find Nuclei Viewer",
   "short_name": "Find Nuclei",
-  "description": "View OME-ZARR microscopy images in your browser. Multi-channel fluorescence, HCS plates, segmentation overlays. Your data never leaves your machine.",
+  "description": "View microscopy images, plates and whole slides in your browser. OME-Zarr, microscope files and slides from every major scanner. Your data never leaves your machine.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
