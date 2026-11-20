@@ -152,10 +152,11 @@
     },
     {
       "action": "./",
-      "name": "Leica LIF file",
+      "name": "Leica LIF or LOF file",
       "accept": {
         "application/octet-stream": [
-          ".lif"
+          ".lif",
+          ".lof"
         ]
       },
       "icons": [
