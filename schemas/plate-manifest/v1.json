@@ -48,7 +48,7 @@
       "additionalProperties": false,
       "properties": {
         "vendor": {
-          "enum": ["harmony", "yokogawa"]
+          "enum": ["harmony", "yokogawa", "imagexpress"]
         },
         "instrument": {
           "type": ["string", "null"],

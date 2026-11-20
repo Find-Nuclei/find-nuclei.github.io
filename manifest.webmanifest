@@ -101,6 +101,23 @@
     },
     {
       "action": "./",
+      "name": "Roche Ventana BIF file",
+      "accept": {
+        "application/octet-stream": [
+          ".bif"
+        ]
+      },
+      "icons": [
+        {
+          "src": "./logo192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
+    },
+    {
+      "action": "./",
       "name": "Leica SCN file",
       "accept": {
         "application/octet-stream": [
@@ -173,6 +190,23 @@
       "accept": {
         "application/octet-stream": [
           ".nd2"
+        ]
+      },
+      "icons": [
+        {
+          "src": "./logo192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "launch_type": "single-client"
+    },
+    {
+      "action": "./",
+      "name": "Olympus OIR file",
+      "accept": {
+        "application/octet-stream": [
+          ".oir"
         ]
       },
       "icons": [
