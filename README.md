@@ -8,10 +8,9 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 
 ## Supported Formats
 
-20 formats, each opened as the instrument saved it.
+20 formats, each opened as the instrument saved it, from your disk or by its address. Details and limits: [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html).
 
-<details open>
-<summary><b>Microscopy images</b> (8)</summary>
+### Microscopy images
 
 | Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
 |---|---|---|---|
@@ -24,10 +23,8 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 | [Olympus OIR](https://find-nuclei.github.io/docs/guides/olympus-oir.html) | One file, or the folder of a large image saved in parts | Images in 2D and 3D, with Z and T. Lambda scans as channels | Not needed |
 | [TIFF and ImageJ](https://find-nuclei.github.io/docs/guides/tiff.html) | One file, from Fiji, ImageJ, a camera or another tool | Images in 2D and 3D. Fiji hyperstacks with Z and T | Not needed |
 
-</details>
 
-<details open>
-<summary><b>High-content screening plates</b> (3)</summary>
+### High-content screening plates
 
 | Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
 |---|---|---|---|
@@ -35,10 +32,8 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 | [Yokogawa CellVoyager](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html) | The measurement folder | Field view, and Well and Plate view up to 256 MB | Yes, compressed or not |
 | [ImageXpress](https://find-nuclei.github.io/docs/guides/imagexpress-plates.html) | The plate folder with its `.HTD` file, or the `.HTD` address | Field view, and Well and Plate view up to 256 MB. Every Z plane, also in 3D | Yes, compressed or not |
 
-</details>
 
-<details open>
-<summary><b>Whole-slide images</b> (9)</summary>
+### Whole-slide images
 
 | Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
 |---|---|---|---|
@@ -52,9 +47,7 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 | [3DHISTECH MRXS](https://find-nuclei.github.io/docs/guides/mrxs.html) | The `.mrxs` file with its folder | Slide in 2D | Yes |
 | [DICOM WSI](https://find-nuclei.github.io/docs/guides/dicom-wsi.html) | A folder of `.dcm` files | Slide in 2D | Yes |
 
-</details>
 
-Each opens from your disk or by its address. Details and limits: [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html).
 
 ---
 
