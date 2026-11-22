@@ -8,23 +8,51 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 
 ## Supported Formats
 
-| Format | Kind | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
-|---|---|---|---|---|
-| [OME-Zarr](https://find-nuclei.github.io/docs/guides/ome-zarr.html) | Microscopy | A folder, or its address | Images in 2D and 3D. Plates in Plate, Well and Field view | Yes, as one `.ozx` or `.zip` file |
-| [OME-TIFF](https://find-nuclei.github.io/docs/guides/ome-tiff.html) | Microscopy | One file | Images in 2D and 3D, with Z and T | Not needed |
-| [Zeiss CZI](https://find-nuclei.github.io/docs/guides/zeiss-czi.html) | Microscopy | One file, or a folder of one file per field | Images in 2D and 3D. Plates in Field view | Yes, one CZI per field |
-| [Zeiss LSM](https://find-nuclei.github.io/docs/guides/zeiss-lsm.html) | Microscopy | One file | Images in 2D and 3D, with Z, T and spectral scans | Not needed |
-| [Leica LIF](https://find-nuclei.github.io/docs/guides/leica-lif.html) | Microscopy | One file, every image of the project | Images in 2D and 3D, tile scans stitched | Not needed |
-| [Nikon ND2](https://find-nuclei.github.io/docs/guides/nikon-nd2.html) | Microscopy | One file, old and new formats | Images in 2D and 3D, with Z, T and XY positions | Not needed |
-| [Opera Phenix / Harmony](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html) | Plates | The measurement folder | Field view | Yes, compressed or not |
-| [Yokogawa CellVoyager](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html) | Plates | The measurement folder | Field view | Yes, compressed or not |
-| [Aperio SVS](https://find-nuclei.github.io/docs/guides/aperio-svs.html) | Pathology | One file | Slide in 2D | Not needed |
-| [Hamamatsu NDPI](https://find-nuclei.github.io/docs/guides/hamamatsu-ndpi.html) | Pathology | One file, also over 4 GB | Slide in 2D | Not needed |
-| [Leica SCN](https://find-nuclei.github.io/docs/guides/leica-scn.html) | Pathology | One file, every region | Slide in 2D | Not needed |
-| [Philips TIFF](https://find-nuclei.github.io/docs/guides/philips-tiff.html) | Pathology | One file | Slide in 2D | Not needed |
-| [Akoya QPTIFF](https://find-nuclei.github.io/docs/guides/akoya-qptiff.html) | Pathology | One file, or an inForm `.tif` export | Slide in 2D, brightfield or multiplex | Not needed |
-| [3DHISTECH MRXS](https://find-nuclei.github.io/docs/guides/mrxs.html) | Pathology | The `.mrxs` file with its folder | Slide in 2D | Yes |
-| [DICOM WSI](https://find-nuclei.github.io/docs/guides/dicom-wsi.html) | Pathology | A folder of `.dcm` files | Slide in 2D | Yes |
+20 formats, each opened as the instrument saved it. Open a group to see what you open and how it shows.
+
+<details>
+<summary><b>Microscopy images</b> (8): OME-Zarr, OME-TIFF, Zeiss CZI, Leica LIF, Zeiss LSM, Nikon ND2, Olympus OIR, TIFF and ImageJ</summary>
+
+| Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
+|---|---|---|---|
+| [OME-Zarr](https://find-nuclei.github.io/docs/guides/ome-zarr.html) | A folder, or its address | Images in 2D and 3D. Plates in Plate, Well and Field view | Yes, as one `.ozx` or `.zip` file |
+| [OME-TIFF](https://find-nuclei.github.io/docs/guides/ome-tiff.html) | One file | Images in 2D and 3D, with Z and T | Not needed |
+| [Zeiss CZI](https://find-nuclei.github.io/docs/guides/zeiss-czi.html) | One file, or a folder of one file per field | Images in 2D and 3D. Plates in Field view, and Well and Plate view up to 256 MB | Yes, one CZI per field |
+| [Leica LIF](https://find-nuclei.github.io/docs/guides/leica-lif.html) | One file, every image of the project, a single `.lof` image, or an XLEF export folder | Images in 2D and 3D, with Z and T. Tile scans stitched. Lambda scans as channels | Not needed |
+| [Zeiss LSM](https://find-nuclei.github.io/docs/guides/zeiss-lsm.html) | One file | Images in 2D and 3D, with Z and T. Spectral scans as channels | Not needed |
+| [Nikon ND2](https://find-nuclei.github.io/docs/guides/nikon-nd2.html) | One file, every XY position | Images in 2D and 3D, with Z and T. Colour camera images as RGB | Not needed |
+| [Olympus OIR](https://find-nuclei.github.io/docs/guides/olympus-oir.html) | One file, or the folder of a large image saved in parts | Images in 2D and 3D, with Z and T. Lambda scans as channels | Not needed |
+| [TIFF and ImageJ](https://find-nuclei.github.io/docs/guides/tiff.html) | One file, from Fiji, ImageJ, a camera or another tool | Images in 2D and 3D. Fiji hyperstacks with Z and T | Not needed |
+
+</details>
+
+<details>
+<summary><b>High-content screening plates</b> (3): Opera Phenix / Harmony, Yokogawa CellVoyager, ImageXpress</summary>
+
+| Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
+|---|---|---|---|
+| [Opera Phenix / Harmony](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html) | The measurement folder | Field view, and Well and Plate view up to 256 MB | Yes, compressed or not |
+| [Yokogawa CellVoyager](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html) | The measurement folder | Field view, and Well and Plate view up to 256 MB | Yes, compressed or not |
+| [ImageXpress](https://find-nuclei.github.io/docs/guides/imagexpress-plates.html) | The plate folder with its `.HTD` file, or the `.HTD` address | Field view, and Well and Plate view up to 256 MB. Every Z plane, also in 3D | Yes, compressed or not |
+
+</details>
+
+<details>
+<summary><b>Whole-slide images</b> (9): Aperio SVS, Hamamatsu NDPI, Olympus VSI, Roche Ventana BIF, Leica SCN, Philips TIFF, Akoya QPTIFF, 3DHISTECH MRXS, DICOM WSI</summary>
+
+| Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
+|---|---|---|---|
+| [Aperio SVS](https://find-nuclei.github.io/docs/guides/aperio-svs.html) | One file | Slide in 2D | Not needed |
+| [Hamamatsu NDPI](https://find-nuclei.github.io/docs/guides/hamamatsu-ndpi.html) | One file, also over 4 GB | Slide in 2D | Not needed |
+| [Olympus VSI](https://find-nuclei.github.io/docs/guides/olympus-vsi.html) | The `.vsi` file with its `_name_` folder | Brightfield slides in 2D. Fluorescence, Z and T as images, also in 3D | Yes |
+| [Roche Ventana BIF](https://find-nuclei.github.io/docs/guides/ventana-bif.html) | One file, also a Ventana .tif | Slide in 2D | Not needed |
+| [Leica SCN](https://find-nuclei.github.io/docs/guides/leica-scn.html) | One file, every region | Slide in 2D | Not needed |
+| [Philips TIFF](https://find-nuclei.github.io/docs/guides/philips-tiff.html) | One file | Slide in 2D | Not needed |
+| [Akoya QPTIFF](https://find-nuclei.github.io/docs/guides/akoya-qptiff.html) | One file, or an inForm `.tif` export | Slide in 2D, brightfield or multiplex | Not needed |
+| [3DHISTECH MRXS](https://find-nuclei.github.io/docs/guides/mrxs.html) | The `.mrxs` file with its folder | Slide in 2D | Yes |
+| [DICOM WSI](https://find-nuclei.github.io/docs/guides/dicom-wsi.html) | A folder of `.dcm` files | Slide in 2D | Yes |
+
+</details>
 
 Each opens from your disk or by its address. Details and limits: [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html).
 
@@ -34,14 +62,14 @@ Each opens from your disk or by its address. Details and limits: [Supported Form
 
 **Opening data**
 
-- **Local files, straight from disk.** No upload and no server. Drop a file, or pick it under **Open Image**. One file opens in any browser: a `.czi`, `.lsm`, `.lif` or `.nd2`, an OME-TIFF, a slide (`.svs`, `.ndpi`, `.scn`, Philips `.tiff`, `.qptiff`), or a zip of a dataset, a plate or a folder slide. Folders open in Chrome and Edge. Drop one that holds several images, of any mix of formats, and pick from the list. The data never leaves your machine. Guide: [Local Files](https://find-nuclei.github.io/docs/guides/local-files.html).
+- **Local files, straight from disk.** No upload and no server. Drop a file, or pick it under **Open Image**. One file opens in any browser: a `.czi`, `.lsm`, `.lif`, `.lof`, `.nd2` or `.oir`, a TIFF or OME-TIFF, a slide (`.svs`, `.ndpi`, `.bif`, `.scn`, Philips `.tiff`, `.qptiff`), or a zip of a dataset, a plate or a folder slide. Folders open in Chrome and Edge. Drop one that holds several images, of any mix of formats, and pick from the list. The data never leaves your machine. Guide: [Local Files](https://find-nuclei.github.io/docs/guides/local-files.html).
 - **Remote URLs.** Anything served over HTTPS with CORS and range requests: S3, R2, GCS, Azure Blob, your own nginx. Only the parts on screen are read. Guide: [Remote URLs](https://find-nuclei.github.io/docs/guides/remote-urls.html).
 - **Private storage.** A presigned link or a Bearer token opens files from your own bucket or server, read straight by your browser. Guide: [Private Images and Slides](https://find-nuclei.github.io/docs/guides/authenticated-sources.html).
 - **`s3://` and `gs://` addresses.** Paste `s3://bucket/path` or `gs://bucket/path` of a public bucket and the image or plate opens, as from its https address.
 - **Opera Phenix and Yokogawa CellVoyager plates.** Open an Opera Phenix plate exported by Harmony (V5 `Index.idx.xml` or V6 `Index.xml`), or a Yokogawa CellVoyager CV8000 or CV7000 measurement folder, straight from its TIFFs, by URL, `s3://`, a local folder, or a zip of the folder in any browser. Nothing is converted. Guides: [Opera Phenix Plates](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html), [Yokogawa CellVoyager Plates](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html).
 - **Zeiss CZI files.** Open a `.czi` from ZEN as it is, by URL, `s3://` or from your disk: Z-stacks, time series, scenes, mosaics, stored pyramids and Celldiscoverer 7 plates. Plates saved as one file per field open from a folder or a zip made without compression. Guide: [Zeiss CZI files](https://find-nuclei.github.io/docs/guides/zeiss-czi.html).
 - **Zeiss LSM, Leica LIF and Nikon ND2 files.** Open them as the microscope saved them, by URL, `s3://` or from your disk. LSM files from LSM 510, 710, 780 and 880 confocals, spectral scans included. Whole LAS X projects, with tile scans stitched. ND2 files from NIS-Elements, old and new, with every XY position. Z-stacks open in 3D. Guides: [Zeiss LSM](https://find-nuclei.github.io/docs/guides/zeiss-lsm.html), [Leica LIF](https://find-nuclei.github.io/docs/guides/leica-lif.html), [Nikon ND2](https://find-nuclei.github.io/docs/guides/nikon-nd2.html).
-- **Whole-slide images.** One free viewer for SVS, NDPI, SCN, MRXS, QPTIFF and DICOM WSI. Aperio, Hamamatsu, Leica, Philips, 3DHISTECH, Akoya and DICOM slides open as the scanner saved them, with label and macro pictures. Multiplex fluorescence opens with every channel named and coloured. See the table above.
+- **Whole-slide images.** One free viewer for SVS, NDPI, VSI, BIF, SCN, MRXS, QPTIFF and DICOM WSI. Aperio, Hamamatsu, Olympus, Roche Ventana, Leica, Philips, 3DHISTECH, Akoya and DICOM slides open as the scanner saved them, with label and macro pictures. Multiplex fluorescence opens with every channel named and coloured. See the table above.
 - **OME-TIFF.** Every channel, Z and time, and 3D for a Z-stack. Guide: [OME-TIFF](https://find-nuclei.github.io/docs/guides/ome-tiff.html).
 
 **Looking at it**
@@ -78,9 +106,9 @@ Full guides at **[find-nuclei.github.io/docs](https://find-nuclei.github.io/docs
 | [Getting Started](https://find-nuclei.github.io/docs/getting-started.html) | Open your first image |
 | [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html) · [Pixel Size and Magnification](https://find-nuclei.github.io/docs/guides/calibration.html) | Every format, and how it opens |
 | [Local Files](https://find-nuclei.github.io/docs/guides/local-files.html) · [Remote URLs](https://find-nuclei.github.io/docs/guides/remote-urls.html) · [Private Images and Slides](https://find-nuclei.github.io/docs/guides/authenticated-sources.html) · [Data Server](https://find-nuclei.github.io/docs/guides/data-server.html) | Where your data lives |
-| [OME-Zarr](https://find-nuclei.github.io/docs/guides/ome-zarr.html) · [OME-TIFF](https://find-nuclei.github.io/docs/guides/ome-tiff.html) · [Zeiss CZI](https://find-nuclei.github.io/docs/guides/zeiss-czi.html) · [Zeiss LSM](https://find-nuclei.github.io/docs/guides/zeiss-lsm.html) · [Leica LIF](https://find-nuclei.github.io/docs/guides/leica-lif.html) · [Nikon ND2](https://find-nuclei.github.io/docs/guides/nikon-nd2.html) | Microscopy formats |
-| [OME-Zarr Plates](https://find-nuclei.github.io/docs/guides/hcs-plates.html) · [Opera Phenix](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html) · [Yokogawa CellVoyager](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html) | High-content screening plates |
-| [Aperio SVS](https://find-nuclei.github.io/docs/guides/aperio-svs.html) · [Hamamatsu NDPI](https://find-nuclei.github.io/docs/guides/hamamatsu-ndpi.html) · [Leica SCN](https://find-nuclei.github.io/docs/guides/leica-scn.html) · [Philips TIFF](https://find-nuclei.github.io/docs/guides/philips-tiff.html) · [Akoya QPTIFF](https://find-nuclei.github.io/docs/guides/akoya-qptiff.html) · [3DHISTECH MRXS](https://find-nuclei.github.io/docs/guides/mrxs.html) · [DICOM WSI](https://find-nuclei.github.io/docs/guides/dicom-wsi.html) | Digital pathology slides |
+| [OME-Zarr](https://find-nuclei.github.io/docs/guides/ome-zarr.html) · [OME-TIFF](https://find-nuclei.github.io/docs/guides/ome-tiff.html) · [Zeiss CZI](https://find-nuclei.github.io/docs/guides/zeiss-czi.html) · [Zeiss LSM](https://find-nuclei.github.io/docs/guides/zeiss-lsm.html) · [Leica LIF, LOF and XLEF](https://find-nuclei.github.io/docs/guides/leica-lif.html) · [Nikon ND2](https://find-nuclei.github.io/docs/guides/nikon-nd2.html) · [Olympus OIR](https://find-nuclei.github.io/docs/guides/olympus-oir.html) · [TIFF and ImageJ](https://find-nuclei.github.io/docs/guides/tiff.html) | Microscopy formats |
+| [OME-Zarr Plates](https://find-nuclei.github.io/docs/guides/hcs-plates.html) · [Opera Phenix](https://find-nuclei.github.io/docs/guides/opera-phenix-plates.html) · [Yokogawa CellVoyager](https://find-nuclei.github.io/docs/guides/yokogawa-plates.html) · [ImageXpress](https://find-nuclei.github.io/docs/guides/imagexpress-plates.html) | High-content screening plates |
+| [Aperio SVS](https://find-nuclei.github.io/docs/guides/aperio-svs.html) · [Hamamatsu NDPI](https://find-nuclei.github.io/docs/guides/hamamatsu-ndpi.html) · [Olympus VSI](https://find-nuclei.github.io/docs/guides/olympus-vsi.html) · [Roche Ventana BIF](https://find-nuclei.github.io/docs/guides/ventana-bif.html) · [Leica SCN](https://find-nuclei.github.io/docs/guides/leica-scn.html) · [Philips TIFF](https://find-nuclei.github.io/docs/guides/philips-tiff.html) · [Akoya QPTIFF](https://find-nuclei.github.io/docs/guides/akoya-qptiff.html) · [3DHISTECH MRXS](https://find-nuclei.github.io/docs/guides/mrxs.html) · [DICOM WSI](https://find-nuclei.github.io/docs/guides/dicom-wsi.html) | Digital pathology slides |
 | [Channels](https://find-nuclei.github.io/docs/guides/channels.html) · [Z-Projection](https://find-nuclei.github.io/docs/guides/z-projection.html) | Display |
 | [3D Rendering](https://find-nuclei.github.io/docs/guides/3d-rendering.html) · [3D Region](https://find-nuclei.github.io/docs/guides/region.html) | 3D |
 | [Labels](https://find-nuclei.github.io/docs/guides/labels.html) · [Analytics & Phenotyping](https://find-nuclei.github.io/docs/guides/analytics-phenotyping.html) · [Analytics Data Format](https://find-nuclei.github.io/docs/guides/analytics-format.html) | Segmentation and measurements |
