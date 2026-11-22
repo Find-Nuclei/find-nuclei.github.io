@@ -40,7 +40,7 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 | [Aperio SVS](https://find-nuclei.github.io/docs/guides/aperio-svs.html) | One file | Slide in 2D | Not needed |
 | [Hamamatsu NDPI](https://find-nuclei.github.io/docs/guides/hamamatsu-ndpi.html) | One file, also over 4 GB | Slide in 2D | Not needed |
 | [Olympus VSI](https://find-nuclei.github.io/docs/guides/olympus-vsi.html) | The `.vsi` file with its `_name_` folder | Brightfield slides in 2D. Fluorescence, Z and T as images, also in 3D | Yes |
-| [Roche Ventana BIF](https://find-nuclei.github.io/docs/guides/ventana-bif.html) | One file, also a Ventana .tif | Slide in 2D | Not needed |
+| [Roche Ventana BIF](https://find-nuclei.github.io/docs/guides/ventana-bif.html) | One file, also a Ventana `.tif` | Slide in 2D | Not needed |
 | [Leica SCN](https://find-nuclei.github.io/docs/guides/leica-scn.html) | One file, every region | Slide in 2D | Not needed |
 | [Philips TIFF](https://find-nuclei.github.io/docs/guides/philips-tiff.html) | One file | Slide in 2D | Not needed |
 | [Akoya QPTIFF](https://find-nuclei.github.io/docs/guides/akoya-qptiff.html) | One file, or an inForm `.tif` export | Slide in 2D, brightfield or multiplex | Not needed |
@@ -94,7 +94,7 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 
 Full guides at **[find-nuclei.github.io/docs](https://find-nuclei.github.io/docs/)**.
 
-| | |
+| Guide | What it covers |
 |---|---|
 | [Getting Started](https://find-nuclei.github.io/docs/getting-started.html) | Open your first image |
 | [Supported Formats](https://find-nuclei.github.io/docs/guides/supported-formats.html) · [Pixel Size and Magnification](https://find-nuclei.github.io/docs/guides/calibration.html) | Every format, and how it opens |
