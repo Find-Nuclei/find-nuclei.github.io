@@ -163,7 +163,7 @@ function stripQuery(u) {
 // replaces the first occurrence, and a mention in a comment would swallow it.
 // The generator asserts exactly one occurrence of each, so this cannot regress
 // silently.
-const BUILD_ID = 'fb95d4715b1e';
+const BUILD_ID = '8cf82811052c';
 const PRECACHE_PATHS = [
     "assets/10501752-B-hwQ8_O.jpg",
     "assets/3d-allen-colony-DSWBz49A.jpg",
@@ -209,16 +209,16 @@ const PRECACHE_PATHS = [
     "assets/cpg-Dest210726-160150-E9RrWjZB.jpg",
     "assets/czi-directory-worker-D9135kQI.js",
     "assets/czi-jxr-worker-IjqnX0MW.js",
-    "assets/fetch-DyckKsic.js",
-    "assets/fn-plate-tables-et6lsprm.js",
+    "assets/fetch-1GF30Dn6.js",
+    "assets/fn-plate-tables-CYPVNds0.js",
     "assets/gzip-BduOtoNN.js",
     "assets/harmony-index-worker-De1e22cD.js",
-    "assets/index-B1d-3B0I.js",
+    "assets/index-C3wO-Sxh.js",
+    "assets/index-CHirA5SO.js",
     "assets/index-CI0Eyzzp.js",
-    "assets/index-CbTrv9WC.js",
+    "assets/index-D9oROjlt.js",
     "assets/index-DSGHM4gd.js",
     "assets/index-DTKLhzNL.css",
-    "assets/index-DnUZE7ug.js",
     "assets/jpegxr-B8hufdT0.js",
     "assets/lz4-CvXMSXgq.js",
     "assets/nd2-j2k-worker-DX4RJIFD.js",
@@ -229,7 +229,7 @@ const PRECACHE_PATHS = [
     "assets/tcga-TCGA-49-4514-DX1-BEEI5SZq.jpg",
     "assets/tcga-TCGA-AO-A1KP-DX1-D9DKknO0.jpg",
     "assets/tcga-TCGA-AZ-5407-DX1-BBK3kO6b.jpg",
-    "assets/viewer-3d-DGXz4umi.js",
+    "assets/viewer-3d-BCXwMUKm.js",
     "assets/viewer-3d-VA-lmr9i.css",
     "assets/viewer-3d-build.worker-Bu7H7GKh.js",
     "assets/viewer-3d-grow3d.worker-q5fjwhup.js",
