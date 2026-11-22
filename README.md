@@ -8,10 +8,10 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 
 ## Supported Formats
 
-20 formats, each opened as the instrument saved it. Open a group to see what you open and how it shows.
+20 formats, each opened as the instrument saved it.
 
-<details>
-<summary><b>Microscopy images</b> (8): OME-Zarr, OME-TIFF, Zeiss CZI, Leica LIF, Zeiss LSM, Nikon ND2, Olympus OIR, TIFF and ImageJ</summary>
+<details open>
+<summary><b>Microscopy images</b> (8)</summary>
 
 | Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
 |---|---|---|---|
@@ -26,8 +26,8 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 
 </details>
 
-<details>
-<summary><b>High-content screening plates</b> (3): Opera Phenix / Harmony, Yokogawa CellVoyager, ImageXpress</summary>
+<details open>
+<summary><b>High-content screening plates</b> (3)</summary>
 
 | Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
 |---|---|---|---|
@@ -37,8 +37,8 @@ Open the files your instruments write, in your browser: microscopy images, HCS p
 
 </details>
 
-<details>
-<summary><b>Whole-slide images</b> (9): Aperio SVS, Hamamatsu NDPI, Olympus VSI, Roche Ventana BIF, Leica SCN, Philips TIFF, Akoya QPTIFF, 3DHISTECH MRXS, DICOM WSI</summary>
+<details open>
+<summary><b>Whole-slide images</b> (9)</summary>
 
 | Format | What you open | Views | [Zip without compression](https://find-nuclei.github.io/docs/guides/local-files.html#zip-without-compression) |
 |---|---|---|---|
