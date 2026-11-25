@@ -1,7 +1,8 @@
 # One small file per format
 
-Public files the format guides link as examples, as their authors published them. The two zips hold the
-original files packed again without compression, so the viewer can read them in parts.
+Public files the format guides link as examples, as their authors published them. The zips hold the
+original files packed again without compression, so the viewer can read them in parts. `Hamamatsu-2-DICOM.zip` leaves
+out the highest resolution, which is too large for this host.
 
 | File | Format | Source | Credit | Licence |
 |---|---|---|---|---|
@@ -16,3 +17,4 @@ original files packed again without compression, so the viewer can read them in 
 | `CMU-1-Small-Region.svs` | Aperio SVS | [OpenSlide test data](https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/) | OpenSlide | CC0 |
 | `CMU-1-Saved-1_16.zip` | 3DHISTECH MRXS | [OpenSlide test data](https://openslide.cs.cmu.edu/download/openslide-testdata/Mirax/) | OpenSlide | CC0 |
 | `Leica-Fluorescence-1.scn` | Leica SCN | [OpenSlide test data](https://openslide.cs.cmu.edu/download/openslide-testdata/Leica/) | Yves Sucaet | Free to use and distribute, with or without modification |
+| `Hamamatsu-2-DICOM.zip` | DICOM WSI | [OpenSlide test data](https://openslide.cs.cmu.edu/download/openslide-testdata/DICOM/) (`Hamamatsu-2.zip`) | Hamamatsu | CC0 |
